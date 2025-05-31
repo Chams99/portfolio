@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallpaperVault - Premium Wallpapers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-vault"></i>
+                <span>WallpaperVault</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#collections" class="nav-link">Collections</a>
+                <a href="#premium" class="nav-link">Premium</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1>Premium Wallpapers</h1>
+            <p>Curated collection of stunning wallpapers for every device</p>
+            <div class="hero-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search thousands of wallpapers..." id="heroSearch">
+                    <button type="button" id="heroSearchBtn">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="floating-cards">
+                <div class="floating-card" style="--delay: 0s">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop" alt="">
+                </div>
+                <div class="floating-card" style="--delay: 1s">
+                    <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=300&h=200&fit=crop" alt="">
+                </div>
+                <div class="floating-card" style="--delay: 2s">
+                    <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=300&h=200&fit=crop" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collections-section" id="collections">
+        <div class="container">
+            <h2>Featured Collections</h2>
+            <div class="collections-grid">
+                <div class="collection-card" data-collection="nature">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Nature">
+                        <div class="collection-overlay">
+                            <h3>Nature</h3>
+                            <p>120+ wallpapers</p>
+                            <button class="explore-btn">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="abstract">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=400&h=300&fit=crop" alt="Abstract">
+                        <div class="collection-overlay">
+                            <h3>Abstract</h3>
+                            <p>85+ wallpapers</p>
+                            <button class="explore-btn">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="space">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop" alt="Space">
+                        <div class="collection-overlay">
+                            <h3>Space</h3>
+                            <p>95+ wallpapers</p>
+                            <button class="explore-btn">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="minimal">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1557683311-eac922347aa1?w=400&h=300&fit=crop" alt="Minimal">
+                        <div class="collection-overlay">
+                            <h3>Minimal</h3>
+                            <p>60+ wallpapers</p>
+                            <button class="explore-btn">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="gallery-header">
+                <h2>Latest Wallpapers</h2>
+                <div class="gallery-controls">
+                    <div class="sort-dropdown">
+                        <select id="sortSelect">
+                            <option value="latest">Latest</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="downloads">Most Downloaded</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                        <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="4k">4K Ultra HD</button>
+                <button class="filter-tab" data-filter="mobile">Mobile</button>
+                <button class="filter-tab" data-filter="desktop">Desktop</button>
+            </div>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Wallpapers will be loaded here -->
+            </div>
+            
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreGallery">
+                    <span>Load More Wallpapers</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="premium-section" id="premium">
+        <div class="container">
+            <div class="premium-content">
+                <div class="premium-text">
+                    <h2>Go Premium</h2>
+                    <p>Unlock exclusive wallpapers, ad-free browsing, and unlimited downloads</p>
+                    <ul class="premium-features">
+                        <li><i class="fas fa-check"></i> Exclusive premium wallpapers</li>
+                        <li><i class="fas fa-check"></i> Ad-free experience</li>
+                        <li><i class="fas fa-check"></i> Unlimited downloads</li>
+                        <li><i class="fas fa-check"></i> Early access to new collections</li>
+                    </ul>
+                    <button class="premium-btn">Upgrade Now</button>
+                </div>
+                <div class="premium-visual">
+                    <div class="premium-cards">
+                        <div class="premium-card">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=300&fit=crop" alt="">
+                            <div class="premium-badge">Premium</div>
+                        </div>
+                        <div class="premium-card">
+                            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=200&h=300&fit=crop" alt="">
+                            <div class="premium-badge">Premium</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-brand">
+                        <i class="fas fa-vault"></i>
+                        <span>WallpaperVault</span>
+                    </div>
+                    <p>Your premium destination for high-quality wallpapers</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Browse</h4>
+                    <ul>
+                        <li><a href="#">Latest</a></li>
+                        <li><a href="#">Popular</a></li>
+                        <li><a href="#">Collections</a></li>
+                        <li><a href="#">Categories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License</a></li>
+                        <li><a href="#">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WallpaperVault. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Wallpaper Preview Modal -->
+    <div class="modal-overlay" id="wallpaperModal">
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content">
+                <div class="modal-image">
+                    <img id="modalWallpaper" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <h3 id="modalTitle"></h3>
+                    <div class="modal-meta">
+                        <span id="modalResolution"></span>
+                        <span id="modalDownloads"></span>
+                    </div>
+                    <div class="modal-tags" id="modalTags"></div>
+                    <div class="modal-actions">
+                        <button class="action-btn download" id="modalDownload">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="action-btn favorite" id="modalFavorite">
+                            <i class="far fa-heart"></i>
+                            Favorite
+                        </button>
+                        <button class="action-btn share" id="modalShare">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
