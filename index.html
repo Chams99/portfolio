@@ -6,10 +6,15 @@
     <title>Dhibi Chames Eddine - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="fa/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="fa/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="fa/favicon-16x16.png">
+    <link rel="manifest" href="fa/site.webmanifest">
+    <link rel="icon" href="fa/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <section class="hero">
@@ -19,15 +24,14 @@
                 <p class="hero-subtitle">Hello, I'm</p>
                 <h1>Dhibi Chames Eddine</h1>
                 <div class="typewriter"></div>
-                <p class="hero-description">Turning ideas into reality through elegant code and creative solutions.</p>
+                <p class="hero-description">Turning ideas into reality through elegant code and creative solutions. I build responsive websites and mobile applications from front to back.</p>
                 <div class="hero-buttons">
-                    <button class="cta-button primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">Explore My Work</button>
+                    <button class="cta-button primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">View My Work</button>
                     <button class="cta-button secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Me</button>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="hero-blob"></div>
-                <!-- Add your profile image here -->
                 <img src="Images/chams.jpg" alt="Dhibi Chames Eddine">
             </div>
         </div>
@@ -38,33 +42,31 @@
     </section>
 
     <section id="about">
-        <h2 class="section-title">About Me</h2>
         <div class="about-container">
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-intro">I'm a passionate Developer and Computer Science student.</p>
-                    <p class="about-description">Currently in my second year of Computer Science, I'm dedicated to mastering web and mobiles apps development and software engineering. I combine my technical knowledge with creativity to build engaging sites and interactive applications.</p>
+                    <p class="about-description">Currently in my second year of Computer Science, I'm dedicated to mastering web and mobile apps development and software engineering. I combine my technical knowledge with creativity to build engaging sites and interactive applications.</p>
                     <div class="personal-info">
                         <div class="info-item">
-                            <span class="info-label">Name:</span>
+                            <span class="info-label">Name</span>
                             <span class="info-value">Dhibi Chames Eddine</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Education:</span>
+                            <span class="info-label">Education</span>
                             <span class="info-value">Computer Science (2nd Year)</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Location:</span>
+                            <span class="info-label">Location</span>
                             <span class="info-value">Tunisia</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Focus:</span>
-                            <span class="info-value">web and mobiles app Development</span>
+                            <span class="info-label">Focus</span>
+                            <span class="info-value">Web & Mobile Development</span>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="your-image.jpg" alt="Profile Picture">
                     <div class="experience-card">
                         <span class="experience-number">3+</span>
                         <span class="experience-text">Years of Experience</span>
@@ -77,7 +79,7 @@
                 <div class="skills-grid">
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span class="skill-name">mobile development</span>
+                            <span class="skill-name">Mobile Development</span>
                             <span class="skill-percentage">60%</span>
                         </div>
                         <div class="skill-bar">
@@ -113,7 +115,7 @@
                     </div>
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span class="skill-name">web development</span>
+                            <span class="skill-name">Web Development</span>
                             <span class="skill-percentage">90%</span>
                         </div>
                         <div class="skill-bar">
@@ -134,14 +136,9 @@
         </div>
     </section>
 
-    <!-- Education & Experience Section -->
-    <section class="section" id="experience">
+    <section id="experience">
         <div class="container">
-            <div class="section-title">
-                <h2>Education & Experience</h2>
-                <div class="line"></div>
-            </div>
-            
+            <h2 class="section-title">Education & Experience</h2>
             <div class="experience-container">
                 <div class="experience-item">
                     <div class="experience-icon">🎓</div>
@@ -185,93 +182,108 @@
             </div>
             
             <div class="portfolio-grid">
-           
+                <!-- Portfolio items will be dynamically added here -->
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title">Contact Me</h2>
+        <h2 class="section-title">Get In Touch</h2>
         <div class="contact-container">
             <div class="contact-info">
-                <h3>Let's Connect!</h3>
-                <p class="contact-description">Feel free to reach out for collaborations, all opportunities, or just to say hello!</p>
+                <div class="contact-header">
+                    <h3>Let's Create Something Amazing Together</h3>
+                    <p class="contact-description">I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                </div>
                 
                 <div class="contact-details">
                     <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
                         <div class="contact-text">
                             <h4>Location</h4>
                             <p>Tunisia</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                        <div class="contact-icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                        </div>
                         <div class="contact-text">
                             <h4>Email</h4>
-                            <p>dhibichams@gmail.com</p>
+                            <p><a href="mailto:dhibichams@gmail.com" class="contact-link">dhibichams@gmail.com</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">🎮</div>
+                        <div class="contact-icon-wrapper">
+                            <i class="fab fa-instagram"></i>
+                        </div>
                         <div class="contact-text">
-                            <h4>Profile</h4>
-                            <p>instagram.com/chamsdhs/</p>
+                            <h4>Instagram</h4>
+                            <p><a href="https://instagram.com/chamsdhs/" target="_blank" rel="noopener" class="contact-link">@chamsdhs</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">💼</div>
+                        <div class="contact-icon-wrapper">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
                         <div class="contact-text">
                             <h4>LinkedIn</h4>
-                            <p><a href='https://www.linkedin.com/in/dhibi-chams-827146344/' target="_blank" rel="noopener">Dhibi Chams</a></p>
+                            <p><a href='https://www.linkedin.com/in/dhibi-chams-827146344/' target="_blank" rel="noopener" class="contact-link">dhibi-chams</a></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="social-links">
-                    <a href="#" class="social-link" title="GitHub">
+                    <a href="https://github.com/Chams99" class="social-link" title="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="social-link" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/dhibi-chams-827146344/" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="social-link" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Itch.io">
-                        <i class="fab fa-itch-io"></i>
+                    <a href="https://instagram.com/chamsdhs/" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
 
             <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" required>
+                <div class="form-header">
+                    <h3>Send Me a Message</h3>
+                    <p>I'll respond within 24 hours</p>
+                </div>
+                <div class="form-group floating">
+                    <input type="text" id="name" name="name" placeholder=" " required>
                     <label for="name">Your Name</label>
-                    <div class="line"></div>
+                    <div class="form-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <input type="email" id="email" required>
+                <div class="form-group floating">
+                    <input type="email" id="email" name="email" placeholder=" " required>
                     <label for="email">Your Email</label>
-                    <div class="line"></div>
+                    <div class="form-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <input type="text" id="subject" required>
+                <div class="form-group floating">
+                    <input type="text" id="subject" name="subject" placeholder=" " required>
                     <label for="subject">Subject</label>
-                    <div class="line"></div>
+                    <div class="form-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <textarea id="message" required></textarea>
+                <div class="form-group floating">
+                    <textarea id="message" name="message" placeholder=" " required></textarea>
                     <label for="message">Your Message</label>
-                    <div class="line"></div>
+                    <div class="form-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
                 </div>
-
                 <button type="submit" class="submit-btn">
-                    <span class="btn-text">Send Message</span>
-                    <span class="btn-icon">📨</span>
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
                 </button>
             </form>
         </div>
@@ -279,49 +291,5 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
-    <script>
-    particlesJS('particles-js', {
-        particles: {
-            number: { 
-                value: 40,  // Reduced from 80
-                density: {
-                    enable: true,
-                    value_area: 800
-                }
-            },
-            color: { value: '#ECDBBA' },
-            shape: { type: 'circle' },
-            opacity: { 
-                value: 0.3,  // Reduced from 0.5
-                random: false
-            },
-            size: { 
-                value: 2,    // Reduced from 3
-                random: true
-            },
-            move: {
-                enable: true,
-                speed: 1,    // Reduced from 2
-                direction: "none",
-                random: false,
-                straight: false,
-                out_mode: "out",
-                bounce: false,
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: false  // Disabled hover effects
-                    },
-                    onclick: {
-                        enable: false  // Disabled click effects
-                    },
-                    resize: true
-                }
-            }
-        }
-    });
-    </script>
 </body>
 </html>

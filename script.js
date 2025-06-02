@@ -46,12 +46,12 @@
         // Portfolio items data
         const projects = [
             { 
-                title: 'Wallpaper Generator', 
+                title: 'Wallpaper Generator DEMO', 
                 description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.', 
                 category: 'web',
                 image: 'wallpaper/Capture d\'écran 2025-05-31 092043.png',
-                github: 'https://github.com/yourusername/wallpaper-generator',
-                demo: 'wallpaper/index.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
+                demo: 'wallpaper/',
                 features: [
                     '🎨 Dynamic Pattern Generation',
                     '🖼️ Customizable Colors',
@@ -65,8 +65,8 @@
                 description: 'An interactive typing game that tests your typing speed and accuracy with different difficulty levels.', 
                 category: 'game',
                 image: 'Images/typing game.png',
-                github: 'https://github.com/yourusername/speed-typer',
-                demo: 'typing game/typing-game.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/typing game',
+                demo: 'typing game/typing-game',
                 features: [
                     '⌨️ Real-time WPM calculation',
                     '🏆 High score tracking',
@@ -76,12 +76,12 @@
                 tags: ['JavaScript', 'HTML5', 'CSS3', 'Web Game']
             },
             { 
-                title: 'The Ridiculous Quest', 
+                title: 'The Ridiculous Quest DEMO', 
                 description: 'A humorous adventure game where players battle rubber chickens, collect magic bananas, and dance with sock puppets. Features include inventory management, health potions, and save/load functionality.', 
                 category: 'game',
                 image: 'Images/chicken.jpg',
-                github: 'https://github.com/yourusername/ridiculous-quest',
-                demo: 'chicken/chicken.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/chicken',
+                demo: 'chicken/',
                 features: [
                     '🎮 Turn-based combat system',
                     '💾 Save/Load game progress',
@@ -95,8 +95,8 @@
                 description: 'A League of Legends themed chat interface that combines modern web design with the game\'s aesthetic. Features champion data integration and responsive design.', 
                 category: 'web',
                 image: 'Images/lol.jpg',
-                github: 'https://github.com/yourusername/lolchat',
-                demo: 'lolchat/LolChat.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
+                demo: 'lolchat/',
                 features: [
                     '🎮 League of Legends Theme',
                     '🦸‍♂️ Champion Data Integration',
@@ -106,12 +106,12 @@
                 tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
             },
             { 
-                title: 'E-commerce website', 
+                title: 'E-commerce website DEMO', 
                 description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
                 category: 'web',
                 image: 'Images/ecommerce.jpg',
-                github: 'https://github.com/yourusername/chamsshop',
-                demo: 'ChamsShop/Public/index.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
+                demo: 'ChamsShop/Public/',
                 features: [
                     '🛒 Dynamic Shopping Cart',
                     '🔐 User Authentication',
@@ -121,12 +121,12 @@
                 tags: ['HTML', 'CSS', 'JavaScript', 'E-commerce']
             },
             { 
-                title: 'Chamsado Messenger', 
+                title: 'Chamsado Messenger DEMO', 
                 description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
                 category: 'mobile',
                 image: 'Images/chamsado_messenger.jpg',
-                github: 'https://github.com/yourusername/chamsado-messenger',
-                demo: 'messenger_app/chamsado_project.html',
+                github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
+                demo: 'messenger_app/',
                 features: [
                     '💬 Real-time Messaging',
                     '🔒 Secure Communication',
@@ -159,7 +159,7 @@
                             ${project.image ? `<img src="${project.image}" alt="${project.title}">` : ''}
                             <div class="portfolio-overlay">
                                 <div class="portfolio-buttons">
-                                    ${project.github ? `<a href="${project.github}" class="portfolio-btn">GitHub</a>` : ''}
+                                    ${project.github ? `<a href="${project.github}" class="portfolio-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
                                     ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn ${project.category?.includes('game') ? 'game-btn' : ''}">Live Demo</a>` : ''}
                                 </div>
                             </div>
@@ -250,27 +250,51 @@
         document.addEventListener('DOMContentLoaded', () => {
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
+                let canSubmit = true; // Flag to track if form can be submitted
+
                 contactForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
+                    if (!canSubmit) {
+                        alert('Please wait 5 seconds before sending another message.');
+                        return;
+                    }
+
                     const submitBtn = contactForm.querySelector('.submit-btn');
                     const originalBtnText = submitBtn.innerHTML;
-                    
-                    // Change button text/state
-                    submitBtn.innerHTML = 'Sending...';
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                     submitBtn.disabled = true;
-                    
+
                     try {
-                        // Simulate form submission
-                        await new Promise(resolve => setTimeout(resolve, 1500));
-                        
-                        // Show success message
-                        alert('Message sent successfully!');
-                        contactForm.reset();
+                        const formData = new FormData(contactForm);
+                        const response = await fetch('telegram-proxy.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            // Show success message
+                            alert('Message sent successfully!');
+                            contactForm.reset();
+                            
+                            // Disable form submission for 5 seconds
+                            canSubmit = false;
+                            submitBtn.innerHTML = '<i class="fas fa-clock"></i> Wait 5s...';
+                            
+                            setTimeout(() => {
+                                canSubmit = true;
+                                submitBtn.innerHTML = originalBtnText;
+                                submitBtn.disabled = false;
+                            }, 5000);
+                        } else {
+                            // Show the specific error message from the server
+                            throw new Error(result.error || 'Failed to send message');
+                        }
                     } catch (error) {
-                        alert('Error sending message. Please try again.');
-                    } finally {
-                        // Restore button state
+                        console.error('Error:', error);
+                        alert(error.message || 'Sorry, there was an error sending your message. Please try again.');
                         submitBtn.innerHTML = originalBtnText;
                         submitBtn.disabled = false;
                     }
@@ -422,21 +446,7 @@
                 });
             }
 
-            // Social Links Stagger Animation
-            const socialLinks = document.querySelectorAll('.social-link');
-            if (socialLinks.length > 0) {
-                gsap.from(socialLinks, {
-                    scrollTrigger: {
-                        trigger: '.social-links',
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
-                    },
-                    duration: 0.5,
-                    y: 30,
-                    opacity: 0,
-                    stagger: 0.1
-                });
-            }
+           
 
             // Add hover animations for interactive elements
             const addHoverAnimation = (elements, scale = 1.05) => {
@@ -463,6 +473,5 @@
 
             // Apply hover animations
             addHoverAnimation(document.querySelectorAll('.portfolio-item'));
-            addHoverAnimation(document.querySelectorAll('.social-link'), 1.1);
             addHoverAnimation(document.querySelectorAll('.game-btn'));
         });
