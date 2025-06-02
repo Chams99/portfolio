@@ -1,0 +1,77 @@
+# Disable directory listing
+Options -Indexes
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Special rule for admin directory index - placing this higher in priority
+RewriteCond %{THE_REQUEST} \s/+admin/index\.php [NC]
+RewriteRule ^admin/index\.php$ /admin/ [R=301,L]
+
+# Special rule for admin login page - only for GET requests, not POST
+RewriteCond %{THE_REQUEST} ^GET\ /admin/login\.php [NC]
+RewriteRule ^admin/login\.php$ /admin/login [R=301,L]
+
+# Special rule for admin projects page - only for GET requests without query parameters
+RewriteCond %{THE_REQUEST} ^GET\ /admin/projects\.php(\ |$) [NC]
+RewriteRule ^admin/projects\.php$ /admin/projects [R=301,L]
+
+# Special rule for admin stats page - only for GET requests without query parameters
+RewriteCond %{THE_REQUEST} ^GET\ /admin/stats\.php(\ |$) [NC]
+RewriteRule ^admin/stats\.php$ /admin/stats [R=301,L]
+
+# Special rule for admin change password page - only for GET requests without query parameters
+RewriteCond %{THE_REQUEST} ^GET\ /admin/change_password\.php(\ |$) [NC]
+RewriteRule ^admin/change_password\.php$ /admin/change_password [R=301,L]
+
+# Remove trailing slashes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+# Exclude admin directory and telegram-proxy.php from clean URL redirects
+RewriteCond %{REQUEST_URI} !^/admin/ [NC]
+RewriteCond %{REQUEST_URI} !^/telegram-proxy\.php [NC]
+# Redirect any direct access to .html files to clean URL (including in subdirectories)
+RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Exclude admin directory and telegram-proxy.php from clean URL redirects
+RewriteCond %{REQUEST_URI} !^/admin/ [NC]
+RewriteCond %{REQUEST_URI} !^/telegram-proxy\.php [NC]
+# Redirect any direct access to .php files to clean URL (including in subdirectories)
+RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Block direct access to JavaScript files
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?chames.youssef\.tn/ [NC]
+RewriteCond %{REQUEST_URI} \.(js)$ [NC]
+RewriteRule \.(js)$ - [F,L]
+
+# Block direct access to CSS files
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?chames.youssef\.tn/ [NC]
+RewriteCond %{REQUEST_URI} \.(css)$ [NC]
+RewriteRule \.(css)$ - [F,L]
+
+# Protect telegram-proxy.php from direct access
+RewriteCond %{THE_REQUEST} ^.*/telegram-proxy\.php [NC]
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?chames.youssef\.tn/ [NC]
+RewriteRule ^ - [F,L]
+
+# Internal rewrites - try PHP first, then HTML
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Protect sensitive files
+<FilesMatch "(^\.env|\.htaccess|config\.php|db_connection\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
