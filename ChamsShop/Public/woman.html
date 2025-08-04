@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spring Collection 2025 - Fashion Store</title>
+    <title>Spring Collection 2025 - Lava</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            colors: { primary: "#4285F4", secondary: "#34A853" },
+            colors: { primary: "#000000", secondary: "#34A853" },
             borderRadius: {
               none: "0px",
               sm: "4px",
@@ -33,9 +33,10 @@
       rel="stylesheet"
     />
     <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
     <style>
       :where([class^="ri-"])::before { content: "\f3c2"; }
       .search-input:focus {
@@ -52,7 +53,7 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: #4285F4;
+      background: #000000;
       cursor: pointer;
       border: 2px solid white;
       box-shadow: 0 1px 3px rgba(0,0,0,0.2);
@@ -61,107 +62,155 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: #4285F4;
+      background: #000000;
       cursor: pointer;
       border: 2px solid white;
       box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       }
       .custom-checkbox:checked + label .checkbox-icon {
-      background-color: #4285F4;
-      border-color: #4285F4;
+      background-color: #000000;
+      border-color: #000000;
       }
       .custom-checkbox:checked + label .checkbox-icon i {
       opacity: 1;
       }
       .color-radio:checked + label .color-circle {
-      box-shadow: 0 0 0 2px white, 0 0 0 3px #4285F4;
+      box-shadow: 0 0 0 2px white, 0 0 0 3px #000000;
       }
     </style>
   </head>
   <body class="bg-white">
     <!-- Header -->
-    <header class="border-b border-gray-100 sticky top-0 bg-white z-50">
-      <div
-        class="container mx-auto px-4 py-3 flex items-center justify-between"
-      >
-        <a
-          href="https://readdy.ai/home/7e2f9ea2-069c-493f-b8bb-ceaea6a1c8cb/1bc87721-683f-4521-a855-f00ddb2d8ad9"
-          data-readdy="true"
-          class="text-3xl font-['Pacifico'] text-primary"
-          >logo</a
-        >
-        <div class="relative flex-1 max-w-xl mx-8">
-          <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-            <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-              <i class="ri-search-line"></i>
+        <!-- Header -->
+    <header class="header sticky top-0 z-50 bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="brand-logo">Lava</a>
+  
+        <!-- Search Bar -->
+        <div class="search-bar hidden md:flex items-center flex-1 max-w-xl mx-6">
+          <div class="relative w-full">
+            <input
+              type="text"
+              id="search-input"
+              class="search-input w-full py-2 pl-10 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Search for products..."
+              aria-label="Search for products"
+            />
+            <div
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400"
+            >
+              <i class="ri-search-line" aria-hidden="true"></i>
             </div>
           </div>
-          <input
-            type="text"
-            placeholder="Search for products..."
-            class="search-input w-full pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm bg-gray-50"
-          />
         </div>
-        <div class="flex items-center space-x-5">
-          <div class="relative w-8 h-8 flex items-center justify-center">
-            <i class="ri-heart-line text-gray-700"></i>
+  
+        <!-- Right Navigation Icons -->
+        <div class="flex items-center space-x-6">
+          <!-- Wishlist -->
+          <a href="wishlist.html" class="relative text-gray-700 hover:text-primary" aria-label="Go to Wishlist">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-heart-line ri-lg" aria-hidden="true"></i>
+            </div>
             <span
               class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
-              >3</span
-            >
-          </div>
-          <div class="relative w-8 h-8 flex items-center justify-center">
-            <i class="ri-shopping-bag-line text-gray-700"></i>
+            >3</span>
+          </a>
+  
+          <!-- Cart -->
+          <a href="cart.html" class="relative text-gray-700 hover:text-primary" aria-label="Go to Cart">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-shopping-cart-line ri-lg" aria-hidden="true"></i>
+            </div>
             <span
               class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
-              >2</span
-            >
-          </div>
-          <div class="w-8 h-8 flex items-center justify-center">
-            <i class="ri-user-line text-gray-700"></i>
-          </div>
+            >2</span>
+          </a>
+  
+          <!-- User Profile/Login -->
+          <a href="login.html" class="text-gray-700 hover:text-primary relative" aria-label="User Login" id="user-profile-link">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-user-line ri-lg"></i>
+            </div>
+            <span id="user-name" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden"></span>
+          </a>
+          
+          <!-- Admin Link -->
+          <a href="admin.html" class="text-gray-700 hover:text-primary" aria-label="Admin Panel">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-settings-3-line ri-lg"></i>
+            </div>
+          </a>
         </div>
-      </div>
-      <nav class="container mx-auto px-4 py-3">
-        <ul class="flex space-x-8">
-          <li>
-            <a
-              href="https://readdy.ai/home/7e2f9ea2-069c-493f-b8bb-ceaea6a1c8cb/1bc87721-683f-4521-a855-f00ddb2d8ad9"
-              data-readdy="true"
-              class="text-gray-600 hover:text-primary"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-gray-600 hover:text-primary"
-              >New Arrivals</a
-            >
-          </li>
-          <li><a href="#" class="text-primary font-medium">Women</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-primary">Men</a></li>
-          <li>
-            <a href="#" class="text-gray-600 hover:text-primary">Accessories</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-600 hover:text-primary">Beauty</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-600 hover:text-primary">Electronics</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-600 hover:text-primary"
-              >Home & Living</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://readdy.ai/home/7e2f9ea2-069c-493f-b8bb-ceaea6a1c8cb/9f6b3a3b-2a39-4dc2-9a5d-48a64d7c28a5"
-              data-readdy="true"
-              class="text-gray-600 hover:text-primary"
-              >Sale</a
-            >
-          </li>
-        </ul>
+    </div>  
+      <!-- Category navigation -->
+      <nav class="bg-white border-t border-gray-100">
+        <div class="container mx-auto px-4">
+          <ul
+            class="flex items-center space-x-8 overflow-x-auto py-3 whitespace-nowrap"
+          >
+            <li>
+              <a href="index.html" class="nav-link font-medium text-gray-600 hover:text-primary">Home</a>
+            </li>
+            <li>
+              <a
+                href="newAriviales.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >New Arrivals</a
+              >
+            </li>
+            <li>
+              <a
+                href="woman.html"
+                class="nav-link font-medium text-primary"
+                >Women</a
+              >
+            </li>
+            <li>
+              <a
+                href="men.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Men</a
+              >
+            </li>
+            <li>
+              <a
+                href="accesiore.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Accessories</a
+              >
+            </li>
+            <li>
+              <a
+                href="beauty.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Beauty</a
+              >
+            </li>
+            <li>
+              <a
+                href="electronics.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Electronics</a
+              >
+            </li>
+            <li>
+              <a
+                href="home&living.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Home & Living</a
+              >
+            </li>
+            <li>
+              <a
+                href="sale.html"
+                class="nav-link font-medium text-gray-600 hover:text-primary"
+                >Sale</a
+              >
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
     <!-- Breadcrumb -->
@@ -169,8 +218,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center text-sm">
           <a
-            href="https://readdy.ai/home/7e2f9ea2-069c-493f-b8bb-ceaea6a1c8cb/1bc87721-683f-4521-a855-f00ddb2d8ad9"
-            data-readdy="true"
+            href="index.html"
             class="text-gray-500 hover:text-primary"
             >Home</a
           >
@@ -340,13 +388,13 @@
                 <input
                   type="radio"
                   name="color"
-                  id="color-blue"
+                  id="color-black"
                   class="hidden color-radio"
                   checked
                 />
-                <label for="color-blue" class="block cursor-pointer">
+                <label for="color-black" class="block cursor-pointer">
                   <div
-                    class="color-circle w-8 h-8 rounded-full bg-blue-500 border-2 border-white shadow-sm"
+                    class="color-circle w-8 h-8 rounded-full bg-black border-2 border-white shadow-sm"
                   ></div>
                 </label>
               </div>
@@ -564,7 +612,7 @@
                 <span
                   class="bg-gray-100 px-3 py-1 rounded-full flex items-center"
                 >
-                  Color: Blue
+                  Color: Black
                   <button class="ml-2 text-gray-500 hover:text-gray-700">
                     <i class="ri-close-line"></i>
                   </button>
@@ -1248,9 +1296,9 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div>
             <a
-              href="#"
-              class="text-3xl font-['Pacifico'] text-white mb-4 inline-block"
-              >logo</a
+              href="index.html"
+              class="text-3xl font-['Pacifico'] text-white mb-4 inline-block brand-logo"
+              >Lava</a
             >
             <p class="text-gray-400 mb-4">
               Your destination for premium fashion and lifestyle products.
@@ -1286,27 +1334,27 @@
             <h3 class="text-lg font-semibold mb-4">Shop</h3>
             <ul class="space-y-2">
               <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
+                <a href="woman.html" class="text-gray-400 hover:text-white transition"
                   >Women</a
                 >
               </li>
               <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
+                <a href="men.html" class="text-gray-400 hover:text-white transition"
                   >Men</a
                 >
               </li>
               <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
+                <a href="accesiore.html" class="text-gray-400 hover:text-white transition"
                   >Accessories</a
                 >
               </li>
               <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
+                <a href="beauty.html" class="text-gray-400 hover:text-white transition"
                   >Beauty</a
                 >
               </li>
               <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
+                <a href="sale.html" class="text-gray-400 hover:text-white transition"
                   >Sale</a
                 >
               </li>
@@ -1377,7 +1425,7 @@
           class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
         >
           <p class="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2025 Fashion Store. All rights reserved.
+            © 2025 Lava. All rights reserved.
           </p>
           <div class="flex items-center space-x-4">
             <div class="w-8 h-5 flex items-center justify-center">
@@ -1434,5 +1482,6 @@
         }
       });
     </script>
+      <script src="js/shared-nav.js"></script>
   </body>
 </html>

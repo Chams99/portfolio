@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Product Management</title>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
@@ -13,7 +17,7 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: { primary: "#3b82f6", secondary: "#f59e0b" },
+          colors: { primary: "#000000", secondary: "#f59e0b" },
           borderRadius: {
             none: "0px",
             sm: "4px",
@@ -34,7 +38,7 @@
 <body class="bg-gray-100">
   <header class="header sticky top-0 z-50 bg-white shadow-sm">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="font-['Pacifico'] text-3xl text-primary">lava</a>
+      <a href="index.html" class="brand-logo">Lava</a>
       <div class="flex items-center space-x-6">
         <a href="index.html" class="text-gray-700 hover:text-primary">
           <i class="ri-home-line ri-lg"></i>
@@ -174,7 +178,7 @@
               <p class="font-bold text-primary">$${parseFloat(product.price).toFixed(2)}</p>
               <p class="text-xs text-gray-500">Added: ${new Date(product.created_at).toLocaleString()}</p>
               <div class="flex gap-2 mt-3">
-                <button class="edit-product-btn bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors" data-id="${product.id}">
+                <button class="edit-product-btn bg-black text-white px-3 py-1 rounded text-sm hover:bg-gray-800 transition-colors" data-id="${product.id}">
                   Edit
                 </button>
                 <button class="delete-product-btn bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-colors" data-id="${product.id}">
@@ -400,5 +404,160 @@
       loadProducts();
     });
   </script>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <a
+            href="index.html"
+            class="text-3xl font-['Pacifico'] text-white mb-4 inline-block brand-logo"
+            >Lava</a
+          >
+          <p class="text-gray-400 mb-4">
+            Your destination for premium fashion and lifestyle products.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+            >
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+            >
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+            >
+              <i class="ri-twitter-x-line"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition"
+            >
+              <i class="ri-pinterest-line"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Shop</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="woman.html" class="text-gray-400 hover:text-white transition"
+                >Women</a
+              >
+            </li>
+            <li>
+              <a href="men.html" class="text-gray-400 hover:text-white transition"
+                >Men</a
+              >
+            </li>
+            <li>
+              <a href="accesiore.html" class="text-gray-400 hover:text-white transition"
+                >Accessories</a
+              >
+            </li>
+            <li>
+              <a href="beauty.html" class="text-gray-400 hover:text-white transition"
+                >Beauty</a
+              >
+            </li>
+            <li>
+              <a href="sale.html" class="text-gray-400 hover:text-white transition"
+                >Sale</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Shipping & Returns</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >FAQ</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Size Guide</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Track Order</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">About</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Our Story</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Sustainability</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Careers</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Press</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Privacy Policy</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
+      >
+        <p class="text-gray-400 text-sm mb-4 md:mb-0">
+          © 2025 Lava. All rights reserved.
+        </p>
+        <div class="flex items-center space-x-4">
+          <div class="w-8 h-5 flex items-center justify-center">
+            <i class="ri-visa-fill text-xl"></i>
+          </div>
+          <div class="w-8 h-5 flex items-center justify-center">
+            <i class="ri-mastercard-fill text-xl"></i>
+          </div>
+          <div class="w-8 h-5 flex items-center justify-center">
+            <i class="ri-paypal-fill text-xl"></i>
+          </div>
+          <div class="w-8 h-5 flex items-center justify-center">
+            <i class="ri-apple-fill text-xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html> 
