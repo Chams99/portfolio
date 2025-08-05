@@ -3,131 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speed Typer - Test Your Typing Skills</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>UltraType Pro - Advanced Typing Mastery</title>
+    <meta name="description" content="Master your typing skills with UltraType Pro - The ultimate typing experience with AI-powered feedback, multiple modes, and real-time analytics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>">
     <style>
         :root {
-            --dark-bg: #161616;
-            --green: #346751;
-            --red: #C84B31;
-            --beige: #ECDBBA;
+            /* Modern Color Palette */
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --warning: #f97316;
+            
+            /* Neutral Colors */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --bg-elevated: #475569;
+            
+            /* Text Colors */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 20px rgb(99 102 241 / 0.3);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 350ms ease;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--beige);
-            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
             margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        .app-container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            gap: 0;
         }
 
         .game-container {
-            max-width: 700px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: linear-gradient(145deg, rgba(22, 22, 22, 0.9), rgba(30, 30, 30, 0.8));
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            text-align: center;
+            background: var(--bg-secondary);
+            border-radius: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            border: none;
+            overflow: hidden;
             position: relative;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .game-header {
-            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            padding: var(--space-md);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .game-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .game-header {
+            margin-bottom: 0;
         }
 
         .game-title {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 15px rgba(52, 103, 81, 0.5);
-            letter-spacing: 1px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            text-shadow: var(--shadow-lg);
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
         }
 
         .game-subtitle {
-            font-size: 1.1rem;
-            color: var(--beige);
-            opacity: 0.8;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: var(--space-sm);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-content {
+            padding: var(--space-md);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .game-settings {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            background: var(--bg-tertiary);
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--bg-elevated);
+            flex-shrink: 0;
         }
 
-        .difficulty-selector, .time-selector {
-            padding: 0.6rem 1rem;
-            background: linear-gradient(145deg, rgba(52, 103, 81, 0.1), rgba(52, 103, 81, 0.3));
-            border: 2px solid var(--green);
-            border-radius: 50px;
-            color: var(--beige);
-            font-size: 0.9rem;
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .setting-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .difficulty-selector, .time-selector, .mode-selector {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-secondary);
+            border: 2px solid var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
             appearance: none;
             -webkit-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23ECDBBA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
             background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
+            background-position: right var(--space-sm) center;
+            padding-right: var(--space-xl);
         }
 
-        .difficulty-selector:hover, .time-selector:hover {
-            background: linear-gradient(145deg, rgba(52, 103, 81, 0.2), rgba(52, 103, 81, 0.4));
-            transform: translateY(-2px);
+        .difficulty-selector:hover, .time-selector:hover, .mode-selector:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-1px);
+        }
+
+        .difficulty-selector:focus, .time-selector:focus, .mode-selector:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
         }
 
         .game-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            flex-shrink: 0;
         }
 
         .stat-box {
-            background: linear-gradient(145deg, rgba(22, 22, 22, 0.6), rgba(52, 103, 81, 0.1));
-            border-radius: 15px;
-            padding: 1rem;
-            min-width: 110px;
-            border: 1px solid rgba(52, 103, 81, 0.2);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            border: 1px solid var(--bg-elevated);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
         }
 
         .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-box.wpm::before {
+            background: var(--gradient-secondary);
+        }
+
+        .stat-box.accuracy::before {
+            background: var(--gradient-accent);
+        }
+
+        .stat-box.time::before {
+            background: var(--gradient-danger);
         }
 
         .stat-title {
-            font-size: 0.9rem;
-            color: var(--green);
-            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--beige);
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .stat-unit {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .game-area {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border: 1px solid var(--bg-elevated);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
         .countdown {
@@ -135,30 +338,44 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 7rem;
-            font-weight: 700;
-            color: var(--green);
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--primary);
             z-index: 10;
             display: none;
-            text-shadow: 0 0 30px rgba(52, 103, 81, 0.8);
-            animation: pulse 0.5s infinite alternate;
+            text-shadow: var(--shadow-glow);
+            animation: countdownPulse 0.5s infinite alternate;
+            font-family: var(--font-mono);
+        }
+
+        @keyframes countdownPulse {
+            0% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
         }
 
         .text-display {
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.7), rgba(22, 22, 22, 0.8));
-            padding: 2rem;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            line-height: 1.7;
+            background: var(--bg-secondary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            line-height: 1.6;
             text-align: left;
-            margin-bottom: 1.5rem;
-            min-height: 120px;
-            height: 120px;
+            margin-bottom: var(--space-sm);
+            flex: 1;
             position: relative;
             overflow-y: auto;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(52, 103, 81, 0.1);
-            letter-spacing: 0.5px;
+            box-shadow: inset var(--shadow-sm);
+            border: 1px solid var(--bg-elevated);
+            letter-spacing: 0.02em;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            min-height: 0;
         }
 
         .text-display.blur {
@@ -166,10 +383,12 @@
         }
 
         .current-word {
-            background: linear-gradient(90deg, rgba(52, 103, 81, 0.3), rgba(52, 103, 81, 0.6));
-            border-radius: 4px;
-            padding: 2px 4px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-sm);
+            padding: var(--space-xs) var(--space-sm);
             position: relative;
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .current-word::after {
@@ -179,92 +398,123 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: var(--green);
-            animation: pulse 1.5s infinite;
+            background: var(--primary);
+            animation: cursorBlink 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
+        @keyframes cursorBlink {
+            0%, 50% {
                 opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
             }
         }
 
         .correct {
-            color: var(--green);
+            color: var(--secondary);
+            font-weight: 500;
         }
 
         .incorrect {
-            color: var(--red);
-            text-decoration: underline;
+            color: var(--danger);
+            text-decoration: wavy underline var(--danger);
+            text-underline-offset: 2px;
         }
 
         .text-input {
-            width: 200px;
-            padding: 1rem 1.2rem;
-            font-size: 1.2rem;
-            background: linear-gradient(145deg, rgba(22, 22, 22, 0.8), rgba(30, 30, 30, 0.6));
-            border: 2px solid var(--green);
-            border-radius: 15px;
-            color: var(--beige);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            width: 100%;
+            max-width: 400px;
+            padding: var(--space-md) var(--space-lg);
+            font-size: 1.125rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            transition: var(--transition-normal);
+            letter-spacing: 0.02em;
+            font-family: var(--font-mono);
+            text-align: center;
         }
 
         .text-input:focus {
             outline: none;
-            box-shadow: 0 0 20px rgba(52, 103, 81, 0.4);
-            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-1px);
         }
         
-        /* New style for input error state */
         .text-input.error {
-            border: 2px solid var(--red);
-            box-shadow: 0 0 20px rgba(200, 75, 49, 0.4);
-            color: var(--red);
+            border-color: var(--danger);
+            box-shadow: 0 0 20px rgb(239 68 68 / 0.3);
+            color: var(--danger);
+        }
+
+        .text-input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .game-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            flex-wrap: wrap;
+            flex-shrink: 0;
         }
 
         .game-btn {
-            padding: 0.8rem 1.8rem;
-            font-size: 1rem;
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.875rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
             border: none;
-            border-radius: 50px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
             position: relative;
             overflow: hidden;
+            font-family: var(--font-sans);
+            min-width: 100px;
         }
 
         .start-btn {
-            background: linear-gradient(145deg, var(--green), #264d3c);
-            color: var(--beige);
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
         }
 
         .reset-btn {
             background: transparent;
-            color: var(--beige);
-            border: 2px solid var(--green);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
+            border: 2px solid var(--bg-elevated);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pause-btn {
+            background: var(--gradient-accent);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
         }
 
         .game-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(52, 103, 81, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .game-btn::after {
+        .game-btn:active {
+            transform: translateY(0);
+        }
+
+        .game-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .game-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -272,100 +522,223 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            transition: var(--transition-slow);
         }
 
-        .game-btn:hover::after {
+        .game-btn:hover::before {
             left: 100%;
         }
 
         .results {
             display: none;
-            background: linear-gradient(145deg, rgba(22, 22, 22, 0.8), rgba(52, 103, 81, 0.1));
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(52, 103, 81, 0.2);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            margin-top: var(--space-lg);
+            border: 1px solid var(--bg-elevated);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
         }
 
         .results-title {
-            font-size: 1.7rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--green);
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            text-align: center;
         }
 
         .results-stats {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
         }
 
         .result-box {
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.7), rgba(52, 103, 81, 0.2));
-            border-radius: 15px;
-            padding: 1rem;
-            min-width: 110px;
-            border: 1px solid rgba(52, 103, 81, 0.2);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            border: 1px solid var(--bg-elevated);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            text-align: center;
         }
 
         .result-box:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .result-title {
-            font-size: 0.9rem;
-            color: var(--green);
-            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
         }
 
         .result-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--beige);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .result-unit {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .results-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
         }
 
         .back-btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            color: var(--beige);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-top: var(--space-lg);
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            border: 1px solid var(--green);
-            transition: all 0.3s ease;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--bg-elevated);
+            transition: var(--transition-normal);
+            background: var(--bg-secondary);
         }
 
         .back-btn:hover {
-            background-color: rgba(52, 103, 81, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: var(--bg-tertiary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        /* Additional Features */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: var(--space-lg);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+            border-radius: var(--radius-sm);
+        }
+
+        .keyboard-hint {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .key {
+            background: var(--bg-elevated);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .app-container {
+                grid-template-columns: 200px 1fr 250px;
+            }
         }
 
         @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .sidebar, .right-panel {
+                display: none;
+            }
+
             .game-container {
-                margin: 1rem;
-                padding: 1.5rem;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .game-header {
+                padding: var(--space-md);
             }
 
             .game-title {
                 font-size: 2rem;
             }
 
+            .game-content {
+                padding: var(--space-md);
+            }
+
+            .game-settings {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
             .text-display {
-                font-size: 1.1rem;
-                padding: 1.5rem;
+                font-size: 1rem;
+                padding: var(--space-md);
             }
 
             .stat-box, .result-box {
-                min-width: 100px;
+                min-width: 120px;
+            }
+
+            .game-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .game-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-title {
+                font-size: 2rem;
+            }
+
+            .stat-value, .result-value {
+                font-size: 1.5rem;
+            }
+
+            .text-display {
+                font-size: 1rem;
+                padding: var(--space-md);
             }
         }
 
@@ -382,56 +755,467 @@
         .text-display {
             transition: none;
         }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--bg-elevated);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--bg-elevated);
+            margin-bottom: var(--space-md);
+        }
+
+        .sidebar-header h2 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .sidebar-header p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Right Panel Styles */
+        .right-panel {
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--bg-elevated);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .panel-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--bg-elevated);
+            margin-bottom: var(--space-md);
+        }
+
+        .panel-header h3 {
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .panel-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--bg-elevated);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .option-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .option-card:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .option-card.clicked {
+            background: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .option-card.clicked i {
+            color: var(--text-primary);
+        }
+
+        .option-card i {
+            color: var(--primary);
+            font-size: 1.25rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .option-card h4 {
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .option-card p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
+        .panel-stats {
+            padding: var(--space-md);
+            border-top: 1px solid var(--bg-elevated);
+            margin-top: auto;
+        }
+
+        .panel-stats h4 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--bg-elevated);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-item span:first-child {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .stat-item span:last-child {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        /* Panel Styles */
+        .progress-panel, .leaderboard-panel, .settings-panel {
+            padding: var(--space-lg);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .progress-panel h2, .leaderboard-panel h2, .settings-panel h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            text-align: center;
+        }
+
+        /* Progress Panel */
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .progress-card {
+            background: var(--bg-tertiary);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--bg-elevated);
+            text-align: center;
+        }
+
+        .progress-card h3 {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+
+        .progress-value {
+            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Leaderboard Panel */
+        .leaderboard-tabs {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--bg-elevated);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--text-primary);
+            border-color: var(--primary);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .leaderboard-list {
+            margin-bottom: var(--space-lg);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            border: 1px solid var(--bg-elevated);
+        }
+
+        .leaderboard-item:first-child {
+            background: var(--gradient-primary);
+            border-color: var(--primary);
+        }
+
+        .rank {
+            background: var(--primary);
+            color: var(--text-primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: var(--space-md);
+        }
+
+        .leaderboard-item:first-child .rank {
+            background: var(--text-primary);
+            color: var(--primary);
+        }
+
+        .player {
+            flex: 1;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .score {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        /* Settings Panel */
+        .settings-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .settings-section h3 {
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--bg-elevated);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .setting-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
 
-    <div class="game-container">
-        <div class="game-header">
-            <h1 class="game-title">Speed Typer</h1>
-            <p class="game-subtitle">How fast can you type? Test your skills!</p>
+        <div class="app-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>UltraType Pro</h2>
+                <p>Master your typing skills</p>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-item active">
+                    <i class="fas fa-keyboard"></i>
+                    <span>Practice</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Leaderboard</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
         </div>
 
+        <!-- Main Game Area -->
+    <div class="game-container">
+        <div class="game-header">
+                <h1 class="game-title">UltraType Pro</h1>
+                <p class="game-subtitle">Master your typing skills with AI-powered feedback</p>
+                <div class="game-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Advanced Typing Experience</span>
+                </div>
+        </div>
+
+            <div class="game-content">
         <div class="game-settings">
+                    <div class="setting-group">
+                        <label class="setting-label">Difficulty</label>
             <select class="difficulty-selector" id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium" selected>Medium</option>
-                <option value="hard">Hard</option>
+                            <option value="easy">Beginner</option>
+                            <option value="medium" selected>Intermediate</option>
+                            <option value="hard">Advanced</option>
                 <option value="expert">Expert</option>
             </select>
+                    </div>
 
+                    <div class="setting-group">
+                        <label class="setting-label">Time Limit</label>
             <select class="time-selector" id="timeLimit">
                 <option value="30">30 Seconds</option>
-                <option value="60" selected>60 Seconds</option>
+                            <option value="60" selected>1 Minute</option>
                 <option value="120">2 Minutes</option>
+                            <option value="300">5 Minutes</option>
             </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="setting-label">Mode</label>
+                        <select class="mode-selector" id="gameMode">
+                            <option value="words" selected>Words</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="code">Code</option>
+                            <option value="quotes">Quotes</option>
+                        </select>
+                    </div>
         </div>
 
         <div class="game-stats">
-            <div class="stat-box">
+                    <div class="stat-box time">
                 <div class="stat-title">Time Left</div>
                 <div class="stat-value" id="time">60</div>
+                        <div class="stat-unit">seconds</div>
             </div>
-            <div class="stat-box">
+                    <div class="stat-box wpm">
                 <div class="stat-title">WPM</div>
                 <div class="stat-value" id="wpm">0</div>
+                        <div class="stat-unit">words/min</div>
             </div>
-            <div class="stat-box">
+                    <div class="stat-box accuracy">
                 <div class="stat-title">Accuracy</div>
-                <div class="stat-value" id="accuracy">0%</div>
+                        <div class="stat-value" id="accuracy">0</div>
+                        <div class="stat-unit">%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-title">Progress</div>
+                        <div class="stat-value" id="progress">0</div>
+                        <div class="stat-unit">%</div>
             </div>
         </div>
 
         <div class="game-area">
             <div class="countdown" id="countdown">3</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
             <div class="text-display" id="textDisplay">Click 'Start' to begin typing...</div>
             <input type="text" class="text-input" id="textInput" placeholder="Start typing here..." disabled>
+                    <div class="keyboard-hint">
+                        <span>Press</span>
+                        <span class="key">Space</span>
+                        <span>to submit word</span>
+                    </div>
         </div>
 
         <div class="game-buttons">
-            <button class="game-btn start-btn" id="startBtn">Start Game</button>
-            <button class="game-btn reset-btn" id="resetBtn">Reset</button>
+                    <button class="game-btn start-btn" id="startBtn">
+                        <i class="fas fa-play"></i>
+                        Start Game
+                    </button>
+                    <button class="game-btn pause-btn" id="pauseBtn" style="display: none;">
+                        <i class="fas fa-pause"></i>
+                        Pause
+                    </button>
+                    <button class="game-btn reset-btn" id="resetBtn">
+                        <i class="fas fa-redo"></i>
+                        Reset
+                    </button>
         </div>
 
         <div class="results" id="results">
@@ -440,40 +1224,198 @@
                 <div class="result-box">
                     <div class="result-title">WPM</div>
                     <div class="result-value" id="finalWpm">0</div>
+                            <div class="result-unit">words/min</div>
                 </div>
                 <div class="result-box">
                     <div class="result-title">Accuracy</div>
-                    <div class="result-value" id="finalAccuracy">0%</div>
+                            <div class="result-value" id="finalAccuracy">0</div>
+                            <div class="result-unit">%</div>
                 </div>
                 <div class="result-box">
                     <div class="result-title">Words</div>
                     <div class="result-value" id="finalWords">0</div>
+                            <div class="result-unit">typed</div>
                 </div>
                 <div class="result-box">
                     <div class="result-title">Errors</div>
                     <div class="result-value" id="finalErrors">0</div>
+                            <div class="result-unit">mistakes</div>
                 </div>
+            </div>
+                    <div class="results-actions">
+                        <button class="game-btn start-btn" id="retryBtn">
+                            <i class="fas fa-redo"></i>
+                            Try Again
+                        </button>
+                        <button class="game-btn reset-btn" id="shareBtn">
+                            <i class="fas fa-share"></i>
+                            Share Results
+                        </button>
             </div>
         </div>
 
-        <a href="../index.html" class="back-btn">Back to Portfolio</a>
+                <a href="../index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Portfolio
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <div class="panel-header">
+                <h3>Game Options</h3>
+            </div>
+            <div class="panel-content">
+                <div class="option-card">
+                    <i class="fas fa-play"></i>
+                    <div>
+                        <h4>Quick Start</h4>
+                        <p>Begin typing immediately</p>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Time Challenge</h4>
+                        <p>Race against the clock</p>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <i class="fas fa-code"></i>
+                    <div>
+                        <h4>Code Practice</h4>
+                        <p>Improve coding speed</p>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <i class="fas fa-quote-left"></i>
+                    <div>
+                        <h4>Quote Mode</h4>
+                        <p>Type famous quotes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-stats">
+                <h4>Your Stats</h4>
+                <div class="stat-item">
+                    <span>Best WPM</span>
+                    <span id="bestWpm">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Best Accuracy</span>
+                    <span id="bestAccuracy">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span>Games Played</span>
+                    <span id="gamesPlayed">0</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js
+        // Initialize particles.js with modern configuration
         particlesJS('particles-js', {
             particles: {
-                number: { value: 50 },
-                color: { value: '#ECDBBA' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.3 },
-                size: { value: 3 },
+                number: { 
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: { value: '#6366f1' },
+                shape: { 
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.2,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#6366f1',
+                    opacity: 0.1,
+                    width: 1
+                },
                 move: {
                     enable: true,
-                    speed: 1
+                    speed: 1,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
                 }
-            }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
         });
 
         // Game elements
@@ -482,10 +1424,16 @@
         const timeEl = document.getElementById('time');
         const wpmEl = document.getElementById('wpm');
         const accuracyEl = document.getElementById('accuracy');
+        const progressEl = document.getElementById('progress');
+        const progressFillEl = document.getElementById('progressFill');
         const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
         const resetBtn = document.getElementById('resetBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        const shareBtn = document.getElementById('shareBtn');
         const difficultySelect = document.getElementById('difficulty');
         const timeLimitSelect = document.getElementById('timeLimit');
+        const gameModeSelect = document.getElementById('gameMode');
         const countdownEl = document.getElementById('countdown');
         const resultsEl = document.getElementById('results');
         const finalWpmEl = document.getElementById('finalWpm');
@@ -496,20 +1444,30 @@
         // Game variables
         let timer;
         let timeLeft;
+        let originalTime;
         let isPlaying = false;
+        let isPaused = false;
         let words = [];
         let currentWordIndex = 0;
         let correctWords = 0;
         let incorrectWords = 0;
         let startTime;
+        let pauseStartTime;
+        let totalPauseTime = 0;
         
-        // New variables for keystroke accuracy
+        // Keystroke tracking
         let totalKeystrokes = 0;
         let correctKeystrokes = 0;
-        let previousInputLength = 0; // Track previous input length to detect erasing
+        let previousInputLength = 0;
+        
+        // Performance tracking
+        let bestWpm = localStorage.getItem('bestWpm') || 0;
+        let bestAccuracy = localStorage.getItem('bestAccuracy') || 0;
+        let gamesPlayed = localStorage.getItem('gamesPlayed') || 0;
 
-        // Word lists by difficulty
-        const wordLists = {
+        // Content by mode and difficulty
+        const contentData = {
+            words: {
             easy: [
                 'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'I',
                 'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at',
@@ -529,23 +1487,135 @@
                 'sophisticated', 'extraordinary', 'comprehensive', 'revolutionary', 'philosophical', 'psychological', 'unprecedented', 'enthusiastically', 'responsibility', 'determination',
                 'entrepreneurship', 'biodiversity', 'sustainability', 'infrastructure', 'collaboration', 'authentication', 'implementation', 'personalization', 'visualization', 'transformation'
             ]
+            },
+            sentences: {
+                easy: [
+                    'The quick brown fox jumps over the lazy dog.',
+                    'All work and no play makes Jack a dull boy.',
+                    'A journey of a thousand miles begins with a single step.',
+                    'Practice makes perfect.',
+                    'Time flies when you are having fun.'
+                ],
+                medium: [
+                    'The early bird catches the worm, but the second mouse gets the cheese.',
+                    'Life is what happens while you are busy making other plans.',
+                    'The only way to do great work is to love what you do.',
+                    'Success is not final, failure is not fatal.',
+                    'The future belongs to those who believe in the beauty of their dreams.'
+                ],
+                hard: [
+                    'The greatest glory in living lies not in never falling, but in rising every time we fall.',
+                    'In the middle of difficulty lies opportunity.',
+                    'The only limit to our realization of tomorrow will be our doubts of today.',
+                    'It does not matter how slowly you go as long as you do not stop.',
+                    'The way to get started is to quit talking and begin doing.'
+                ],
+                expert: [
+                    'The difference between the impossible and the possible lies in determination.',
+                    'Success is walking from failure to failure with no loss of enthusiasm.',
+                    'The only person you are destined to become is the person you decide to be.',
+                    'Your time is limited, so do not waste it living someone else life.',
+                    'The future depends on what you do today.'
+                ]
+            },
+            code: {
+                easy: [
+                    'function hello() { return "world"; }',
+                    'const x = 5; const y = 10;',
+                    'if (condition) { doSomething(); }',
+                    'for (let i = 0; i < n; i++) { }',
+                    'class MyClass { constructor() { } }'
+                ],
+                medium: [
+                    'const result = array.filter(item => item.active).map(item => item.name);',
+                    'async function fetchData() { const response = await fetch(url); return response.json(); }',
+                    'const debounce = (func, wait) => { let timeout; return function executedFunction(...args) { } };',
+                    'class Component extends React.Component { render() { return <div>Hello</div>; } }',
+                    'const reducer = (state, action) => { switch (action.type) { case "UPDATE": return { ...state, ...action.payload }; default: return state; } };'
+                ],
+                hard: [
+                    'const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);',
+                    'const useCustomHook = () => { const [state, setState] = useState(initialState); useEffect(() => { const subscription = observable.subscribe(setState); return () => subscription.unsubscribe(); }, []); return state; };',
+                    'const curry = (fn) => { return function curried(...args) { if (args.length >= fn.length) { return fn.apply(this, args); } return function(...moreArgs) { return curried.apply(this, args.concat(moreArgs)); }; }; };',
+                    'const deepClone = (obj) => { if (obj === null || typeof obj !== "object") return obj; if (obj instanceof Date) return new Date(obj.getTime()); if (obj instanceof Array) return obj.map(item => deepClone(item)); if (typeof obj === "object") { const clonedObj = {}; for (let key in obj) { if (obj.hasOwnProperty(key)) { clonedObj[key] = deepClone(obj[key]); } } return clonedObj; } };',
+                    'const binarySearch = (arr, target) => { let left = 0; let right = arr.length - 1; while (left <= right) { const mid = Math.floor((left + right) / 2); if (arr[mid] === target) return mid; if (arr[mid] < target) left = mid + 1; else right = mid - 1; } return -1; };'
+                ],
+                expert: [
+                    'const createStore = (reducer, preloadedState, enhancer) => { if (typeof preloadedState === "function" && typeof enhancer === "undefined") { enhancer = preloadedState; preloadedState = undefined; } if (typeof enhancer !== "undefined") { if (typeof enhancer !== "function") { throw new Error("Expected the enhancer to be a function."); } return enhancer(createStore)(reducer, preloadedState); } if (typeof reducer !== "function") { throw new Error("Expected the reducer to be a function."); } let currentReducer = reducer; let currentState = preloadedState; let currentListeners = []; let nextListeners = currentListeners; let isDispatching = false; function ensureCanMutateNextListeners() { if (nextListeners === currentListeners) { nextListeners = currentListeners.slice(); } } function getState() { if (isDispatching) { throw new Error("You may not call store.getState() while the reducer is executing."); } return currentState; } function subscribe(listener) { if (typeof listener !== "function") { throw new Error("Expected the listener to be a function."); } if (isDispatching) { throw new Error("You may not call store.subscribe() while the reducer is executing."); } let isSubscribed = true; ensureCanMutateNextListeners(); nextListeners.push(listener); return function unsubscribe() { if (!isSubscribed) { return; } if (isDispatching) { throw new Error("You may not unsubscribe from a store listener while the reducer is executing."); } isSubscribed = false; ensureCanMutateNextListeners(); const index = nextListeners.indexOf(listener); nextListeners.splice(index, 1); }; } function dispatch(action) { if (!isPlainObject(action)) { throw new Error("Actions must be plain objects."); } if (typeof action.type === "undefined") { throw new Error("Actions may not have an undefined \"type\" property."); } if (isDispatching) { throw new Error("Reducers may not dispatch actions."); } try { isDispatching = true; currentState = currentReducer(currentState, action); } finally { isDispatching = false; } const listeners = (currentListeners = nextListeners); for (let i = 0; i < listeners.length; i++) { const listener = listeners[i]; listener(); } return action; } function replaceReducer(nextReducer) { if (typeof nextReducer !== "function") { throw new Error("Expected the nextReducer to be a function."); } currentReducer = nextReducer; dispatch({ type: ActionTypes.REPLACE }); } function observable() { const outerSubscribe = subscribe; return { subscribe(observer) { if (typeof observer !== "object" || observer === null) { throw new TypeError("Expected the observer to be an object."); } function observeState() { if (observer.next) { observer.next(getState()); } } observeState(); const unsubscribe = outerSubscribe(observeState); return { unsubscribe }; } }; } dispatch({ type: ActionTypes.INIT }); return { dispatch, subscribe, getState, replaceReducer, [$$observable]: observable }; };'
+                ]
+            },
+            quotes: {
+                easy: [
+                    '"Be yourself; everyone else is already taken." - Oscar Wilde',
+                    '"Two things are infinite: the universe and human stupidity." - Albert Einstein',
+                    '"Be the change that you wish to see in the world." - Mahatma Gandhi',
+                    '"In three words I can sum up everything I know about life." - Robert Frost',
+                    '"If you tell the truth, you do not have to remember anything." - Mark Twain'
+                ],
+                medium: [
+                    '"The only way to do great work is to love what you do." - Steve Jobs',
+                    '"Life is what happens when you are busy making other plans." - John Lennon',
+                    '"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt',
+                    '"Success is not final, failure is not fatal: it is the courage to continue that counts." - Winston Churchill',
+                    '"The only limit to our realization of tomorrow will be our doubts of today." - Franklin D. Roosevelt'
+                ],
+                hard: [
+                    '"The greatest glory in living lies not in never falling, but in rising every time we fall." - Nelson Mandela',
+                    '"The way to get started is to quit talking and begin doing." - Walt Disney',
+                    '"It does not matter how slowly you go as long as you do not stop." - Confucius',
+                    '"The only person you are destined to become is the person you decide to be." - Ralph Waldo Emerson',
+                    '"Your time is limited, so do not waste it living someone else life." - Steve Jobs'
+                ],
+                expert: [
+                    '"The difference between the impossible and the possible lies in determination." - Tommy Lasorda',
+                    '"Success is walking from failure to failure with no loss of enthusiasm." - Winston Churchill',
+                    '"The only way to achieve the impossible is to believe it is possible." - Charles Kingsleigh',
+                    '"The future depends on what you do today." - Mahatma Gandhi',
+                    '"The only limit to our realization of tomorrow will be our doubts of today." - Franklin D. Roosevelt'
+                ]
+            }
         };
 
-        // Generate random words based on difficulty
-        function generateWords(difficulty, count = 50) {
-            const wordList = wordLists[difficulty];
-            const generatedWords = [];
+        // Generate content based on mode and difficulty
+        function generateContent(mode, difficulty, count = 50) {
+            const contentList = contentData[mode][difficulty];
+            const generatedContent = [];
             
+            if (mode === 'words') {
+                // For words mode, generate individual words
             for (let i = 0; i < count; i++) {
-                const randomIndex = Math.floor(Math.random() * wordList.length);
-                generatedWords.push(wordList[randomIndex]);
+                    const randomIndex = Math.floor(Math.random() * contentList.length);
+                    generatedContent.push(contentList[randomIndex]);
+                }
+            } else {
+                // For other modes, generate fewer content pieces but more varied
+                const piecesCount = Math.min(count / 5, contentList.length);
+                for (let i = 0; i < piecesCount; i++) {
+                    const randomIndex = Math.floor(Math.random() * contentList.length);
+                    generatedContent.push(contentList[randomIndex]);
+                }
             }
             
-            return generatedWords;
+            return generatedContent;
         }
 
-        // Display words in the text display
-        function displayWords() {
+        // Split content into words for processing
+        function splitIntoWords(content) {
+            if (Array.isArray(content)) {
+                if (content.length === 0) return [];
+                
+                // Join all content pieces and split into words
+                const fullText = content.join(' ');
+                return fullText.split(/\s+/).filter(word => word.length > 0);
+            }
+            return content.split(/\s+/).filter(word => word.length > 0);
+        }
+
+                // Display content in the text display
+        function displayContent() {
+            const mode = gameModeSelect.value;
+            
+            if (mode === 'words') {
             textDisplay.innerHTML = words.map((word, index) => {
                 if (index === currentWordIndex) {
                     return `<span class="current-word">${word}</span>`;
@@ -555,6 +1625,28 @@
                     return word;
                 }
             }).join(' ');
+            } else {
+                // For sentences, code, and quotes, display with word highlighting
+                const fullText = words.join(' ');
+                const wordsArray = fullText.split(/\s+/);
+                
+                textDisplay.innerHTML = wordsArray.map((word, index) => {
+                    if (index === currentWordIndex) {
+                        return `<span class="current-word">${word}</span>`;
+                    } else if (index < currentWordIndex) {
+                        return `<span class="correct">${word}</span>`;
+                    } else {
+                        return word;
+                    }
+                }).join(' ');
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (currentWordIndex / words.length) * 100;
+            progressEl.textContent = Math.round(progress);
+            progressFillEl.style.width = `${progress}%`;
         }
 
         // Start countdown before game begins
@@ -580,11 +1672,20 @@
         // Start the game
         function startGame() {
             isPlaying = true;
+            isPaused = false;
             textInput.disabled = false;
+            
+            // Apply auto-focus setting
+            const autoFocus = localStorage.getItem('autoFocus') !== 'false';
+            if (autoFocus) {
             textInput.focus();
-            startBtn.disabled = true;
+            }
+            
+            startBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-flex';
             difficultySelect.disabled = true;
             timeLimitSelect.disabled = true;
+            gameModeSelect.disabled = true;
             resultsEl.style.display = 'none';
             
             // Reset game variables
@@ -594,46 +1695,92 @@
             totalKeystrokes = 0;
             correctKeystrokes = 0;
             previousInputLength = 0;
+            totalPauseTime = 0;
             
-            // Generate words based on selected difficulty
-            words = generateWords(difficultySelect.value);
-            displayWords();
+            // Generate content based on selected mode and difficulty
+            const mode = gameModeSelect.value;
+            const difficulty = difficultySelect.value;
+            
+            // Generate more content for non-word modes
+            const contentCount = mode === 'words' ? 20 : 50;
+            const content = generateContent(mode, difficulty, contentCount);
+            words = splitIntoWords(content);
+            
+            console.log('Mode:', mode, 'Words count:', words.length);
+            displayContent();
             
             // Set time limit
             timeLeft = parseInt(timeLimitSelect.value);
+            originalTime = timeLeft;
             timeEl.textContent = timeLeft;
             startTime = new Date().getTime();
             
             // Start timer
             timer = setInterval(() => {
+                if (!isPaused) {
                 timeLeft--;
                 timeEl.textContent = timeLeft;
                 
                 // Update WPM in real-time
                 updateWPM();
+                    updateProgress();
                 
                 if (timeLeft === 0) {
                     endGame();
+                    }
                 }
             }, 1000);
+        }
+
+        // Pause/Resume game
+        function togglePause() {
+            if (isPaused) {
+                // Resume
+                isPaused = false;
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                totalPauseTime += (new Date().getTime() - pauseStartTime);
+            } else {
+                // Pause
+                isPaused = true;
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+                pauseStartTime = new Date().getTime();
+            }
         }
 
         // End the game
         function endGame() {
             clearInterval(timer);
             isPlaying = false;
+            isPaused = false;
             textInput.disabled = true;
-            startBtn.disabled = false;
+            startBtn.style.display = 'inline-flex';
+            pauseBtn.style.display = 'none';
             difficultySelect.disabled = false;
             timeLimitSelect.disabled = false;
+            gameModeSelect.disabled = false;
             
             // Calculate final stats
             const finalWpm = calculateWPM();
             const finalAccuracy = calculateAccuracy();
             
+            // Update best scores
+            if (finalWpm > bestWpm) {
+                bestWpm = finalWpm;
+                localStorage.setItem('bestWpm', bestWpm);
+            }
+            if (finalAccuracy > bestAccuracy) {
+                bestAccuracy = finalAccuracy;
+                localStorage.setItem('bestAccuracy', bestAccuracy);
+            }
+            gamesPlayed++;
+            localStorage.setItem('gamesPlayed', gamesPlayed);
+            
+            // Update sidebar stats
+            updateSidebarStats();
+            
             // Display results
             finalWpmEl.textContent = finalWpm;
-            finalAccuracyEl.textContent = finalAccuracy + '%';
+            finalAccuracyEl.textContent = finalAccuracy;
             finalWordsEl.textContent = correctWords;
             finalErrorsEl.textContent = incorrectWords;
             resultsEl.style.display = 'block';
@@ -646,20 +1793,24 @@
         function resetGame() {
             clearInterval(timer);
             isPlaying = false;
+            isPaused = false;
             textInput.disabled = true;
             textInput.value = '';
-            startBtn.disabled = false;
+            startBtn.style.display = 'inline-flex';
+            pauseBtn.style.display = 'none';
             difficultySelect.disabled = false;
             timeLimitSelect.disabled = false;
+            gameModeSelect.disabled = false;
             
-            // Reset display with fixed height to prevent container size changes
+            // Reset display
             textDisplay.innerHTML = "Click 'Start' to begin typing...";
-            textDisplay.style.height = '120px'; // Ensure height stays consistent
             
             timeLeft = parseInt(timeLimitSelect.value);
             timeEl.textContent = timeLeft;
             wpmEl.textContent = '0';
-            accuracyEl.textContent = '0%';
+            accuracyEl.textContent = '0';
+            progressEl.textContent = '0';
+            progressFillEl.style.width = '0%';
             resultsEl.style.display = 'none';
             
             // Reset keystroke tracking
@@ -673,7 +1824,7 @@
 
         // Calculate WPM (Words Per Minute)
         function calculateWPM() {
-            const elapsedTimeInMinutes = (new Date().getTime() - startTime) / 60000;
+            const elapsedTimeInMinutes = (new Date().getTime() - startTime - totalPauseTime) / 60000;
             return Math.round(correctWords / elapsedTimeInMinutes);
         }
 
@@ -691,15 +1842,698 @@
         // Update accuracy in real-time
         function updateAccuracy() {
             const accuracy = calculateAccuracy();
-            accuracyEl.textContent = accuracy + '%';
+            accuracyEl.textContent = accuracy;
+        }
+
+        // Share results
+        function shareResults() {
+            const finalWpm = calculateWPM();
+            const finalAccuracy = calculateAccuracy();
+            const text = `I just achieved ${finalWpm} WPM with ${finalAccuracy}% accuracy on UltraType Pro! 🚀`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'UltraType Pro Results',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to clipboard
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Results copied to clipboard!');
+                });
+            }
         }
 
         // Event listeners
         startBtn.addEventListener('click', startCountdown);
+        pauseBtn.addEventListener('click', togglePause);
         resetBtn.addEventListener('click', resetGame);
+        retryBtn.addEventListener('click', () => {
+            resetGame();
+            startCountdown();
+        });
+        shareBtn.addEventListener('click', shareResults);
 
-        // Track real-time keystrokes for accuracy (excluding erasing)
-        textInput.addEventListener('input', (e) => {
+        // Initialize event listeners for the original game elements
+        setupEventListeners();
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key) {
+                    case 'Enter':
+                        e.preventDefault();
+                        if (!isPlaying) {
+                            startCountdown();
+                        }
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        resetGame();
+                        break;
+                    case 'p':
+                        e.preventDefault();
+                        if (isPlaying) {
+                            togglePause();
+                        }
+                        break;
+                }
+            }
+        });
+
+        // Initialize tooltips and hints
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show keyboard shortcuts hint
+            const keyboardHint = document.querySelector('.keyboard-hint');
+            if (keyboardHint) {
+                keyboardHint.innerHTML = `
+                    <span>Press</span>
+                    <span class="key">Space</span>
+                    <span>to submit word</span>
+                    <span>•</span>
+                    <span class="key">Ctrl+Enter</span>
+                    <span>to start</span>
+                    <span>•</span>
+                    <span class="key">Ctrl+P</span>
+                    <span>to pause</span>
+                `;
+            }
+
+            // Update sidebar stats
+            updateSidebarStats();
+            
+            // Setup navigation and game options
+            setupSidebarNavigation();
+            setupGameOptions();
+            
+            // Load saved settings
+            loadSettings();
+        });
+
+        // Update sidebar stats
+        function updateSidebarStats() {
+            document.getElementById('bestWpm').textContent = bestWpm;
+            document.getElementById('bestAccuracy').textContent = bestAccuracy + '%';
+            document.getElementById('gamesPlayed').textContent = gamesPlayed;
+        }
+
+        // Sidebar navigation functionality
+        function setupSidebarNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // Add active class to clicked item
+                    item.classList.add('active');
+                    
+                    // Handle different navigation actions
+                    const text = item.querySelector('span').textContent;
+                    switch(text) {
+                        case 'Practice':
+                            showPracticeMode();
+                            break;
+                        case 'Progress':
+                            showProgressMode();
+                            break;
+                        case 'Leaderboard':
+                            showLeaderboardMode();
+                            break;
+                        case 'Settings':
+                            showSettingsMode();
+                            break;
+                    }
+                });
+            });
+        }
+
+        // Game option cards functionality
+        function setupGameOptions() {
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Add visual feedback
+                    card.classList.add('clicked');
+                    setTimeout(() => {
+                        card.classList.remove('clicked');
+                    }, 200);
+                    
+                    const title = card.querySelector('h4').textContent;
+                    switch(title) {
+                        case 'Quick Start':
+                            quickStart();
+                            break;
+                        case 'Time Challenge':
+                            timeChallenge();
+                            break;
+                        case 'Code Practice':
+                            codePractice();
+                            break;
+                        case 'Quote Mode':
+                            quoteMode();
+                            break;
+                    }
+                });
+            });
+        }
+
+        // Navigation functions
+        function showPracticeMode() {
+            // Return to the original practice mode
+            returnToPractice();
+        }
+
+        function showProgressMode() {
+            // Show progress/statistics view
+            showProgressPanel();
+        }
+
+        function showLeaderboardMode() {
+            // Show leaderboard view
+            showLeaderboardPanel();
+        }
+
+        function showSettingsMode() {
+            // Show settings view
+            showSettingsPanel();
+        }
+
+        // Progress Panel
+        function showProgressPanel() {
+            const gameContent = document.querySelector('.game-content');
+            gameContent.innerHTML = `
+                <div class="progress-panel">
+                    <h2>Your Progress</h2>
+                    <div class="progress-stats">
+                        <div class="progress-card">
+                            <h3>Best WPM</h3>
+                            <div class="progress-value">${bestWpm}</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(bestWpm / 100 * 100, 100)}%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-card">
+                            <h3>Best Accuracy</h3>
+                            <div class="progress-value">${bestAccuracy}%</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${bestAccuracy}%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-card">
+                            <h3>Games Played</h3>
+                            <div class="progress-value">${gamesPlayed}</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(gamesPlayed / 50 * 100, 100)}%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-card">
+                            <h3>Average WPM</h3>
+                            <div class="progress-value">${Math.round(bestWpm * 0.8)}</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(bestWpm * 0.8 / 100 * 100, 100)}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="game-btn start-btn" onclick="returnToPractice()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Practice
+                    </button>
+                </div>
+            `;
+        }
+
+        // Leaderboard Panel
+        function showLeaderboardPanel() {
+            const gameContent = document.querySelector('.game-content');
+            gameContent.innerHTML = `
+                <div class="leaderboard-panel">
+                    <h2>Leaderboard</h2>
+                    <div class="leaderboard-tabs">
+                        <button class="tab-btn active" onclick="switchTab('wpm')">WPM</button>
+                        <button class="tab-btn" onclick="switchTab('accuracy')">Accuracy</button>
+                        <button class="tab-btn" onclick="switchTab('games')">Games</button>
+                    </div>
+                    <div class="leaderboard-list">
+                        <div class="leaderboard-item">
+                            <div class="rank">1</div>
+                            <div class="player">You</div>
+                            <div class="score">${bestWpm} WPM</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="player">Pro Typer</div>
+                            <div class="score">85 WPM</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="player">Speed Demon</div>
+                            <div class="score">78 WPM</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="player">Keyboard Warrior</div>
+                            <div class="score">72 WPM</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="player">Typing Master</div>
+                            <div class="score">68 WPM</div>
+                        </div>
+                    </div>
+                    <button class="game-btn start-btn" onclick="returnToPractice()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Practice
+                    </button>
+                </div>
+            `;
+        }
+
+        // Settings Panel
+        function showSettingsPanel() {
+            const gameContent = document.querySelector('.game-content');
+            gameContent.innerHTML = `
+                <div class="settings-panel">
+                    <h2>Settings</h2>
+                    <div class="settings-section">
+                        <h3>Game Settings</h3>
+                        <div class="setting-item">
+                            <label>Show Keyboard Hints</label>
+                            <input type="checkbox" id="showHints" checked onchange="toggleHints()">
+                        </div>
+                        <div class="setting-item">
+                            <label>Auto Focus Input</label>
+                            <input type="checkbox" id="autoFocus" checked onchange="toggleAutoFocus()">
+                        </div>
+                        <div class="setting-item">
+                            <label>Show Progress Bar</label>
+                            <input type="checkbox" id="showProgress" checked onchange="toggleProgress()">
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Display Settings</h3>
+                        <div class="setting-item">
+                            <label>Font Size</label>
+                            <select id="fontSize" onchange="changeFontSize()">
+                                <option value="small">Small</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="large">Large</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Theme</label>
+                            <select id="theme" onchange="changeTheme()">
+                                <option value="dark" selected>Dark</option>
+                                <option value="light">Light</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Data Management</h3>
+                        <button class="game-btn reset-btn" onclick="clearAllData()">
+                            <i class="fas fa-trash"></i>
+                            Clear All Data
+                        </button>
+                        <button class="game-btn start-btn" onclick="resetToDefaults()">
+                            <i class="fas fa-undo"></i>
+                            Reset to Defaults
+                        </button>
+                    </div>
+                    <button class="game-btn start-btn" onclick="returnToPractice()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Practice
+                    </button>
+                </div>
+            `;
+            
+            // Load saved settings
+            loadSettings();
+        }
+
+        // Tab switching for leaderboard
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update leaderboard content based on tab
+            const leaderboardList = document.querySelector('.leaderboard-list');
+            if (tab === 'wpm') {
+                leaderboardList.innerHTML = `
+                    <div class="leaderboard-item">
+                        <div class="rank">1</div>
+                        <div class="player">You</div>
+                        <div class="score">${bestWpm} WPM</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">2</div>
+                        <div class="player">Pro Typer</div>
+                        <div class="score">85 WPM</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">3</div>
+                        <div class="player">Speed Demon</div>
+                        <div class="score">78 WPM</div>
+                    </div>
+                `;
+            } else if (tab === 'accuracy') {
+                leaderboardList.innerHTML = `
+                    <div class="leaderboard-item">
+                        <div class="rank">1</div>
+                        <div class="player">You</div>
+                        <div class="score">${bestAccuracy}%</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">2</div>
+                        <div class="player">Accuracy Master</div>
+                        <div class="score">98%</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">3</div>
+                        <div class="player">Perfect Typer</div>
+                        <div class="score">95%</div>
+                    </div>
+                `;
+            } else if (tab === 'games') {
+                leaderboardList.innerHTML = `
+                    <div class="leaderboard-item">
+                        <div class="rank">1</div>
+                        <div class="player">You</div>
+                        <div class="score">${gamesPlayed} Games</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">2</div>
+                        <div class="player">Dedicated Player</div>
+                        <div class="score">45 Games</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="rank">3</div>
+                        <div class="player">Regular User</div>
+                        <div class="score">32 Games</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Settings functions
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
+                localStorage.clear();
+                bestWpm = 0;
+                bestAccuracy = 0;
+                gamesPlayed = 0;
+                updateSidebarStats();
+                alert('All data cleared successfully!');
+            }
+        }
+
+        function resetToDefaults() {
+            if (confirm('Reset all settings to defaults?')) {
+                localStorage.removeItem('showHints');
+                localStorage.removeItem('autoFocus');
+                localStorage.removeItem('showProgress');
+                localStorage.removeItem('fontSize');
+                localStorage.removeItem('theme');
+                alert('Settings reset to defaults!');
+                loadSettings();
+            }
+        }
+
+        // Working settings functions
+        function toggleHints() {
+            const showHints = document.getElementById('showHints').checked;
+            localStorage.setItem('showHints', showHints);
+            
+            const keyboardHint = document.querySelector('.keyboard-hint');
+            if (keyboardHint) {
+                keyboardHint.style.display = showHints ? 'flex' : 'none';
+            }
+        }
+
+        function toggleAutoFocus() {
+            const autoFocus = document.getElementById('autoFocus').checked;
+            localStorage.setItem('autoFocus', autoFocus);
+        }
+
+        function toggleProgress() {
+            const showProgress = document.getElementById('showProgress').checked;
+            localStorage.setItem('showProgress', showProgress);
+            
+            const progressBar = document.querySelector('.progress-bar');
+            if (progressBar) {
+                progressBar.style.display = showProgress ? 'block' : 'none';
+            }
+        }
+
+        function changeFontSize() {
+            const fontSize = document.getElementById('fontSize').value;
+            localStorage.setItem('fontSize', fontSize);
+            
+            const textDisplay = document.querySelector('.text-display');
+            if (textDisplay) {
+                switch(fontSize) {
+                    case 'small':
+                        textDisplay.style.fontSize = '0.875rem';
+                        break;
+                    case 'medium':
+                        textDisplay.style.fontSize = '1rem';
+                        break;
+                    case 'large':
+                        textDisplay.style.fontSize = '1.25rem';
+                        break;
+                }
+            }
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('theme').value;
+            localStorage.setItem('theme', theme);
+            
+            const root = document.documentElement;
+            switch(theme) {
+                case 'light':
+                    root.style.setProperty('--bg-primary', '#1e3a8a');
+                    root.style.setProperty('--bg-secondary', '#1e40af');
+                    root.style.setProperty('--bg-tertiary', '#3b82f6');
+                    root.style.setProperty('--bg-elevated', '#60a5fa');
+                    root.style.setProperty('--text-primary', '#ffffff');
+                    root.style.setProperty('--text-secondary', '#dbeafe');
+                    root.style.setProperty('--text-muted', '#93c5fd');
+                    root.style.setProperty('--primary', '#3b82f6');
+                    root.style.setProperty('--primary-dark', '#1d4ed8');
+                    root.style.setProperty('--primary-light', '#60a5fa');
+                    break;
+                case 'blue':
+                    root.style.setProperty('--bg-primary', '#1a1a2e');
+                    root.style.setProperty('--bg-secondary', '#16213e');
+                    root.style.setProperty('--bg-tertiary', '#0f3460');
+                    root.style.setProperty('--primary', '#4f46e5');
+                    break;
+                case 'dark':
+                default:
+                    root.style.setProperty('--bg-primary', '#0f172a');
+                    root.style.setProperty('--bg-secondary', '#1e293b');
+                    root.style.setProperty('--bg-tertiary', '#334155');
+                    root.style.setProperty('--text-primary', '#f8fafc');
+                    root.style.setProperty('--text-secondary', '#cbd5e1');
+                    root.style.setProperty('--primary', '#6366f1');
+                    break;
+            }
+        }
+
+        function loadSettings() {
+            // Load saved settings
+            const showHints = localStorage.getItem('showHints') !== 'false';
+            const autoFocus = localStorage.getItem('autoFocus') !== 'false';
+            const showProgress = localStorage.getItem('showProgress') !== 'false';
+            const fontSize = localStorage.getItem('fontSize') || 'medium';
+            const theme = localStorage.getItem('theme') || 'dark';
+            
+            // Apply settings
+            if (document.getElementById('showHints')) {
+                document.getElementById('showHints').checked = showHints;
+            }
+            if (document.getElementById('autoFocus')) {
+                document.getElementById('autoFocus').checked = autoFocus;
+            }
+            if (document.getElementById('showProgress')) {
+                document.getElementById('showProgress').checked = showProgress;
+            }
+            if (document.getElementById('fontSize')) {
+                document.getElementById('fontSize').value = fontSize;
+            }
+            if (document.getElementById('theme')) {
+                document.getElementById('theme').value = theme;
+            }
+            
+            // Apply theme
+            changeTheme();
+        }
+
+        // Return to practice mode function
+        function returnToPractice() {
+            // Reset the game content to the original practice mode
+            const gameContent = document.querySelector('.game-content');
+            gameContent.innerHTML = `
+                <div class="game-settings">
+                    <div class="setting-group">
+                        <label class="setting-label">Difficulty</label>
+                        <select class="difficulty-selector" id="difficulty">
+                            <option value="easy">Beginner</option>
+                            <option value="medium" selected>Intermediate</option>
+                            <option value="hard">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="setting-label">Time Limit</label>
+                        <select class="time-selector" id="timeLimit">
+                            <option value="30">30 Seconds</option>
+                            <option value="60" selected>1 Minute</option>
+                            <option value="120">2 Minutes</option>
+                            <option value="300">5 Minutes</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="setting-label">Mode</label>
+                        <select class="mode-selector" id="gameMode">
+                            <option value="words" selected>Words</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="code">Code</option>
+                            <option value="quotes">Quotes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="game-stats">
+                    <div class="stat-box time">
+                        <div class="stat-title">Time Left</div>
+                        <div class="stat-value" id="time">60</div>
+                        <div class="stat-unit">seconds</div>
+                    </div>
+                    <div class="stat-box wpm">
+                        <div class="stat-title">WPM</div>
+                        <div class="stat-value" id="wpm">0</div>
+                        <div class="stat-unit">words/min</div>
+                    </div>
+                    <div class="stat-box accuracy">
+                        <div class="stat-title">Accuracy</div>
+                        <div class="stat-value" id="accuracy">0</div>
+                        <div class="stat-unit">%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-title">Progress</div>
+                        <div class="stat-value" id="progress">0</div>
+                        <div class="stat-unit">%</div>
+                    </div>
+                </div>
+
+                <div class="game-area">
+                    <div class="countdown" id="countdown">3</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="text-display" id="textDisplay">Click 'Start' to begin typing...</div>
+                    <input type="text" class="text-input" id="textInput" placeholder="Start typing here..." disabled>
+                    <div class="keyboard-hint">
+                        <span>Press</span>
+                        <span class="key">Space</span>
+                        <span>to submit word</span>
+                        <span>•</span>
+                        <span class="key">Ctrl+Enter</span>
+                        <span>to start</span>
+                        <span>•</span>
+                        <span class="key">Ctrl+P</span>
+                        <span>to pause</span>
+                    </div>
+                </div>
+
+                <div class="game-buttons">
+                    <button class="game-btn start-btn" id="startBtn">
+                        <i class="fas fa-play"></i>
+                        Start Game
+                    </button>
+                    <button class="game-btn pause-btn" id="pauseBtn" style="display: none;">
+                        <i class="fas fa-pause"></i>
+                        Pause
+                    </button>
+                    <button class="game-btn reset-btn" id="resetBtn">
+                        <i class="fas fa-redo"></i>
+                        Reset
+                    </button>
+                </div>
+
+                <div class="results" id="results">
+                    <h2 class="results-title">Your Results</h2>
+                    <div class="results-stats">
+                        <div class="result-box">
+                            <div class="result-title">WPM</div>
+                            <div class="result-value" id="finalWpm">0</div>
+                            <div class="result-unit">words/min</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-title">Accuracy</div>
+                            <div class="result-value" id="finalAccuracy">0</div>
+                            <div class="result-unit">%</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-title">Words</div>
+                            <div class="result-value" id="finalWords">0</div>
+                            <div class="result-unit">typed</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-title">Errors</div>
+                            <div class="result-value" id="finalErrors">0</div>
+                            <div class="result-unit">mistakes</div>
+                        </div>
+                    </div>
+                    <div class="results-actions">
+                        <button class="game-btn start-btn" id="retryBtn">
+                            <i class="fas fa-redo"></i>
+                            Try Again
+                        </button>
+                        <button class="game-btn reset-btn" id="shareBtn">
+                            <i class="fas fa-share"></i>
+                            Share Results
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Re-initialize event listeners
+            setupEventListeners();
+            resetGame();
+        }
+
+        // Setup event listeners for game elements
+        function setupEventListeners() {
+            // Re-get elements after DOM changes
+            const startBtn = document.getElementById('startBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const retryBtn = document.getElementById('retryBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const textInput = document.getElementById('textInput');
+
+            if (startBtn) startBtn.addEventListener('click', startCountdown);
+            if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+            if (resetBtn) resetBtn.addEventListener('click', resetGame);
+            if (retryBtn) retryBtn.addEventListener('click', () => {
+                resetGame();
+                startCountdown();
+            });
+            if (shareBtn) shareBtn.addEventListener('click', shareResults);
+            if (textInput) {
+                textInput.addEventListener('input', handleTextInput);
+                textInput.addEventListener('keydown', handleKeydown);
+            }
+        }
+
+        // Handle text input (moved from inline)
+        function handleTextInput(e) {
             if (!isPlaying) return;
             
             const currentWord = words[currentWordIndex];
@@ -756,20 +2590,24 @@
                 textInput.value = '';
                 previousInputLength = 0;
                 textInput.classList.remove('error'); // Reset error state
-                displayWords();
+                displayContent();
+                updateProgress();
                 
                 // Check if all words have been typed
                 if (currentWordIndex === words.length) {
-                    // Generate more words
-                    const newWords = generateWords(difficultySelect.value, 20);
+                    // Generate more content
+                    const mode = gameModeSelect.value;
+                    const difficulty = difficultySelect.value;
+                    const newContent = generateContent(mode, difficulty, 10);
+                    const newWords = splitIntoWords(newContent);
                     words = [...words, ...newWords];
-                    displayWords();
+                    displayContent();
                 }
             }
-        });
+        }
 
-        // Handle space key for word submission
-        textInput.addEventListener('keydown', (e) => {
+        // Handle keydown events (moved from inline)
+        function handleKeydown(e) {
             if (e.key === ' ') {
                 e.preventDefault();
                 
@@ -784,27 +2622,79 @@
                     correctWords++;
                 } else {
                     incorrectWords++;
-                    
-                    // Count the word submission as a mistake only if the word doesn't match
-                    // We don't add this to totalKeystrokes since we're measuring character accuracy
                 }
                 
                 currentWordIndex++;
                 textInput.value = '';
                 previousInputLength = 0;
                 textInput.classList.remove('error'); // Reset error state
-                displayWords();
+                displayContent();
                 updateAccuracy();
+                updateProgress();
                 
                 // Check if all words have been typed
                 if (currentWordIndex === words.length) {
-                    // Generate more words
-                    const newWords = generateWords(difficultySelect.value, 20);
+                    // Generate more content
+                    const mode = gameModeSelect.value;
+                    const difficulty = difficultySelect.value;
+                    const newContent = generateContent(mode, difficulty, 10);
+                    const newWords = splitIntoWords(newContent);
                     words = [...words, ...newWords];
-                    displayWords();
+                    displayContent();
                 }
             }
-        });
+        }
+
+        // Game option functions
+        function quickStart() {
+            resetGame();
+            gameModeSelect.value = 'words';
+            difficultySelect.value = 'easy';
+            timeLimitSelect.value = '60';
+            startCountdown();
+            console.log('Quick Start activated');
+        }
+
+        function timeChallenge() {
+            resetGame();
+            gameModeSelect.value = 'words';
+            difficultySelect.value = 'medium';
+            timeLimitSelect.value = '30';
+            startCountdown();
+            console.log('Time Challenge activated');
+        }
+
+        function codePractice() {
+            resetGame();
+            gameModeSelect.value = 'code';
+            difficultySelect.value = 'medium';
+            timeLimitSelect.value = '60';
+            startCountdown();
+            console.log('Code Practice activated');
+        }
+
+        function quoteMode() {
+            resetGame();
+            gameModeSelect.value = 'quotes';
+            difficultySelect.value = 'medium';
+            timeLimitSelect.value = '60';
+            startCountdown();
+            console.log('Quote Mode activated');
+        }
+
+        // Debug function to check content generation
+        function debugContent() {
+            const mode = gameModeSelect.value;
+            const difficulty = difficultySelect.value;
+            console.log('Mode:', mode);
+            console.log('Difficulty:', difficulty);
+            console.log('Content Data:', contentData[mode][difficulty]);
+            const content = generateContent(mode, difficulty, 20);
+            console.log('Generated Content:', content);
+            const words = splitIntoWords(content);
+            console.log('Split Words:', words);
+            console.log('Words Count:', words.length);
+        }
     </script>
 </body>
 </html>
