@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Chicken Adventure</title>
+    <style>
+        /* Integrated CSS from style.css */
+        :root {
+            --dark-gray: #161616;
+            --green: #346751;
+            --red: #C84B31;
+            --beige: #ECDBBA;
+            --yellow: #FFD700;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--dark-gray);
+            color: var(--beige);
+            margin: 0;
+            padding: 0;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .typewriter {
+            color: var(--red);
+            font-size: 2rem;
+        }
+        #gameText {
+            margin: 20px;
+            padding: 20px;
+            background-color: var(--green);
+            border-radius: 10px;
+            color: var(--beige);
+            min-height: 80px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+        .game-btn {
+            margin: 8px;
+            padding: 12px 20px;
+            background-color: var(--red);
+            color: var(--beige);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .game-btn:hover {
+            transform: scale(1.05);
+            background-color: #e05a3f;
+        }
+        .game-btn:active {
+            transform: scale(0.98);
+        }
+        #stats {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(52, 103, 81, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--beige);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--beige);
+            opacity: 0.8;
+        }
+        #chicken-container {
+            position: relative;
+            height: 200px;
+            width: 200px;
+            margin: 20px 0;
+        }
+        #chicken {
+            position: absolute;
+            height: 150px;
+            width: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="%23f5f0e1"/><circle cx="42" cy="34" r="3" fill="%23000"/><circle cx="58" cy="34" r="3" fill="%23000"/><path d="M50 50 L40 60 L50 55 L60 60 Z" fill="%23FF6B35"/><circle cx="50" cy="80" r="18" fill="%23f5f0e1"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: transform 0.3s;
+        }
+        .chicken-attack {
+            animation: attackAnim 0.5s ease-in-out;
+        }
+        .shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: rgba(52, 103, 81, 0.5);
+            border-radius: 5px;
+        }
+        .shop-btn {
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        .level-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--red);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        #screen-container {
+            width: 100%;
+            max-width: 800px;
+        }
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .active-screen {
+            display: flex;
+        }
+        @keyframes attackAnim {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-50px) scale(1.2); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Epic Chicken Adventure</h1>
+        <div class="level-indicator">Level: <span id="level-display">1</span></div>
+        
+        <div id="stats">
+            <div class="stat">
+                <div class="stat-value" id="health-value">100</div>
+                <div class="stat-label">❤️ Health</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="score-value">0</div>
+                <div class="stat-label">🏆 Score</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="bananas-value">0</div>
+                <div class="stat-label">🍌 Bananas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="potions-value">2</div>
+                <div class="stat-label">💊 Potions</div>
+            </div>
+        </div>
+        
+        <div id="screen-container">
+            <div id="game-screen" class="screen active-screen">
+                <div id="chicken-container">
+                    <div id="chicken"></div>
+                </div>
+                <div id="gameText">Welcome to Epic Chicken Adventure! Fight chickens, collect bananas, and become the Chicken Master!</div>
+                <div>
+                    <button class="game-btn" onclick="fightChicken()">🐔 Fight Chicken</button>
+                    <button class="game-btn" onclick="searchBananas()">🔍 Search Bananas</button>
+                    <button class="game-btn" onclick="dance()">🧦 Dance</button>
+                    <button class="game-btn" onclick="usePotion()">💊 Use Potion</button>
+                    <button class="game-btn" onclick="showShop()">🛒 Shop</button>
+                </div>
+            </div>
+            
+            <div id="shop-screen" class="screen">
+                <h2>Banana Shop</h2>
+                <div id="gameText">Spend your bananas on powerful upgrades!</div>
+                <div style="width: 100%; max-width: 500px;">
+                    <div class="shop-item">
+                        <span>Health Potion (25 🍌)</span>
+                        <button class="shop-btn" onclick="buyItem('potion')">Buy</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Extra Health (30 🍌)</span>
+                        <button class="shop-btn" onclick="buyItem('health')">Buy</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Chicken Repellent (50 🍌)</span>
+                        <button class="shop-btn" onclick="buyItem('repellent')">Buy</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Golden Feather (75 🍌)</span>
+                        <button class="shop-btn" onclick="buyItem('feather')">Buy</button>
+                    </div>
+                </div>
+                <button class="game-btn" onclick="hideShop()">Return to Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global game state
+        var health = 100;
+        var maxHealth = 100;
+        var bananas = 0;
+        var potions = 2;
+        var score = 0;
+        var level = 1;
+        var chickenStrength = 1;
+        var hasRepellent = false;
+        var hasFeather = false;
+        
+        // Simple sound functions - no large base64 encoded data
+        function playHitSound() {
+            try {
+                new Audio("data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBAAAAABAAEARKwAAESsAAABAAgAZGF0YQYAAAAAAAAAAA==").play();
+            } catch (e) {
+                console.log("Sound failed to play");
+            }
+        }
+        
+        function playCollectSound() {
+            try {
+                new Audio("data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBAAAAABAAEARKwAAESsAAABAAgAZGF0YQYAAAAAAAAAAA==").play();
+            } catch (e) {
+                console.log("Sound failed to play");
+            }
+        }
+        
+        function playLevelUpSound() {
+            try {
+                new Audio("data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBAAAAABAAEARKwAAESsAAABAAgAZGF0YQYAAAAAAAAAAA==").play();
+            } catch (e) {
+                console.log("Sound failed to play");
+            }
+        }
+
+        // Initialize game
+        window.onload = function() {
+            updateStats();
+        };
+
+        // Update stats display
+        function updateStats() {
+            document.getElementById("health-value").textContent = health;
+            document.getElementById("bananas-value").textContent = bananas;
+            document.getElementById("potions-value").textContent = potions;
+            document.getElementById("score-value").textContent = score;
+            document.getElementById("level-display").textContent = level;
+            
+            // Check for level up
+            if (score >= level * 100) {
+                levelUp();
+            }
+            
+            // Check for game over
+            if (health <= 0) {
+                gameOver();
+            }
+        }
+        
+        // Chicken fight with variety
+        function fightChicken() {
+            // Animate chicken
+            var chicken = document.getElementById("chicken");
+            chicken.classList.add("chicken-attack");
+            setTimeout(function() {
+                chicken.classList.remove("chicken-attack");
+            }, 500);
+            
+            // Calculate damage based on level and equipment
+            var baseDamage = Math.floor(Math.random() * 16) + 5;
+            var damageMultiplier = chickenStrength;
+            
+            // Reduce damage if has repellent
+            if (hasRepellent) {
+                damageMultiplier *= 0.5;
+            }
+            
+            var damage = Math.floor(baseDamage * damageMultiplier);
+            health -= damage;
+            
+            // Play hit sound
+            playHitSound();
+            
+            // Add screen shake effect
+            var gameScreen = document.getElementById("game-screen");
+            gameScreen.classList.add("shake");
+            setTimeout(function() {
+                gameScreen.classList.remove("shake");
+            }, 500);
+            
+            // Generate message with variety
+            var attackTypes = ["pecked", "scratched", "charged at", "flapped angrily at", "headbutted"];
+            var attackType = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            
+            var message = "The chicken " + attackType + " you for " + damage + " damage!";
+            
+            // Random banana chance with messages
+            var bananaChance = hasFeather ? 0.5 : 0.3;
+            if (Math.random() < bananaChance) {
+                var bananaFound = Math.floor(Math.random() * 2) + 1;
+                bananas += bananaFound;
+                playCollectSound();
+                
+                var bananaMessages = [
+                    " You found " + bananaFound + " magic banana" + (bananaFound > 1 ? "s" : "") + "!",
+                    " Look! " + bananaFound + " banana" + (bananaFound > 1 ? "s" : "") + " appeared from nowhere!",
+                    " The chicken dropped " + bananaFound + " banana" + (bananaFound > 1 ? "s" : "") + "!"
+                ];
+                message += bananaMessages[Math.floor(Math.random() * bananaMessages.length)];
+            }
+            
+            // Increase score
+            score += 10;
+            
+            document.getElementById("gameText").textContent = message;
+            updateStats();
+        }
+        
+        // Search for bananas
+        function searchBananas() {
+            // More bananas at higher levels
+            var baseBananas = Math.floor(Math.random() * 3) + 1;
+            var found = baseBananas + Math.floor(level / 3);
+            
+            if (hasFeather) {
+                found = Math.floor(found * 1.5);
+            }
+            
+            bananas += found;
+            playCollectSound();
+            
+            var messages = [
+                "You found " + found + " bananas!",
+                "Success! You discovered " + found + " delicious bananas!",
+                "Your search revealed " + found + " bananas hiding nearby!"
+            ];
+            
+            var message = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById("gameText").textContent = message;
+            
+            // Increase score
+            score += 5;
+            
+            updateStats();
+        }
+        
+        // Dance to recover health
+        function dance() {
+            var gain = Math.floor(Math.random() * 10) + 5;
+            
+            health += gain;
+            if (health > maxHealth) {
+                health = maxHealth;
+            }
+            
+            var danceStyles = ["funky", "silly", "graceful", "energetic", "wild"];
+            var danceStyle = danceStyles[Math.floor(Math.random() * danceStyles.length)];
+            
+            var message = "You performed a " + danceStyle + " dance and gained " + gain + " health!";
+            
+            // Small chance to find a banana while dancing
+            if (Math.random() < 0.2) {
+                bananas += 1;
+                message += " A chicken watched your dance and gave you a banana!";
+                playCollectSound();
+            }
+            
+            document.getElementById("gameText").textContent = message;
+            
+            // Increase score
+            score += 3;
+            
+            updateStats();
+        }
+        
+        // Use potion
+        function usePotion() {
+            if (potions > 0) {
+                var gain = Math.floor(Math.random() * 20) + 10;
+                health += gain;
+                if (health > maxHealth) {
+                    health = maxHealth;
+                }
+                potions--;
+                
+                playCollectSound();
+                
+                document.getElementById("gameText").textContent = "You used a potion and gained " + gain + " health!";
+                
+                // Increase score
+                score += 2;
+            } else {
+                document.getElementById("gameText").textContent = "No potions left! Visit the shop to buy more.";
+            }
+            
+            updateStats();
+        }
+        
+        // Shop functions
+        function showShop() {
+            document.getElementById("game-screen").classList.remove("active-screen");
+            document.getElementById("shop-screen").classList.add("active-screen");
+        }
+        
+        function hideShop() {
+            document.getElementById("shop-screen").classList.remove("active-screen");
+            document.getElementById("game-screen").classList.add("active-screen");
+        }
+        
+        function buyItem(item) {
+            var cost = 0;
+            var message = "";
+            
+            switch(item) {
+                case 'potion':
+                    cost = 25;
+                    if (bananas >= cost) {
+                        bananas -= cost;
+                        potions += 1;
+                        message = "You bought a health potion!";
+                        playCollectSound();
+                    } else {
+                        message = "Not enough bananas!";
+                    }
+                    break;
+                    
+                case 'health':
+                    cost = 30;
+                    if (bananas >= cost) {
+                        bananas -= cost;
+                        maxHealth += 20;
+                        health += 20;
+                        message = "You increased your maximum health by 20!";
+                        playCollectSound();
+                    } else {
+                        message = "Not enough bananas!";
+                    }
+                    break;
+                    
+                case 'repellent':
+                    cost = 50;
+                    if (bananas >= cost) {
+                        bananas -= cost;
+                        hasRepellent = true;
+                        message = "You bought chicken repellent! Chickens now do less damage.";
+                        playCollectSound();
+                    } else {
+                        message = "Not enough bananas!";
+                    }
+                    break;
+                    
+                case 'feather':
+                    cost = 75;
+                    if (bananas >= cost) {
+                        bananas -= cost;
+                        hasFeather = true;
+                        message = "You bought a golden feather! You'll find more bananas now.";
+                        playCollectSound();
+                    } else {
+                        message = "Not enough bananas!";
+                    }
+                    break;
+            }
+            
+            document.getElementById("gameText").textContent = message;
+            updateStats();
+        }
+        
+        // Level up function
+        function levelUp() {
+            level++;
+            chickenStrength = 1 + (level * 0.2);
+            
+            // Heal player on level up
+            health = maxHealth;
+            
+            // Play level up sound
+            playLevelUpSound();
+            
+            // Show level up message
+            document.getElementById("gameText").textContent = "Level Up! You are now level " + level + ". Chickens are getting stronger!";
+            
+            // Add screen shake effect
+            var gameScreen = document.getElementById("game-screen");
+            gameScreen.classList.add("shake");
+            setTimeout(function() {
+                gameScreen.classList.remove("shake");
+            }, 500);
+            
+            updateStats();
+        }
+        
+        // Game over function
+        function gameOver() {
+            document.getElementById("gameText").textContent = "Game Over! You reached level " + level + " with a score of " + score + ". Refresh the page to play again.";
+            
+            // Disable buttons
+            var buttons = document.querySelectorAll(".game-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+                buttons[i].style.opacity = 0.5;
+            }
+        }
+    </script>
+</body>
+</html>
