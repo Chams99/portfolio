@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +42,7 @@
 <body class="bg-gray-100">
   <header class="header sticky top-0 z-50 bg-white shadow-sm">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="index.html" class="brand-logo">Lava</a>
+        <a href="../core/index.html" class="brand-logo">Lava</a>
       <div class="search-bar hidden md:flex items-center flex-1 max-w-xl mx-6">
         <div class="relative w-full">
           <input type="text" class="search-input w-full py-2 pl-10 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search for products..." />
@@ -52,18 +52,18 @@
         </div>
       </div>
       <div class="flex items-center space-x-6">
-        <a href="wishlist.html" class="relative text-gray-700 hover:text-primary">
+        <a href="../shopping/wishlist.html" class="relative text-gray-700 hover:text-primary">
           <i class="ri-heart-line ri-lg"></i>
           <span id="wishlist-count" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
         </a>
-        <a href="cart.html" class="relative text-gray-700 hover:text-primary">
+        <a href="../shopping/cart.html" class="relative text-gray-700 hover:text-primary">
           <i class="ri-shopping-cart-line ri-lg"></i>
           <span id="cart-count" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
         </a>
-        <a href="orders.html" class="text-gray-700 hover:text-primary">
+        <a href="../shopping/orders.html" class="text-gray-700 hover:text-primary">
           <i class="ri-file-list-line ri-lg"></i>
         </a>
-        <a href="login.html" class="text-gray-700 hover:text-primary relative" id="user-profile-link">
+        <a href="../auth/login.html" class="text-gray-700 hover:text-primary relative" id="user-profile-link">
           <i class="ri-user-line ri-lg"></i>
           <span id="user-name" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden"></span>
         </a>
@@ -82,7 +82,7 @@
       <!-- Empty Cart Message -->
       <div id="empty-cart-message" class="hidden">
         <p class="text-gray-500 text-lg">Your cart is currently empty.</p>
-        <a class="text-primary font-medium hover:underline mt-4 inline-block" href="index.html">Continue Shopping</a>
+        <a class="text-primary font-medium hover:underline mt-4 inline-block" href="../core/index.html">Continue Shopping</a>
       </div>
       
       <!-- Cart Summary -->
@@ -100,7 +100,7 @@
           <span id="cart-total" class="text-2xl font-bold text-primary">$0.00</span>
         </div>
         <div class="flex space-x-4">
-          <a href="index.html" class="flex-1 text-center py-3 border border-gray-300 rounded-lg hover:bg-gray-50">Continue Shopping</a>
+          <a href="../core/index.html" class="flex-1 text-center py-3 border border-gray-300 rounded-lg hover:bg-gray-50">Continue Shopping</a>
           <button id="checkout-btn" class="flex-1 bg-primary text-white py-3 rounded-lg hover:bg-primary/90">Proceed to Checkout</button>
         </div>
       </div>
@@ -451,12 +451,12 @@
   <footer class="bg-gray-900 text-white pt-16 pb-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <div>
-          <a
-            href="index.html"
-            class="text-3xl font-['Pacifico'] text-white mb-4 inline-block brand-logo"
-            >Lava</a
-          >
+                    <div>
+              <a
+                href="../core/index.html"
+                class="text-3xl font-['Pacifico'] text-white mb-4 inline-block brand-logo"
+                >Lava</a
+              >
           <p class="text-gray-400 mb-4">
             Your destination for premium fashion and lifestyle products.
           </p>
@@ -490,31 +490,31 @@
         <div>
           <h3 class="text-lg font-semibold mb-4">Shop</h3>
           <ul class="space-y-2">
-            <li>
-              <a href="woman.html" class="text-gray-400 hover:text-white transition"
-                >Women</a
-              >
-            </li>
-            <li>
-              <a href="men.html" class="text-gray-400 hover:text-white transition"
-                >Men</a
-              >
-            </li>
-            <li>
-              <a href="accesiore.html" class="text-gray-400 hover:text-white transition"
-                >Accessories</a
-              >
-            </li>
-            <li>
-              <a href="beauty.html" class="text-gray-400 hover:text-white transition"
-                >Beauty</a
-              >
-            </li>
-            <li>
-              <a href="sale.html" class="text-gray-400 hover:text-white transition"
-                >Sale</a
-              >
-            </li>
+                            <li>
+                  <a href="../categories/woman.html" class="text-gray-400 hover:text-white transition"
+                    >Women</a
+                  >
+                </li>
+                <li>
+                  <a href="../categories/men.html" class="text-gray-400 hover:text-white transition"
+                    >Men</a
+                  >
+                </li>
+                <li>
+                  <a href="../categories/accesiore.html" class="text-gray-400 hover:text-white transition"
+                    >Accessories</a
+                  >
+                </li>
+                <li>
+                  <a href="../categories/beauty.html" class="text-gray-400 hover:text-white transition"
+                    >Beauty</a
+                  >
+                </li>
+                <li>
+                  <a href="../categories/sale.html" class="text-gray-400 hover:text-white transition"
+                    >Sale</a
+                  >
+                </li>
           </ul>
         </div>
         <div>
@@ -582,7 +582,7 @@
         class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
       >
         <p class="text-gray-400 text-sm mb-4 md:mb-0">
-          © 2025 Lava. All rights reserved.
+          Â© 2025 Lava. All rights reserved.
         </p>
         <div class="flex items-center space-x-4">
           <div class="w-8 h-5 flex items-center justify-center">
@@ -603,3 +603,4 @@
   </footer>
 </body>
 </html>
+
