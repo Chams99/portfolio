@@ -64,9 +64,9 @@
                 title: 'Speed Typer', 
                 description: 'An interactive typing game that tests your typing speed and accuracy with different difficulty levels.', 
                 category: 'game',
-                image: 'Images/typing game.png',
+                image: 'Images/typing-game.png',
                 github: 'https://github.com/Chams99/portfolio/tree/main/typing game',
-                demo: 'typing game/typing-game',
+                demo: 'typing game/',
                 features: [
                     '⌨️ Real-time WPM calculation',
                     '🏆 High score tracking',
@@ -134,6 +134,23 @@
                     '👥 Group Chats'
                 ],
                 tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
+            },
+            { 
+                title: 'FitLite - AI Fitness Companion DEMO', 
+                description: 'A modern, responsive landing page for FitLite - an AI-powered fitness companion app. Features dynamic theme switching, smooth animations, and mobile-first design with cutting-edge web technologies.', 
+                category: 'mobile',
+                image: 'Images/Fitness.png',
+                github: 'https://github.com/Chams99/portfolio/tree/main/fitness_app',
+                demo: 'fitness_app/',
+                features: [
+                    '🌙 Dynamic Dark/Light Theme',
+                    '📱 Mobile-First Responsive Design',
+                    '⚡ Performance Optimized (95+ Lighthouse)',
+                    '🎨 Modern Glassmorphism UI',
+                    '🔄 Real-time Image Switching',
+                    '📊 SEO Optimized'
+                ],
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Mobile App', 'AI', 'Performance']
             }
             // You can add more projects following this format
         ];
