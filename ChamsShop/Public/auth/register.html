@@ -1,13 +1,13 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lava - Premium Online Shopping</title>
   <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +24,7 @@
 <body class="bg-gray-100">
   <header class="header sticky top-0 z-50 bg-white shadow-sm">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="brand-logo">Lava</a>
+      <a href="../core/index.html" class="brand-logo">Lava</a>
       <div class="search-bar hidden md:flex items-center flex-1 max-w-xl mx-6">
         <div class="relative w-full">
           <input type="text" class="search-input w-full py-2 pl-10 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search for products..." />
@@ -34,38 +34,42 @@
         </div>
       </div>
       <div class="flex items-center space-x-6">
-        <a href="wishlist.html" class="relative text-gray-700 hover:text-primary">
+        <a href="../shopping/wishlist.html" class="relative text-gray-700 hover:text-primary">
           <i class="ri-heart-line ri-lg"></i>
         </a>
-        <a href="cart.html" class="relative text-gray-700 hover:text-primary">
+        <a href="../shopping/cart.html" class="relative text-gray-700 hover:text-primary">
           <i class="ri-shopping-cart-line ri-lg"></i>
         </a>
-        <a href="login.html" class="text-gray-700 hover:text-primary">
+        <a href="../auth/login.html" class="text-gray-700 hover:text-primary">
           <i class="ri-user-line ri-lg"></i>
         </a>
       </div>
     </div>
   </header>
-  <main class="py-20 px-4">
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-      <h1 class="text-3xl font-bold mb-6">Checkout</h1>
-      <p class="text-gray-600 mb-4">Shipping and billing info goes here.</p>
-      <!-- Example content layout -->
-      <div class="grid md:grid-cols-2 gap-6">
+  <main class="flex items-center justify-center min-h-screen px-4">
+    <div class="bg-white p-10 rounded-2xl shadow-lg w-full max-w-md">
+      <h2 class="text-3xl font-bold text-center text-primary mb-6">Create an Account</h2>
+      <form id="register-form" class="space-y-5">
         <div>
-          <h2 class="text-xl font-semibold mb-2">Shipping Information</h2>
-          <input type="text" placeholder="Full Name" class="w-full mb-3 px-4 py-2 border rounded-lg" />
-          <input type="text" placeholder="Address" class="w-full mb-3 px-4 py-2 border rounded-lg" />
-          <input type="text" placeholder="City" class="w-full mb-3 px-4 py-2 border rounded-lg" />
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg mt-1 focus:ring-primary focus:border-primary" />
         </div>
         <div>
-          <h2 class="text-xl font-semibold mb-2">Billing Information</h2>
-          <input type="text" placeholder="Card Number" class="w-full mb-3 px-4 py-2 border rounded-lg" />
-          <input type="text" placeholder="Expiry Date" class="w-full mb-3 px-4 py-2 border rounded-lg" />
-          <input type="text" placeholder="CVV" class="w-full mb-3 px-4 py-2 border rounded-lg" />
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg mt-1 focus:ring-primary focus:border-primary" />
         </div>
-      </div>
-      <button class="mt-6 bg-primary text-white py-2 px-6 rounded-lg hover:bg-primary/90">Place Order</button>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg mt-1 focus:ring-primary focus:border-primary" />
+        </div>
+        <div>
+          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg mt-1 focus:ring-primary focus:border-primary" />
+        </div>
+        <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90" style="color: black;">Register</button>
+      </form>
+      <p id="register-message" class="text-center text-sm text-gray-600 mt-4"></p>
+      <p class="text-center text-sm text-gray-600 mt-4">Already have an account? <a href="../auth/login.html" class="text-primary font-medium hover:underline">Login</a></p>
     </div>
   </main>
   <!-- Footer -->
@@ -74,7 +78,7 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
         <div>
           <a
-            href="index.html"
+            href="../core/index.html"
             class="text-3xl font-['Pacifico'] text-white mb-4 inline-block brand-logo"
             >Lava</a
           >
@@ -112,27 +116,27 @@
           <h3 class="text-lg font-semibold mb-4">Shop</h3>
           <ul class="space-y-2">
             <li>
-              <a href="woman.html" class="text-gray-400 hover:text-white transition"
+              <a href="../categories/woman.html" class="text-gray-400 hover:text-white transition"
                 >Women</a
               >
             </li>
             <li>
-              <a href="men.html" class="text-gray-400 hover:text-white transition"
+              <a href="../categories/men.html" class="text-gray-400 hover:text-white transition"
                 >Men</a
               >
             </li>
             <li>
-              <a href="accesiore.html" class="text-gray-400 hover:text-white transition"
+              <a href="../categories/accesiore.html" class="text-gray-400 hover:text-white transition"
                 >Accessories</a
               >
             </li>
             <li>
-              <a href="beauty.html" class="text-gray-400 hover:text-white transition"
+              <a href="../categories/beauty.html" class="text-gray-400 hover:text-white transition"
                 >Beauty</a
               >
             </li>
             <li>
-              <a href="sale.html" class="text-gray-400 hover:text-white transition"
+              <a href="../categories/sale.html" class="text-gray-400 hover:text-white transition"
                 >Sale</a
               >
             </li>
@@ -203,7 +207,7 @@
         class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
       >
         <p class="text-gray-400 text-sm mb-4 md:mb-0">
-          © 2025 Lava. All rights reserved.
+          Â© 2025 Lava. All rights reserved.
         </p>
         <div class="flex items-center space-x-4">
           <div class="w-8 h-5 flex items-center justify-center">
@@ -222,5 +226,56 @@
       </div>
     </div>
   </footer>
+  <script>
+    console.log("Register page JS loaded ");
+  
+    const form = document.getElementById('register-form');
+  
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+  
+        const username = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const msgEl = document.getElementById('register-message');
+  
+        if (password !== confirmPassword) {
+          msgEl.textContent = 'Passwords do not match';
+          msgEl.className = 'text-red-600 text-center text-sm mt-2';
+          return;
+        }
+  
+        try {
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password }),
+          });
+  
+          const data = await res.json();
+  
+          if (res.ok) {
+            msgEl.textContent = 'Registration successful! Please login.';
+            msgEl.className = 'text-green-600 text-center text-sm mt-2';
+            setTimeout(() => {
+              window.location.href = 'login.html';
+            }, 2000);
+          } else {
+            msgEl.textContent = data.msg || 'Registration failed.';
+            msgEl.className = 'text-red-600 text-center text-sm mt-2';
+          }
+        } catch (err) {
+          msgEl.textContent = 'Server error. Please try again.';
+          msgEl.className = 'text-red-600 text-center text-sm mt-2';
+        }
+      });
+    } else {
+      console.error("Register form not found ");
+    }
+  </script>
 </body>
 </html>
+
+

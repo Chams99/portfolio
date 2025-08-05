@@ -11,27 +11,47 @@ class SharedNavigation {
   }
 
   updateNavigation() {
+    // Determine current page location to set correct relative paths
+    const currentPath = window.location.pathname;
+    let basePath = '';
+    
+    // Determine the base path based on current location
+    if (currentPath.includes('/auth/')) {
+      basePath = '../';
+    } else if (currentPath.includes('/shopping/')) {
+      basePath = '../';
+    } else if (currentPath.includes('/categories/')) {
+      basePath = '../';
+    } else if (currentPath.includes('/admin/')) {
+      basePath = '../';
+    } else if (currentPath.includes('/core/')) {
+      basePath = '../';
+    } else {
+      // If we're in the root Public directory
+      basePath = '';
+    }
+
     // Update all logo elements
     const logos = document.querySelectorAll('.logo, .brand-logo');
     logos.forEach(logo => {
       if (logo.textContent.toLowerCase().includes('lava') || logo.textContent.toLowerCase().includes('logo')) {
         logo.textContent = 'Lava';
         logo.className = 'brand-logo';
-        logo.href = 'index.html';
+        logo.href = basePath + 'core/index.html';
       }
     });
 
     // Update navigation links to ensure proper connectivity
     const navLinks = {
-      'Home': 'index.html',
-      'New Arrivals': 'newAriviales.html',
-      'Women': 'woman.html',
-      'Men': 'men.html',
-      'Accessories': 'accesiore.html',
-      'Beauty': 'beauty.html',
-      'Electronics': 'electronics.html',
-      'Home & Living': 'home&living.html',
-      'Sale': 'sale.html'
+      'Home': basePath + 'core/index.html',
+      'New Arrivals': basePath + 'categories/newAriviales.html',
+      'Women': basePath + 'categories/woman.html',
+      'Men': basePath + 'categories/men.html',
+      'Accessories': basePath + 'categories/accesiore.html',
+      'Beauty': basePath + 'categories/beauty.html',
+      'Electronics': basePath + 'categories/electronics.html',
+      'Home & Living': basePath + 'categories/home&living.html',
+      'Sale': basePath + 'categories/sale.html'
     };
 
     // Update navigation menu items
@@ -39,6 +59,25 @@ class SharedNavigation {
       const links = document.querySelectorAll(`a[href*="${text.toLowerCase()}"]`);
       links.forEach(link => {
         if (link.textContent.trim() === text) {
+          link.href = href;
+        }
+      });
+    });
+
+    // Update shopping-related links (cart, wishlist, orders)
+    const shoppingLinks = {
+      'cart': basePath + 'shopping/cart.html',
+      'wishlist': basePath + 'shopping/wishlist.html',
+      'orders': basePath + 'shopping/orders.html',
+      'checkout': basePath + 'shopping/checkout.html',
+      'product': basePath + 'shopping/product.html'
+    };
+
+    // Update shopping navigation elements
+    Object.entries(shoppingLinks).forEach(([key, href]) => {
+      const links = document.querySelectorAll(`a[href*="${key}"]`);
+      links.forEach(link => {
+        if (link.href.includes(key)) {
           link.href = href;
         }
       });
@@ -82,6 +121,18 @@ class SharedNavigation {
 
   // Check and update login status
   checkLoginStatus() {
+    // Determine base path for auth links
+    const currentPath = window.location.pathname;
+    let basePath = '';
+    
+    if (currentPath.includes('/auth/') || currentPath.includes('/shopping/') || 
+        currentPath.includes('/categories/') || currentPath.includes('/admin/') || 
+        currentPath.includes('/core/')) {
+      basePath = '../';
+    } else {
+      basePath = '';
+    }
+
     fetch('/api/auth/check-login', {
       method: 'GET',
       credentials: 'include',
@@ -95,7 +146,7 @@ class SharedNavigation {
       const userNameSpan = document.getElementById('user-name');
       
       if (data.loggedIn && data.username) {
-        userProfileLink.href = 'profile.html';
+        userProfileLink.href = basePath + 'auth/profile.html';
         userNameSpan.textContent = data.username.charAt(0).toUpperCase();
         userNameSpan.classList.remove('hidden');
         
@@ -105,7 +156,7 @@ class SharedNavigation {
           userIcon.classList.add('ri-user-fill');
         }
       } else {
-        userProfileLink.href = 'login.html';
+        userProfileLink.href = basePath + 'auth/login.html';
         userNameSpan.classList.add('hidden');
         
         const userIcon = userProfileLink.querySelector('.ri-user-fill, .ri-user-line');
