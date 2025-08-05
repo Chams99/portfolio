@@ -3,155 +3,708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chamsado Messenger - Connect Seamlessly</title>
+    <meta name="description" content="Chamsado Messenger - Secure, real-time messaging built with Flutter and Firebase. Connect with friends and family seamlessly.">
+    <meta name="keywords" content="messenger, chat, flutter, firebase, real-time messaging, secure messaging">
+    <meta name="author" content="Chamsado">
+    <meta name="theme-color" content="#3C4038">
+    <meta property="og:title" content="Chamsado Messenger - Messaging. Anywhere.">
+    <meta property="og:description" content="Secure, real-time messaging built with Flutter and Firebase">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>Chamsado Messenger - Messaging. Anywhere.</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="images/logo.png" as="image">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary-color: #7ca08a; /* Muted Green from icon */
-            --secondary-color: #e8906b; /* Muted Orange from icon */
-            --background-color: #f0e9d8; /* Light Beige/White from icon */
-            --text-color: #425b50; /* Dark Green/Outline from icon */
-            --accent-color: #e8906b; /* Muted Orange (can be used for highlights) */
+            /* Chamsado App Color Palette */
+            --primary-bg: #3C4038; /* Dark olive green background */
+            --secondary-bg: #2D302B; /* Darker green for cards */
+            --accent-orange: #B06B4F; /* Earthy orange from buttons */
+            --text-primary: #E0E0E0; /* Light off-white text */
+            --text-secondary: #7A8C72; /* Muted green for secondary text */
+            --border-color: #4A4A4A; /* Subtle borders */
+            --card-bg: #2D302B; /* Card background */
+            --success-color: #7ca08a; /* Muted green for success states */
+            --error-color: #e74c3c; /* Error color */
+            --gradient-primary: linear-gradient(135deg, var(--accent-orange) 0%, #c17a5f 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            
+            /* Spacing system */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            
+            /* Border radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .hero {
-            height: 100vh;
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        :focus {
+            outline: 2px solid var(--accent-orange);
+            outline-offset: 2px;
+        }
+
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            z-index: 1000;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Sticky Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(60, 64, 56, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: var(--space-sm) var(--space-lg);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(60, 64, 56, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
+            gap: var(--space-xs);
+        }
+
+        .logo i {
+            color: var(--accent-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section - Aaptiv Style */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             position: relative;
+            background: var(--gradient-secondary);
+            padding: var(--space-3xl) var(--space-lg);
+            margin-top: 60px;
             overflow: hidden;
-            background: #e8906b; /* Using muted orange for hero background */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%234A4A4A" stroke-width="0.5" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
         }
 
         .hero-content {
             max-width: 1200px;
-            padding: 2rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            position: relative;
             z-index: 1;
         }
 
+        .hero-text {
+            max-width: 600px;
+        }
+
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            color: var(--text-color); /* Use the new text color */
-            margin-bottom: 2rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.3s;
+            line-height: 1.6;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--primary-color); /* Use muted green for CTA */
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.6s;
         }
 
-        .cta-button:hover {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(66, 91, 80, 0.2); /* Adjust shadow color */
+            box-shadow: var(--shadow-xl);
         }
 
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .device-mockup {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            background: var(--card-bg);
+            border-radius: var(--radius-2xl);
+            border: 8px solid var(--border-color);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            transform: rotate(-5deg) translateY(20px);
+            transition: all var(--transition-normal);
+        }
+
+        .device-mockup:hover {
+            transform: rotate(-3deg) translateY(10px) scale(1.02);
+        }
+
+        .device-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: calc(var(--radius-2xl) - 8px);
+        }
+
+        .device-mockup::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        /* CTA Strip */
+        .cta-strip {
+            background: var(--gradient-primary);
+            padding: var(--space-lg) var(--space-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-strip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cta-strip-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-strip h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-strip p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-md);
+        }
+
+        /* Features Section */
         .features {
-            padding: 5rem 2rem;
-            background-color: var(--background-color); /* Use beige for features background */
+            padding: var(--space-3xl) var(--space-lg);
+            background: var(--secondary-bg);
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .feature-card {
-            padding: 2rem;
-            border-radius: 20px;
-            background: white; /* Keep card background white or use beige */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            color: var(--text-primary);
+            font-weight: 800;
             opacity: 0;
             transform: translateY(30px);
         }
 
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: var(--space-3xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-orange);
         }
 
         .feature-card i {
-            font-size: 2.5rem;
-            color: var(--primary-color); /* Use muted green for icons */
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            color: var(--accent-orange);
+            margin-bottom: var(--space-md);
+            display: block;
         }
 
         .feature-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color); /* Use dark green for feature titles */
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Screenshots Section */
         .screenshots {
-            padding: 5rem 2rem;
-            background-color: var(--background-color); /* Use beige for screenshots background */
-            text-align: center;
+            padding: var(--space-3xl) var(--space-lg);
+            background: var(--primary-bg);
         }
 
         .screenshots-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 3rem auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
         }
 
-        .screenshot {
-            border-radius: 20px;
+        .screenshot-card {
+            position: relative;
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            opacity: 0;
+            transform: translateY(30px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
 
-        .screenshot:hover {
-            transform: scale(1.05);
+        .screenshot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .screenshot img {
+        .screenshot-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform var(--transition-normal);
         }
 
+        .screenshot-card:hover .screenshot-image img {
+            transform: scale(1.05);
+        }
+
+        .screenshot-content {
+            padding: var(--space-lg);
+        }
+
+        .screenshot-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .screenshot-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: var(--space-3xl) var(--space-lg);
+            background: var(--secondary-bg);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .step-card h3 {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--space-3xl) var(--space-lg);
+            background: var(--primary-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stars {
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .testimonial-text {
+            color: var(--text-primary);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            padding: var(--space-2xl) var(--space-lg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .footer-section h4 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-color);
+            margin-top: var(--space-xl);
+        }
+
+        .footer-bottom p {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -159,109 +712,524 @@
             }
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(30px);
-            color: var(--text-color); /* Use dark green for section titles */
-        }
-
         .visible {
             animation: fadeInUp 1s ease forwards;
         }
 
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-links {
+                display: none;
             }
 
-            .hero p {
-                font-size: 1.2rem;
-                color: var(--text-color); /* Ensure text color is applied on mobile */
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: var(--space-xl);
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .device-mockup {
+                width: 250px;
+                height: 500px;
+                transform: rotate(-3deg) translateY(10px);
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            .features, .screenshots, .how-it-works, .testimonials {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            .device-mockup {
+                width: 200px;
+                height: 400px;
+            }
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-color: #ffffff;
+                --text-secondary: #ffffff;
+            }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Chamsado Messenger</h1>
-            <p>Connect with friends and family in a whole new way</p>
-            <a href="#" class="cta-button">Download Now</a>
-        </div>
-    </section>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <i class="fas fa-comments"></i>
+                Chamsado
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#" class="nav-cta">Download Now</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
 
-    <section class="features">
-        <h2 class="section-title">Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-bolt"></i>
-                <h3>Lightning Fast</h3>
-                <p>Experience instant messaging with our optimized platform</p>
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Messaging. Anywhere.</h1>
+                    <p>Experience secure, real-time messaging that works seamlessly across all your devices. Built with Flutter and Firebase for lightning-fast performance.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Start Chatting
+                        </a>
+                        <a href="#screenshots" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i>
+                            See Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="device-mockup">
+                        <img src="images/loginpage.png" alt="Chamsado Messenger App Interface">
+                    </div>
+                </div>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-lock"></i>
-                <h3>Secure & Private</h3>
-                <p>End-to-end encryption for your peace of mind</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-palette"></i>
-                <h3>Beautiful Design</h3>
-                <p>Intuitive interface with stunning visuals</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="screenshots">
-        <h2 class="section-title">See it in Action</h2>
-        <div class="screenshots-grid">
-            <div class="screenshot">
-                <img src="WhatsApp Image 2025-05-28 à 16.48.16_0d3c0e07.jpg" alt="Messenger App Screenshot 1">
+        <!-- CTA Strip -->
+        <section class="cta-strip">
+            <div class="cta-strip-content">
+                <h3>Ready to Connect?</h3>
+                <p>Join thousands of users who trust Chamsado for their messaging needs</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Download Now
+                </a>
             </div>
-            <div class="screenshot">
-                <img src="WhatsApp Image 2025-05-28 à 16.48.17_f2534636.jpg" alt="Messenger App Screenshot 2">
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Chamsado?</h2>
+                <p class="section-subtitle">Built for modern communication with enterprise-grade security and seamless cross-platform experience.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>End-to-End Encryption</h3>
+                        <p>Your conversations are protected with military-grade encryption. Only you and your contacts can read your messages.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-wifi-slash"></i>
+                        <h3>Works Offline</h3>
+                        <p>Send messages even when you're offline. They'll be delivered automatically when you reconnect.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sync"></i>
+                        <h3>Cross-Device Sync</h3>
+                        <p>Your messages, contacts, and settings sync instantly across all your devices in real-time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-share-alt"></i>
+                        <h3>Share Files, Audio & Video</h3>
+                        <p>Share photos, videos, voice messages, and documents with ease. No file size limits.</p>
+                    </div>
+                </div>
             </div>
-            <div class="screenshot">
-                <img src="WhatsApp Image 2025-05-28 à 16.48.19_fcb0ac5e.jpg" alt="Messenger App Screenshot 3">
+        </section>
+
+        <!-- CTA Strip -->
+        <section class="cta-strip">
+            <div class="cta-strip-content">
+                <h3>Experience the Difference</h3>
+                <p>Join the revolution in secure messaging</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Get Started Free
+                </a>
             </div>
-            <div class="screenshot">
-                <img src="WhatsApp Image 2025-05-28 à 16.48.20_86509996.jpg" alt="Messenger App Screenshot 4">
+        </section>
+
+        <!-- Screenshots Section -->
+        <section class="screenshots" id="screenshots">
+            <div class="container">
+                <h2 class="section-title">See Chamsado in Action</h2>
+                <p class="section-subtitle">From seamless onboarding to powerful chat features, discover how Chamsado transforms your messaging experience.</p>
+                <div class="screenshots-grid">
+                    <div class="screenshot-card">
+                        <div class="screenshot-image">
+                            <img src="images/loginpage.png" alt="Chamsado Login Screen" loading="lazy">
+                        </div>
+                        <div class="screenshot-content">
+                            <h3 class="screenshot-title">Secure Login</h3>
+                            <p class="screenshot-description">Quick and secure authentication with Firebase-powered security.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-image">
+                            <img src="images/lightmode.png" alt="Chamsado Light Mode Interface" loading="lazy">
+                        </div>
+                        <div class="screenshot-content">
+                            <h3 class="screenshot-title">Light Mode Interface</h3>
+                            <p class="screenshot-description">Clean, modern interface with intuitive navigation and smooth animations.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-image">
+                            <img src="images/darkmode.png" alt="Chamsado Dark Mode Interface" loading="lazy">
+                        </div>
+                        <div class="screenshot-content">
+                            <h3 class="screenshot-title">Dark Mode Experience</h3>
+                            <p class="screenshot-description">Beautiful dark theme for comfortable messaging in any lighting condition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Strip -->
+        <section class="cta-strip">
+            <div class="cta-strip-content">
+                <h3>Ready to Start Messaging?</h3>
+                <p>Download Chamsado and experience the future of secure communication</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-mobile-alt"></i>
+                    Download for Free
+                </a>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get started with Chamsado in just three simple steps</p>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Download or Sign In</h3>
+                        <p>Download Chamsado from your app store or sign in to your existing account to get started instantly.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Add Contacts or Join Groups</h3>
+                        <p>Connect with friends by adding their phone numbers or join existing groups to start conversations.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Start Messaging Securely</h3>
+                        <p>Begin sending messages, sharing files, and enjoying real-time communication with end-to-end encryption.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Strip -->
+        <section class="cta-strip">
+            <div class="cta-strip-content">
+                <h3>Join the Conversation</h3>
+                <p>Millions of users trust Chamsado for their daily communication</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-users"></i>
+                    Start Messaging Now
+                </a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Users Say</h2>
+                <p class="section-subtitle">Real feedback from our community of satisfied users</p>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Chamsado has completely transformed how I communicate with my team. The real-time sync and security features are incredible!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <h4>Sarah Chen</h4>
+                                <p>Product Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The offline functionality is a game-changer. I can send messages even when I'm in areas with poor connectivity."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>Mike Rodriguez</h4>
+                                <p>Travel Blogger</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Finally, a messaging app that puts security first without compromising on features. Chamsado is exactly what I needed."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h4>Alex Thompson</h4>
+                                <p>Security Analyst</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Strip -->
+        <section class="cta-strip">
+            <div class="cta-strip-content">
+                <h3>Ready to Experience Chamsado?</h3>
+                <p>Join thousands of users who've already made the switch to secure messaging</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Download Chamsado
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Chamsado</h4>
+                <p>Secure, real-time messaging built with Flutter and Firebase. Connect with friends and family seamlessly.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Download</h4>
+                <ul>
+                    <li><a href="#">iOS App Store</a></li>
+                    <li><a href="#">Google Play Store</a></li>
+                    <li><a href="#">Web Version</a></li>
+                    <li><a href="#">Desktop App</a></li>
+                </ul>
             </div>
         </div>
-    </section>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Chamsado Messenger. All rights reserved. Built with ❤️ using Flutter and Firebase.</p>
+        </div>
+    </footer>
 
     <script>
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // Modern JavaScript with error handling and performance optimizations
+        (function() {
+            'use strict';
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
 
-        // Observe all feature cards and section titles
-        document.querySelectorAll('.feature-card, .section-title').forEach((el) => {
-            observer.observe(el);
-        });
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            const animatedElements = document.querySelectorAll('.feature-card, .section-title, .screenshot-card, .step-card, .testimonial-card');
+            animatedElements.forEach((el) => {
+                observer.observe(el);
+            });
+
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
-        });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('show');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+            }
+
+            // Performance: Lazy load images
+            if ('loading' in HTMLImageElement.prototype) {
+                console.log('Native lazy loading supported');
+            } else {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                images.forEach(img => imageObserver.observe(img));
+            }
+
+            // Add loading states for buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (this.href === '#') {
+                        e.preventDefault();
+                        this.classList.add('loading');
+                        // Simulate loading state
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                        }, 2000);
+                    }
+                });
+            });
+
+            // Keyboard navigation support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (navLinks && navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        const icon = mobileMenuBtn?.querySelector('i');
+                        if (icon) {
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    }
+                }
+            });
+
+            // Service Worker registration for PWA capabilities
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('SW registered: ', registration);
+                        })
+                        .catch(registrationError => {
+                            console.log('SW registration failed: ', registrationError);
+                        });
+                });
+            }
+
+        })();
     </script>
 </body>
 </html>

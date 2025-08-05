@@ -47,76 +47,76 @@ app.use('/api/orders', orderRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'core/index.html'));
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'auth/login.html'));
 });
 
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'register.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'auth/register.html'));
 });
 
 app.get('/cart', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'cart.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'shopping/cart.html'));
 });
 
 app.get('/checkout', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'checkout.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'shopping/checkout.html'));
 });
 
 app.get('/profile', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'profile.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'auth/profile.html'));
 });
 
 app.get('/orders', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'orders.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'shopping/orders.html'));
 });
 
 app.get('/wishlist', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'wishlist.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'shopping/wishlist.html'));
 });
 
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'admin.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'admin/admin.html'));
 });
 
 // Product category routes
 app.get('/electronics', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'electronics.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/electronics.html'));
 });
 
 app.get('/men', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'men.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/men.html'));
 });
 
 app.get('/women', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'woman.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/woman.html'));
 });
 
 app.get('/beauty', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'beauty.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/beauty.html'));
 });
 
 app.get('/home-living', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'home&living.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/home&living.html'));
 });
 
 app.get('/accessories', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'accesiore.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/accessories.html'));
 });
 
 app.get('/sale', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'sale.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/sale.html'));
 });
 
 app.get('/new-arrivals', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'newAriviales.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'categories/newAriviales.html'));
 });
 
 app.get('/product/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Public', 'product.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'shopping/product.html'));
 });
 
 // Error handling middleware

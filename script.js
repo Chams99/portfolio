@@ -111,14 +111,14 @@
                 category: 'web',
                 image: 'Images/ecommerce.jpg',
                 github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
-                demo: 'ChamsShop/Public/',
+                demo: 'ChamsShop/Public/core/',
                 features: [
                     '🛒 Dynamic Shopping Cart',
                     '🔐 User Authentication',
                     '💳 Checkout System',
                     '📱 Responsive Design'
                 ],
-                tags: ['HTML', 'CSS', 'JavaScript', 'E-commerce']
+                tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
             },
             { 
                 title: 'Chamsado Messenger DEMO', 
