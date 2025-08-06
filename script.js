@@ -46,94 +46,23 @@
         // Portfolio items data
         const projects = [
             { 
-                title: 'Wallpaper Generator DEMO', 
-                description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.', 
+                title: 'Energy - Renewable Energy Solutions', 
+                description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.', 
                 category: 'web',
-                image: 'wallpaper/Capture d\'écran 2025-05-31 092043.png',
-                github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
-                demo: 'wallpaper/',
+                image: 'Images/energy.jpg',
+                github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
+                demo: 'Energy/',
                 features: [
-                    '🎨 Dynamic Pattern Generation',
-                    '🖼️ Customizable Colors',
-                    '💫 Interactive Elements',
-                    '📱 Responsive Design'
+                    '☀️ Solar & Wind Energy Solutions',
+                    '📱 Fully Responsive Design',
+                    '⚡ Next.js 14 Performance',
+                    '🎨 Modern Professional UI',
+                    '📊 SEO Optimized',
+                    '♿ WCAG Accessibility Compliant',
+                    '📝 Blog & Project Showcase',
+                    '📞 Lead Generation Forms'
                 ],
-                tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Design']
-            },
-            { 
-                title: 'Speed Typer', 
-                description: 'An interactive typing game that tests your typing speed and accuracy with different difficulty levels.', 
-                category: 'game',
-                image: 'Images/typing-game.png',
-                github: 'https://github.com/Chams99/portfolio/tree/main/typing game',
-                demo: 'typing game/',
-                features: [
-                    '⌨️ Real-time WPM calculation',
-                    '🏆 High score tracking',
-                    '🔤 Multiple difficulty levels',
-                    '📊 Performance statistics'
-                ],
-                tags: ['JavaScript', 'HTML5', 'CSS3', 'Web Game']
-            },
-            { 
-                title: 'The Ridiculous Quest DEMO', 
-                description: 'A humorous adventure game where players battle rubber chickens, collect magic bananas, and dance with sock puppets. Features include inventory management, health potions, and save/load functionality.', 
-                category: 'game',
-                image: 'Images/chicken.jpg',
-                github: 'https://github.com/Chams99/portfolio/tree/main/chicken',
-                demo: 'chicken/',
-                features: [
-                    '🎮 Turn-based combat system',
-                    '💾 Save/Load game progress',
-                    '🎯 Multiple game mechanics',
-                    '🖼️ GUI with Tkinter'
-                ],
-                tags: ['Python', 'Tkinter', 'Game Dev', 'GUI']
-            },
-            { 
-                title: 'LolChat', 
-                description: 'A League of Legends themed chat interface that combines modern web design with the game\'s aesthetic. Features champion data integration and responsive design.', 
-                category: 'web',
-                image: 'Images/lol.jpg',
-                github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
-                demo: 'lolchat/',
-                features: [
-                    '🎮 League of Legends Theme',
-                    '🦸‍♂️ Champion Data Integration',
-                    '💬 Chat Interface',
-                    '📱 Responsive Design'
-                ],
-                tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
-            },
-            { 
-                title: 'E-commerce website DEMO', 
-                description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
-                category: 'web',
-                image: 'Images/ecommerce.jpg',
-                github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
-                demo: 'ChamsShop/Public/core/',
-                features: [
-                    '🛒 Dynamic Shopping Cart',
-                    '🔐 User Authentication',
-                    '💳 Checkout System',
-                    '📱 Responsive Design'
-                ],
-                tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
-            },
-            { 
-                title: 'Chamsado Messenger DEMO', 
-                description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
-                category: 'mobile',
-                image: 'Images/chamsado_messenger.jpg',
-                github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
-                demo: 'messenger_app/',
-                features: [
-                    '💬 Real-time Messaging',
-                    '🔒 Secure Communication',
-                    '👤 User Profiles',
-                    '👥 Group Chats'
-                ],
-                tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
+                tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
             },
             { 
                 title: 'FitLite - AI Fitness Companion DEMO', 
@@ -151,6 +80,96 @@
                     '📊 SEO Optimized'
                 ],
                 tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Mobile App', 'AI', 'Performance']
+            },
+            { 
+                title: 'Chamsado Messenger DEMO', 
+                description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
+                category: 'mobile',
+                image: 'Images/chamsado_messenger.jpg',
+                github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
+                demo: 'messenger_app/',
+                features: [
+                    '💬 Real-time Messaging',
+                    '🔒 Secure Communication',
+                    '👤 User Profiles',
+                    '👥 Group Chats'
+                ],
+                tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
+            },
+            { 
+                title: 'E-commerce website DEMO', 
+                description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
+                category: 'web',
+                image: 'Images/ecommerce.jpg',
+                github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
+                demo: 'ChamsShop/Public/core/',
+                features: [
+                    '🛒 Dynamic Shopping Cart',
+                    '🔐 User Authentication',
+                    '💳 Checkout System',
+                    '📱 Responsive Design'
+                ],
+                tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
+            },
+            { 
+                title: 'LolChat', 
+                description: 'A League of Legends themed chat interface that combines modern web design with the game\'s aesthetic. Features champion data integration and responsive design.', 
+                category: 'web',
+                image: 'Images/lol.jpg',
+                github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
+                demo: 'lolchat/',
+                features: [
+                    '🎮 League of Legends Theme',
+                    '🦸‍♂️ Champion Data Integration',
+                    '💬 Chat Interface',
+                    '📱 Responsive Design'
+                ],
+                tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
+            },
+            { 
+                title: 'The Ridiculous Quest DEMO', 
+                description: 'A humorous adventure game where players battle rubber chickens, collect magic bananas, and dance with sock puppets. Features include inventory management, health potions, and save/load functionality.', 
+                category: 'game',
+                image: 'Images/chicken.jpg',
+                github: 'https://github.com/Chams99/portfolio/tree/main/chicken',
+                demo: 'chicken/',
+                features: [
+                    '🎮 Turn-based combat system',
+                    '💾 Save/Load game progress',
+                    '🎯 Multiple game mechanics',
+                    '🖼️ GUI with Tkinter'
+                ],
+                tags: ['Python', 'Tkinter', 'Game Dev', 'GUI']
+            },
+            { 
+                title: 'Speed Typer', 
+                description: 'An interactive typing game that tests your typing speed and accuracy with different difficulty levels.', 
+                category: 'game',
+                image: 'Images/typing-game.png',
+                github: 'https://github.com/Chams99/portfolio/tree/main/typing game',
+                demo: 'typing-game/',
+                features: [
+                    '⌨️ Real-time WPM calculation',
+                    '🏆 High score tracking',
+                    '🔤 Multiple difficulty levels',
+                    '📊 Performance statistics'
+                ],
+                tags: ['JavaScript', 'HTML5', 'CSS3', 'Web Game']
+            },
+            { 
+                title: 'Wallpaper Generator DEMO', 
+                description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.', 
+                category: 'web',
+                image: 'wallpaper/Capture d\'écran 2025-05-31 092043.png',
+                github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
+                demo: 'wallpaper/',
+                features: [
+                    '🎨 Dynamic Pattern Generation',
+                    '🖼️ Customizable Colors',
+                    '💫 Interactive Elements',
+                    '📱 Responsive Design'
+                ],
+                tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Design']
             }
             // You can add more projects following this format
         ];
@@ -241,27 +260,49 @@
             });
         });
 
-        // Animate skill bars on scroll
-        function animateSkills() {
-            const skillBars = document.querySelectorAll('.skill-progress');
+        // Animate skill cards on scroll
+        function animateSkillCards() {
+            const skillCards = document.querySelectorAll('.skill-card');
+            const animatedCards = new Set(); // Track which cards have been animated
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const width = entry.target.style.width;
-                        entry.target.style.width = '0';
+                    if (entry.isIntersecting && !animatedCards.has(entry.target)) {
+                        // Mark this card as animated
+                        animatedCards.add(entry.target);
+                        
+                        // Set initial state
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(30px)';
+                        entry.target.style.transition = 'all 0.6s ease';
+                        
+                        // Animate in
+                        requestAnimationFrame(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        });
+                        
+                        // Unobserve after animation
                         setTimeout(() => {
-                            entry.target.style.width = width;
-                        }, 100);
-                        observer.unobserve(entry.target);
+                            observer.unobserve(entry.target);
+                        }, 600);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { 
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            });
 
-            skillBars.forEach(bar => observer.observe(bar));
+            skillCards.forEach(card => {
+                // Ensure cards start visible
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                observer.observe(card);
+            });
         }
 
         // Call the function when the page loads
-        document.addEventListener('DOMContentLoaded', animateSkills);
+        document.addEventListener('DOMContentLoaded', animateSkillCards);
 
         // Contact form handling
         document.addEventListener('DOMContentLoaded', () => {
@@ -443,23 +484,23 @@
                 });
             }
 
-            // Animate Skill Bars on Scroll
-            const skillBars = document.querySelectorAll('.skill-progress');
-            if (skillBars.length > 0) {
-                skillBars.forEach(bar => {
-                    const percent = bar.style.width;
-                    bar.style.width = 0;
-                    
-                    gsap.to(bar, {
-                        scrollTrigger: {
-                            trigger: bar,
-                            start: 'top 85%',
-                            toggleActions: 'play none none reverse'
-                        },
-                        width: percent,
-                        duration: 1.5,
-                        ease: 'power4.out'
-                    });
+            // Animate Skill Cards on Scroll with GSAP
+            const skillCards = document.querySelectorAll('.skill-card');
+            if (skillCards.length > 0) {
+                // Set initial state
+                gsap.set(skillCards, { opacity: 0, y: 40 });
+                
+                gsap.to(skillCards, {
+                    scrollTrigger: {
+                        trigger: '.skills-container',
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    duration: 0.8,
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.1,
+                    ease: 'power2.out'
                 });
             }
 
