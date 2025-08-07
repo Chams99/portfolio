@@ -146,19 +146,21 @@
                 tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
             },
             { 
-                title: 'The Ridiculous Quest DEMO', 
-                description: 'A humorous adventure game where players battle rubber chickens, collect magic bananas, and dance with sock puppets. Features include inventory management, health potions, and save/load functionality.', 
-                category: 'game',
+                title: 'Epic Chicken Adventure - Next.js', 
+                description: 'A modern Next.js application featuring the Epic Chicken Adventure game with enhanced UI, responsive design, and professional styling. Built with React, Tailwind CSS, and modern web technologies.', 
+                category: 'web',
                 image: 'Images/chicken.jpg',
                 github: 'https://github.com/Chams99/portfolio/tree/main/chicken',
                 demo: 'chicken/',
                 features: [
-                    '🎮 Turn-based combat system',
-                    '💾 Save/Load game progress',
-                    '🎯 Multiple game mechanics',
-                    '🖼️ GUI with Tkinter'
+                    '⚛️ Next.js 14 Framework',
+                    '🎨 Modern React Components',
+                    '📱 Responsive Design',
+                    '🎯 Interactive Game Elements',
+                    '⚡ Performance Optimized',
+                    '🎨 Tailwind CSS Styling'
                 ],
-                tags: ['Python', 'Tkinter', 'Game Dev', 'GUI']
+                tags: ['Next.js', 'React', 'Tailwind CSS', 'JavaScript', 'Web App', 'Game']
             },
             { 
                 title: 'Speed Typer', 
