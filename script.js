@@ -82,6 +82,25 @@
                 tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Mobile App', 'AI', 'Performance']
             },
             { 
+                title: 'La Cuisine - Fine Dining Restaurant', 
+                description: 'A modern, responsive single-page restaurant website built with 2025 best practices, featuring elegant design, smooth animations, and excellent user experience. Complete with interactive menu, reservation system, and professional styling.', 
+                category: 'web',
+                image: 'Images/restaurents.png',
+                github: 'https://github.com/Chams99/portfolio/tree/main/restaurents',
+                demo: 'restaurents/',
+                features: [
+                    '🍽️ Interactive Menu System',
+                    '📱 Mobile-First Responsive Design',
+                    '⚡ Performance Optimized',
+                    '🎨 Modern Professional UI',
+                    '📊 SEO Optimized',
+                    '♿ WCAG Accessibility Compliant',
+                    '📝 Reservation Form',
+                    '📞 Contact Integration'
+                ],
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'Restaurant', 'Professional', 'Responsive']
+            },
+            { 
                 title: 'Chamsado Messenger DEMO', 
                 description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
                 category: 'mobile',

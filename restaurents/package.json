@@ -1,0 +1,47 @@
+{
+  "name": "la-cuisine-restaurant",
+  "version": "1.0.0",
+  "description": "A modern, responsive single-page restaurant website built with 2025 best practices",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=8000",
+    "build": "echo 'No build process required for static site'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linter configured'",
+    "format": "echo 'No formatter configured'"
+  },
+  "keywords": [
+    "restaurant",
+    "website",
+    "responsive",
+    "modern",
+    "html5",
+    "css3",
+    "javascript",
+    "single-page",
+    "fine-dining"
+  ],
+  "author": "Restaurant Website Developer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/la-cuisine-restaurant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/la-cuisine-restaurant/issues"
+  },
+  "homepage": "https://yourusername.github.io/la-cuisine-restaurant",
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+} 

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience fine dining at our restaurant. Fresh ingredients, exceptional service, and memorable moments.">
+    <meta name="keywords" content="restaurant, fine dining, reservations, menu, contact">
+    <meta name="author" content="Restaurant Name">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-restaurant.com/">
+    <meta property="og:title" content="Fine Dining Restaurant">
+    <meta property="og:description" content="Experience fine dining at our restaurant. Fresh ingredients, exceptional service, and memorable moments.">
+    <meta property="og:image" content="https://your-restaurant.com/images/hero-bg.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-restaurant.com/">
+    <meta property="twitter:title" content="Fine Dining Restaurant">
+    <meta property="twitter:description" content="Experience fine dining at our restaurant. Fresh ingredients, exceptional service, and memorable moments.">
+    <meta property="twitter:image" content="https://your-restaurant.com/images/hero-bg.jpg">
+
+    <title>Fine Dining Restaurant - Experience Excellence</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="#home" aria-label="Go to homepage">
+                        <h1>La Cuisine</h1>
+                    </a>
+                </div>
+                
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+                
+                <ul class="nav-menu" role="menubar">
+                    <li role="none"><a href="#home" role="menuitem">Home</a></li>
+                    <li role="none"><a href="#about" role="menuitem">About</a></li>
+                    <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
+                    <li role="none"><a href="#reservations" role="menuitem">Reservations</a></li>
+                    <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero" aria-label="Hero section">
+            <div class="hero-content">
+                <h2 class="hero-title">Experience Culinary Excellence</h2>
+                <p class="hero-subtitle">Where passion meets perfection in every dish</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn btn-primary">View Menu</a>
+                    <a href="#reservations" class="btn btn-secondary">Make Reservation</a>
+                </div>
+            </div>
+            <div class="hero-background"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about" aria-label="About us">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2010, La Cuisine has been serving exceptional dishes crafted with the finest ingredients and innovative techniques. Our passionate chefs create memorable dining experiences that celebrate both tradition and innovation.</p>
+                        <p>We believe in sustainable sourcing, supporting local farmers, and creating dishes that tell a story of passion, creativity, and excellence.</p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-leaf" aria-hidden="true"></i>
+                                <h3>Fresh Ingredients</h3>
+                                <p>Locally sourced, organic ingredients</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <h3>Award Winning</h3>
+                                <p>Recognized for culinary excellence</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                <h3>Made with Love</h3>
+                                <p>Every dish crafted with passion</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Chef preparing a beautiful dish in our kitchen" 
+                             loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="menu" aria-label="Our menu">
+            <div class="container">
+                <h2>Our Menu</h2>
+                <p class="section-subtitle">Discover our carefully curated selection of dishes</p>
+                
+                <div class="menu-categories">
+                    <button class="menu-tab active" data-category="starters">Starters</button>
+                    <button class="menu-tab" data-category="mains">Main Courses</button>
+                    <button class="menu-tab" data-category="desserts">Desserts</button>
+                    <button class="menu-tab" data-category="drinks">Beverages</button>
+                </div>
+
+                <div class="menu-content">
+                    <!-- Starters -->
+                    <div class="menu-category active" id="starters">
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Bruschetta al Pomodoro</h3>
+                                    <span class="price">$12</span>
+                                </div>
+                                <p>Fresh tomatoes, basil, and garlic on toasted artisan bread</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Burrata Caprese</h3>
+                                    <span class="price">$16</span>
+                                </div>
+                                <p>Creamy burrata with heirloom tomatoes and aged balsamic</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Wild Mushroom Arancini</h3>
+                                    <span class="price">$14</span>
+                                </div>
+                                <p>Crispy risotto balls with truffle aioli</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Courses -->
+                    <div class="menu-category" id="mains">
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Wagyu Beef Tenderloin</h3>
+                                    <span class="price">$48</span>
+                                </div>
+                                <p>Premium grade wagyu with roasted vegetables and red wine reduction</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Lobster Linguine</h3>
+                                    <span class="price">$42</span>
+                                </div>
+                                <p>Fresh Maine lobster with house-made pasta and saffron cream</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Duck Confit</h3>
+                                    <span class="price">$38</span>
+                                </div>
+                                <p>Slow-cooked duck with cherry reduction and potato gratin</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desserts -->
+                    <div class="menu-category" id="desserts">
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Chocolate Soufflé</h3>
+                                    <span class="price">$14</span>
+                                </div>
+                                <p>Warm chocolate soufflé with vanilla bean ice cream</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Crème Brûlée</h3>
+                                    <span class="price">$12</span>
+                                </div>
+                                <p>Classic vanilla bean crème brûlée with fresh berries</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Tiramisu</h3>
+                                    <span class="price">$13</span>
+                                </div>
+                                <p>Traditional Italian tiramisu with espresso and mascarpone</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drinks -->
+                    <div class="menu-category" id="drinks">
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Signature Cocktails</h3>
+                                    <span class="price">$16</span>
+                                </div>
+                                <p>House-crafted cocktails with premium spirits</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Wine Selection</h3>
+                                    <span class="price">$12-45</span>
+                                </div>
+                                <p>Curated wine list featuring local and international selections</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h3>Artisan Coffee</h3>
+                                    <span class="price">$6</span>
+                                </div>
+                                <p>Freshly brewed coffee from local roasters</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <section id="reservations" class="reservations" aria-label="Make a reservation">
+            <div class="container">
+                <div class="reservations-content">
+                    <div class="reservations-info">
+                        <h2>Make a Reservation</h2>
+                        <p>Join us for an unforgettable dining experience. Reserve your table today and let us create a memorable evening for you.</p>
+                        
+                        <div class="reservation-details">
+                            <div class="detail">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Hours</h3>
+                                    <p>Tuesday - Sunday<br>5:00 PM - 10:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Call Us</h3>
+                                    <p>(555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p>reservations@lacuisine.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="reservation-form" id="reservationForm">
+                        <h3>Book Your Table</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Date *</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Time *</label>
+                                <select id="time" name="time" required>
+                                    <option value="">Select time</option>
+                                    <option value="17:00">5:00 PM</option>
+                                    <option value="17:30">5:30 PM</option>
+                                    <option value="18:00">6:00 PM</option>
+                                    <option value="18:30">6:30 PM</option>
+                                    <option value="19:00">7:00 PM</option>
+                                    <option value="19:30">7:30 PM</option>
+                                    <option value="20:00">8:00 PM</option>
+                                    <option value="20:30">8:30 PM</option>
+                                    <option value="21:00">9:00 PM</option>
+                                    <option value="21:30">9:30 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests *</label>
+                            <select id="guests" name="guests" required>
+                                <option value="">Select guests</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6">6 Guests</option>
+                                <option value="7+">7+ Guests</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="special-requests">Special Requests</label>
+                            <textarea id="special-requests" name="special-requests" rows="3" placeholder="Any dietary restrictions or special requests?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Reservation</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact" aria-label="Contact information">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p class="section-subtitle">We'd love to hear from you</p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>123 Gourmet Street<br>Foodie District, NY 10001</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@lacuisine.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Tuesday - Sunday<br>5:00 PM - 10:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contact-name">Name *</label>
+                                <input type="text" id="contact-name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email *</label>
+                                <input type="email" id="contact-email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <input type="text" id="contact-subject" name="subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message *</label>
+                                <textarea id="contact-message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>La Cuisine</h3>
+                    <p>Experience culinary excellence in every dish. We're passionate about creating memorable dining experiences.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#reservations">Reservations</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>123 Gourmet Street<br>Foodie District, NY 10001</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <p>Email: info@lacuisine.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 La Cuisine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
