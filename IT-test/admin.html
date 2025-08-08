@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Business - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+            color: #2563eb;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-header p {
+            color: #6b7280;
+        }
+
+        .content-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-card h3 {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .status-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            display: block;
+        }
+
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+            display: block;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+            
+            .content-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>IT Business Admin Panel</h1>
+            <p>Manage your website content easily and efficiently</p>
+        </div>
+
+        <div class="content-sections">
+            <!-- Home Section -->
+            <div class="section-card">
+                <h3><span class="icon">🏠</span> Home Section</h3>
+                <form id="homeForm">
+                    <div class="form-group">
+                        <label for="hero-title">Hero Title</label>
+                        <input type="text" id="hero-title" name="hero-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hero-subtitle">Hero Subtitle</label>
+                        <textarea id="hero-subtitle" name="hero-subtitle" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="hero-cta">Call to Action Text</label>
+                        <input type="text" id="hero-cta" name="hero-cta" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="loadContent()">Load Current</button>
+                    </div>
+                </form>
+                <div id="home-status" class="status-message"></div>
+            </div>
+
+            <!-- Services Section -->
+            <div class="section-card">
+                <h3><span class="icon">🛠️</span> Services Section</h3>
+                <form id="servicesForm">
+                    <div class="form-group">
+                        <label for="services-title">Section Title</label>
+                        <input type="text" id="services-title" name="services-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="services-subtitle">Section Subtitle</label>
+                        <textarea id="services-subtitle" name="services-subtitle" required></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="loadContent()">Load Current</button>
+                    </div>
+                </form>
+                <div id="services-status" class="status-message"></div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section-card">
+                <h3><span class="icon">ℹ️</span> About Section</h3>
+                <form id="aboutForm">
+                    <div class="form-group">
+                        <label for="about-title">Section Title</label>
+                        <input type="text" id="about-title" name="about-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-subtitle">Section Subtitle</label>
+                        <input type="text" id="about-subtitle" name="about-subtitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-story">Company Story</label>
+                        <textarea id="about-story" name="about-story" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-mission">Mission Statement</label>
+                        <textarea id="about-mission" name="about-mission" required></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="loadContent()">Load Current</button>
+                    </div>
+                </form>
+                <div id="about-status" class="status-message"></div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="section-card">
+                <h3><span class="icon">📞</span> Contact Section</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contact-title">Section Title</label>
+                        <input type="text" id="contact-title" name="contact-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subtitle">Section Subtitle</label>
+                        <textarea id="contact-subtitle" name="contact-subtitle" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-address">Address</label>
+                        <input type="text" id="contact-address" name="contact-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone">Phone</label>
+                        <input type="tel" id="contact-phone" name="contact-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-hours">Business Hours</label>
+                        <input type="text" id="contact-hours" name="contact-hours" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="loadContent()">Load Current</button>
+                    </div>
+                </form>
+                <div id="contact-status" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentContent = null;
+
+        // Load content on page load
+        document.addEventListener('DOMContentLoaded', loadContent);
+
+        async function loadContent() {
+            try {
+                const response = await fetch('/api/content');
+                currentContent = await response.json();
+                populateForms();
+            } catch (error) {
+                console.error('Error loading content:', error);
+                showStatus('Error loading content', 'error');
+            }
+        }
+
+        function populateForms() {
+            if (!currentContent) return;
+
+            // Home section
+            if (currentContent.home?.hero) {
+                document.getElementById('hero-title').value = currentContent.home.hero.title || '';
+                document.getElementById('hero-subtitle').value = currentContent.home.hero.subtitle || '';
+                document.getElementById('hero-cta').value = currentContent.home.hero.cta || '';
+            }
+
+            // Services section
+            if (currentContent.services) {
+                document.getElementById('services-title').value = currentContent.services.title || '';
+                document.getElementById('services-subtitle').value = currentContent.services.subtitle || '';
+            }
+
+            // About section
+            if (currentContent.about) {
+                document.getElementById('about-title').value = currentContent.about.title || '';
+                document.getElementById('about-subtitle').value = currentContent.about.subtitle || '';
+                document.getElementById('about-story').value = currentContent.about.story || '';
+                document.getElementById('about-mission').value = currentContent.about.mission || '';
+            }
+
+            // Contact section
+            if (currentContent.contact) {
+                document.getElementById('contact-title').value = currentContent.contact.title || '';
+                document.getElementById('contact-subtitle').value = currentContent.contact.subtitle || '';
+                if (currentContent.contact.info) {
+                    document.getElementById('contact-address').value = currentContent.contact.info.address || '';
+                    document.getElementById('contact-phone').value = currentContent.contact.info.phone || '';
+                    document.getElementById('contact-email').value = currentContent.contact.info.email || '';
+                    document.getElementById('contact-hours').value = currentContent.contact.info.hours || '';
+                }
+            }
+        }
+
+        // Form submission handlers
+        document.getElementById('homeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await updateSection('home', {
+                hero: {
+                    title: document.getElementById('hero-title').value,
+                    subtitle: document.getElementById('hero-subtitle').value,
+                    cta: document.getElementById('hero-cta').value
+                }
+            });
+        });
+
+        document.getElementById('servicesForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await updateSection('services', {
+                title: document.getElementById('services-title').value,
+                subtitle: document.getElementById('services-subtitle').value
+            });
+        });
+
+        document.getElementById('aboutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await updateSection('about', {
+                title: document.getElementById('about-title').value,
+                subtitle: document.getElementById('about-subtitle').value,
+                story: document.getElementById('about-story').value,
+                mission: document.getElementById('about-mission').value
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await updateSection('contact', {
+                title: document.getElementById('contact-title').value,
+                subtitle: document.getElementById('contact-subtitle').value,
+                info: {
+                    address: document.getElementById('contact-address').value,
+                    phone: document.getElementById('contact-phone').value,
+                    email: document.getElementById('contact-email').value,
+                    hours: document.getElementById('contact-hours').value
+                }
+            });
+        });
+
+        async function updateSection(section, data) {
+            const form = document.querySelector(`#${section}Form`);
+            const statusDiv = document.getElementById(`${section}-status`);
+            
+            // Show loading state
+            form.classList.add('loading');
+            
+            try {
+                const response = await fetch('/api/content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ section, data })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus(result.message, 'success', statusDiv);
+                    // Update current content
+                    if (!currentContent) currentContent = {};
+                    currentContent[section] = { ...currentContent[section], ...data };
+                } else {
+                    showStatus(result.message || 'Error updating content', 'error', statusDiv);
+                }
+            } catch (error) {
+                console.error('Error updating content:', error);
+                showStatus('Error updating content', 'error', statusDiv);
+            } finally {
+                form.classList.remove('loading');
+            }
+        }
+
+        function showStatus(message, type, element) {
+            if (!element) return;
+            
+            element.textContent = message;
+            element.className = `status-message ${type}`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html> 

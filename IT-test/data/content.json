@@ -1,0 +1,181 @@
+{
+  "home": {
+    "hero": {
+      "title": "Innovative IT Solutions for Modern Businesses",
+      "subtitle": "We help businesses transform their digital presence with cutting-edge technology solutions",
+      "cta": "Get Started"
+    },
+    "features": [
+      {
+        "title": "Web Development",
+        "description": "Custom websites and web applications built with modern technologies",
+        "icon": "💻"
+      },
+      {
+        "title": "Cloud Solutions",
+        "description": "Scalable cloud infrastructure and migration services",
+        "icon": "☁️"
+      },
+      {
+        "title": "Cybersecurity",
+        "description": "Comprehensive security solutions to protect your business",
+        "icon": "🔒"
+      },
+      {
+        "title": "IT Consulting",
+        "description": "Strategic technology consulting to drive business growth",
+        "icon": "📊"
+      }
+    ]
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive IT solutions tailored to your business needs",
+    "items": [
+      {
+        "title": "Web Development",
+        "description": "We create responsive, modern websites and web applications using the latest technologies. Our development process ensures fast, secure, and scalable solutions.",
+        "features": ["Responsive Design", "SEO Optimization", "Performance Optimization", "Security Best Practices"],
+        "icon": "💻"
+      },
+      {
+        "title": "Mobile App Development",
+        "description": "Native and cross-platform mobile applications for iOS and Android. We focus on user experience and performance.",
+        "features": ["iOS Development", "Android Development", "Cross-platform Solutions", "App Store Optimization"],
+        "icon": "📱"
+      },
+      {
+        "title": "Cloud Solutions",
+        "description": "Cloud infrastructure setup, migration, and management services. We help businesses leverage the power of cloud computing.",
+        "features": ["AWS/Azure/GCP", "Migration Services", "Cost Optimization", "24/7 Monitoring"],
+        "icon": "☁️"
+      },
+      {
+        "title": "Cybersecurity",
+        "description": "Comprehensive security solutions to protect your business from cyber threats and ensure compliance.",
+        "features": ["Security Audits", "Penetration Testing", "Compliance", "Incident Response"],
+        "icon": "🔒"
+      },
+      {
+        "title": "IT Consulting",
+        "description": "Strategic technology consulting to help businesses make informed decisions about their IT infrastructure.",
+        "features": ["Technology Assessment", "Digital Transformation", "Process Optimization", "Vendor Selection"],
+        "icon": "📊"
+      },
+      {
+        "title": "Data Analytics",
+        "description": "Turn your data into actionable insights with our advanced analytics and business intelligence solutions.",
+        "features": ["Data Visualization", "Predictive Analytics", "Business Intelligence", "Custom Dashboards"],
+        "icon": "📈"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your trusted technology partner since 2015",
+    "story": "Founded in 2015, we've been helping businesses of all sizes navigate the complex world of technology. Our team of experienced professionals is passionate about delivering innovative solutions that drive real business results.",
+    "mission": "To empower businesses with cutting-edge technology solutions that drive growth, efficiency, and competitive advantage.",
+    "values": [
+      {
+        "title": "Innovation",
+        "description": "We stay ahead of technology trends to provide the best solutions"
+      },
+      {
+        "title": "Quality",
+        "description": "We deliver excellence in every project we undertake"
+      },
+      {
+        "title": "Partnership",
+        "description": "We build long-term relationships with our clients"
+      },
+      {
+        "title": "Integrity",
+        "description": "We operate with honesty and transparency in all our dealings"
+      }
+    ],
+    "team": [
+      {
+        "name": "Sarah Johnson",
+        "position": "CEO & Founder",
+        "bio": "15+ years of experience in technology leadership and business strategy",
+        "image": "sarah.jpg"
+      },
+      {
+        "name": "Michael Chen",
+        "position": "CTO",
+        "bio": "Expert in cloud architecture and emerging technologies",
+        "image": "michael.jpg"
+      },
+      {
+        "name": "Emily Rodriguez",
+        "position": "Lead Developer",
+        "bio": "Full-stack developer with expertise in modern web technologies",
+        "image": "emily.jpg"
+      },
+      {
+        "name": "David Kim",
+        "position": "Security Specialist",
+        "bio": "Cybersecurity expert with certifications in ethical hacking",
+        "image": "david.jpg"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Showcasing our successful projects and client transformations",
+    "projects": [
+      {
+        "title": "E-Commerce Platform",
+        "description": "A modern e-commerce solution for a retail client, featuring advanced search, payment integration, and inventory management.",
+        "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+        "image": "ecommerce.jpg",
+        "category": "Web Development"
+      },
+      {
+        "title": "Healthcare Management System",
+        "description": "A comprehensive healthcare management system with patient records, appointment scheduling, and billing integration.",
+        "technologies": ["Vue.js", "Python", "PostgreSQL", "HIPAA Compliant"],
+        "image": "healthcare.jpg",
+        "category": "Enterprise Solutions"
+      },
+      {
+        "title": "FinTech Mobile App",
+        "description": "A secure mobile banking application with biometric authentication and real-time transaction monitoring.",
+        "technologies": ["React Native", "Firebase", "AWS", "Encryption"],
+        "image": "fintech.jpg",
+        "category": "Mobile Development"
+      },
+      {
+        "title": "Cloud Migration",
+        "description": "Successfully migrated a legacy system to AWS cloud infrastructure, reducing costs by 40% and improving performance.",
+        "technologies": ["AWS", "Docker", "Kubernetes", "CI/CD"],
+        "image": "cloud.jpg",
+        "category": "Cloud Solutions"
+      },
+      {
+        "title": "Cybersecurity Audit",
+        "description": "Comprehensive security assessment and implementation for a financial services company.",
+        "technologies": ["Penetration Testing", "Security Frameworks", "Compliance", "Monitoring"],
+        "image": "security.jpg",
+        "category": "Cybersecurity"
+      },
+      {
+        "title": "Data Analytics Dashboard",
+        "description": "Real-time analytics dashboard providing insights into business performance and customer behavior.",
+        "technologies": ["Power BI", "Python", "SQL", "Machine Learning"],
+        "image": "analytics.jpg",
+        "category": "Data Analytics"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to start your next project? Let's discuss how we can help.",
+    "info": {
+      "address": "123 Tech Street, Innovation District, City, State 12345",
+      "phone": "+1 (555) 123-4567",
+      "email": "hello@itbusiness.com",
+      "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
+    }
+  }
+} 
