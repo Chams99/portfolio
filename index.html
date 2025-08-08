@@ -1,29 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - Optimized loading -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9L8BX89T4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-D9L8BX89T4');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dhibi Chames Eddine - Full Stack Developer & Computer Science Student. Specializing in web development, mobile apps, and software engineering. View my portfolio of projects and get in touch.">
     <title>Dhibi Chames Eddine - Portfolio</title>
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical styles for hero section */
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #161616; color: #ECDBBA; }
+        .hero { min-height: 100vh; padding: 0 5%; display: flex; align-items: center; position: relative; overflow: hidden; }
+        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: row; width: 100%; max-width: 1400px; margin: 0 auto; align-items: center; justify-content: space-between; gap: 4rem; padding: 2rem 0; }
+        .hero-text { flex: 1; text-align: left; max-width: 600px; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; color: #ECDBBA; font-weight: 700; }
+        .typewriter { font-size: 1.8rem; color: #C84B31; margin-bottom: 1.5rem; min-height: 2.5rem; font-weight: 600; }
+        .hero-description { font-size: 1.1rem; margin-bottom: 2.5rem; color: rgba(236, 219, 186, 0.95); line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 1.5rem; }
+        .cta-button { padding: 1rem 2.5rem; font-size: 1rem; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .cta-button.primary { background-color: #346751; color: #ECDBBA; }
+        .cta-button.secondary { background-color: transparent; color: #ECDBBA; border: 2px solid #346751; }
+        .hero-image { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; max-width: 500px; }
+        .hero-image img, .hero-image picture { width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        @media (max-width: 1200px) { .hero-content { flex-direction: column; text-align: center; gap: 3rem; } .hero-text { max-width: 100%; } .hero-buttons { justify-content: center; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .typewriter { font-size: 1.5rem; } }
+        @media (max-width: 480px) { .hero h1 { font-size: 2.5rem; } .typewriter { font-size: 1.2rem; } .hero-buttons { flex-direction: column; } .cta-button { width: 100%; } }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="Images/optimized/chams-large.webp" as="image" type="image/webp">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- Load only essential GSAP core - defer non-critical plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <link rel="apple-touch-icon" sizes="180x180" href="fa/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="fa/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="fa/favicon-16x16.png">
-    <link rel="manifest" href="fa/site.webmanifest">
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" href="fa/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#346751">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chames Portfolio">
 </head>
 <body>
     <section class="hero">
@@ -41,7 +83,10 @@
             </div>
             <div class="hero-image">
                 <div class="hero-blob"></div>
-                <img src="Images/chams.jpg" alt="Dhibi Chames Eddine">
+                <picture>
+                    <source srcset="Images/optimized/chams-small.webp 500w, Images/optimized/chams-medium.webp 1000w, Images/optimized/chams-large.webp 1500w" type="image/webp">
+                    <img src="Images/optimized/chams-fallback.jpg" alt="Dhibi Chames Eddine" loading="eager">
+                </picture>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -53,343 +98,361 @@
     <section id="about">
         <div class="about-container">
             <div class="about-content">
-                <div class="about-text">
-                    <p class="about-intro">I'm a passionate Developer and Computer Science student.</p>
-                    <p class="about-description">Currently in my second year of Computer Science, I'm dedicated to mastering web and mobile apps development and software engineering. I combine my technical knowledge with creativity to build engaging sites and interactive applications.</p>
-                    <div class="personal-info">
-                        <div class="info-item">
-                            <span class="info-label">Name</span>
-                            <span class="info-value">Dhibi Chames Eddine</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Education</span>
-                            <span class="info-value">Computer Science (Last Year)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Location</span>
-                            <span class="info-value">Tunisia</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Focus</span>
-                            <span class="info-value">Web & Mobile Development</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="experience-card">
-                        <span class="experience-number">4+</span>
-                        <span class="experience-text">Years of Experience</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="skills-container">
-                <h3 class="skills-title">Technical Skills</h3>
-                
-                <!-- Programming Languages -->
-                <div class="skills-category">
-                    <h4 class="category-title">Programming Languages</h4>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                <!-- Left Column: Personal Info & Experience -->
+                <div class="about-left-column">
+                    <div class="about-text">
+                        <p class="about-intro">I'm a passionate Developer and Computer Science student.</p>
+                        <p class="about-description">Currently in my final year of Computer Science, I'm dedicated to mastering web and mobile apps development and software engineering. I combine my technical knowledge with creativity to build engaging sites and interactive applications.</p>
+                        <div class="personal-info">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value">Dhibi Chames Eddine</span>
                             </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">JavaScript</h5>
-                                <p class="skill-description">ES6+, DOM manipulation, Async/Await</p>
+                            <div class="info-item">
+                                <span class="info-label">Education</span>
+                                <span class="info-value">Computer Science (Last Year)</span>
                             </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Tunisia</span>
                             </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Python</h5>
-                                <p class="skill-description">OOP, Data structures, Tkinter GUI</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">C#</h5>
-                                <p class="skill-description">.NET Framework, Unity development</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">C</h5>
-                                <p class="skill-description">System programming, Memory management</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Java</h5>
-                                <p class="skill-description">OOP, Android development, Spring</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Dart</h5>
-                                <p class="skill-description">Flutter development, Mobile apps</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">HTML5</h5>
-                                <p class="skill-description">Semantic markup, Accessibility</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">CSS3</h5>
-                                <p class="skill-description">Flexbox, Grid, Animations</p>
+                            <div class="info-item">
+                                <span class="info-label">Focus</span>
+                                <span class="info-value">Web & Mobile Development</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Frameworks & Libraries -->
-                <div class="skills-category">
-                    <h4 class="category-title">Frameworks & Libraries</h4>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                    
+                    <!-- Education & Experience Section -->
+                    <div class="experience-section">
+                        <h2 class="experience-title">Education & Experience</h2>
+                        <div class="experience-container">
+                            <div class="experience-item">
+                                <div class="experience-icon">🎓</div>
+                                <div class="experience-content">
+                                    <h3>Software Engineering</h3>
+                                    <p class="experience-place">Faculty of Science Gafsa</p>
+                                    <p class="experience-duration">Last Year Student</p>
+                                    <p class="experience-description">Currently pursuing a degree in Software Engineering, developing skills in programming, software design, and development methodologies.</p>
+                                </div>
                             </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Node.js</h5>
-                                <p class="skill-description">Server-side development, NPM</p>
+                            
+                            <div class="experience-item">
+                                <div class="experience-icon">🖥️</div>
+                                <div class="experience-content">
+                                    <h3>Full Stack Python Developer Training</h3>
+                                    <p class="experience-place">Go My Code</p>
+                                    <p class="experience-description">Completed intensive training in full stack development using Python, covering web frameworks, databases, and modern development practices.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js">
+                            
+                            <div class="experience-item">
+                                <div class="experience-icon">📚</div>
+                                <div class="experience-content">
+                                    <h3>Baccalauria in Mathematics</h3>
+                                    <p class="experience-place">Houssen Bouzayen Gafsa</p>
+                                    <p class="experience-description">Developed strong analytical and problem-solving skills through rigorous mathematical education.</p>
+                                </div>
                             </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Express.js</h5>
-                                <p class="skill-description">Web framework, REST APIs</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt=".NET">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">.NET</h5>
-                                <p class="skill-description">Framework, C# development</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Flutter</h5>
-                                <p class="skill-description">Cross-platform mobile development</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">React Native</h5>
-                                <p class="skill-description">Mobile app development, JavaScript</p>
+                            
+                            <div class="experience-item">
+                                <div class="experience-icon">🌍</div>
+                                <div class="experience-content">
+                                    <h3>TOEFL iBT Score</h3>
+                                    <p class="experience-place">84/120</p>
+                                    <p class="experience-duration">January 24, 2025</p>
+                                    <p class="experience-description">Achieved a strong TOEFL score demonstrating advanced English proficiency for academic and professional communication.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Tailwind CSS</h5>
-                                <p class="skill-description">Utility-first CSS framework</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="GSAP">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">GSAP</h5>
-                                <p class="skill-description">Advanced animations, ScrollTrigger</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tools & Technologies -->
-                <div class="skills-category">
-                    <h4 class="category-title">Tools & Technologies</h4>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Git</h5>
-                                <p class="skill-description">Version control, GitHub</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">VS Code</h5>
-                                <p class="skill-description">Code editor, Extensions</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Figma</h5>
-                                <p class="skill-description">UI/UX design, Prototyping</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Unity</h5>
-                                <p class="skill-description">Game development, C#</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="XAMPP">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">XAMPP</h5>
-                                <p class="skill-description">Local development environment</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Databases & Cloud -->
-                <div class="skills-category">
-                    <h4 class="category-title">Databases & Cloud</h4>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">MySQL</h5>
-                                <p class="skill-description">Relational database, SQL queries</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">PostgreSQL</h5>
-                                <p class="skill-description">Advanced SQL database, ACID compliance</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">MongoDB</h5>
-                                <p class="skill-description">NoSQL database, CRUD operations</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Firebase</h5>
-                                <p class="skill-description">Backend services, Authentication</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" alt="Netlify">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Netlify</h5>
-                                <p class="skill-description">Deployment, Hosting</p>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" alt="Heroku">
-                            </div>
-                            <div class="skill-info">
-                                <h5 class="skill-name">Heroku</h5>
-                                <p class="skill-description">Cloud platform, App deployment</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Education & Experience</h2>
-            <div class="experience-container">
-                <div class="experience-item">
-                    <div class="experience-icon">🎓</div>
-                    <div class="experience-content">
-                        <h3>Software Engineering</h3>
-                        <p class="experience-place">Faculty of Science Gafsa</p>
-                        <p class="experience-duration">Last Year Student</p>
-                        <p class="experience-description">Currently pursuing a degree in Software Engineering, developing skills in programming, software design, and development methodologies.</p>
                     </div>
                 </div>
                 
-                <div class="experience-item">
-                    <div class="experience-icon">🖥️</div>
-                    <div class="experience-content">
-                        <h3>Full Stack Python Developer Training</h3>
-                        <p class="experience-place">Go My Code</p>
-                        <p class="experience-description">Completed intensive training in full stack development using Python, covering web frameworks, databases, and modern development practices.</p>
-                    </div>
-                </div>
-                
-                <div class="experience-item">
-                    <div class="experience-icon">📚</div>
-                    <div class="experience-content">
-                        <h3>Baccalauria in Mathematics</h3>
-                        <p class="experience-place">Houssen Bouzayen Gafsa</p>
-                        <p class="experience-description">Developed strong analytical and problem-solving skills through rigorous mathematical education.</p>
-                    </div>
-                </div>
-                
-                <div class="experience-item">
-                    <div class="experience-icon">🌍</div>
-                    <div class="experience-content">
-                        <h3>TOEFL iBT Score</h3>
-                        <p class="experience-place">84/120</p>
-                        <p class="experience-duration">January 24, 2025</p>
-                        <p class="experience-description">Achieved a strong TOEFL score demonstrating advanced English proficiency for academic and professional communication.</p>
+                <!-- Right Column: Technical Skills -->
+                <div class="about-right-column">
+                    <div class="skills-container">
+                        <h3 class="skills-title">Technical Skills</h3>
+                        
+                        <!-- Programming Languages -->
+                        <div class="skills-category">
+                            <h4 class="category-title">Programming Languages</h4>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">JavaScript</h5>
+                                        <p class="skill-description">ES6+, DOM manipulation, Async/Await</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Python</h5>
+                                        <p class="skill-description">OOP, Data structures, Tkinter GUI</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">C#</h5>
+                                        <p class="skill-description">.NET Framework, Unity development</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">C</h5>
+                                        <p class="skill-description">System programming, Memory management</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Java</h5>
+                                        <p class="skill-description">OOP, Android development, Spring</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Dart</h5>
+                                        <p class="skill-description">Flutter development, Mobile apps</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">HTML5</h5>
+                                        <p class="skill-description">Semantic markup, Accessibility</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">CSS3</h5>
+                                        <p class="skill-description">Flexbox, Grid, Animations</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Frameworks & Libraries -->
+                        <div class="skills-category">
+                            <h4 class="category-title">Frameworks & Libraries</h4>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Next.js</h5>
+                                        <p class="skill-description">React framework, SSR, Performance</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">React</h5>
+                                        <p class="skill-description">Component-based UI library</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">TypeScript</h5>
+                                        <p class="skill-description">Typed JavaScript, Better DX</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Node.js</h5>
+                                        <p class="skill-description">Server-side development, NPM</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Express.js</h5>
+                                        <p class="skill-description">Web framework, REST APIs</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Tailwind CSS</h5>
+                                        <p class="skill-description">Utility-first CSS framework</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="GSAP">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">GSAP</h5>
+                                        <p class="skill-description">Advanced animations, ScrollTrigger</p>
+                                    </div>
+                                </div>
+
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt=".NET">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">.NET</h5>
+                                        <p class="skill-description">Framework, C# development</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Flutter</h5>
+                                        <p class="skill-description">Cross-platform mobile development</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tools & Technologies -->
+                        <div class="skills-category">
+                            <h4 class="category-title">Tools & Technologies</h4>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Git</h5>
+                                        <p class="skill-description">Version control, GitHub</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">VS Code</h5>
+                                        <p class="skill-description">Code editor, Extensions</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Figma</h5>
+                                        <p class="skill-description">UI/UX design, Prototyping</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Unity</h5>
+                                        <p class="skill-description">Game development, C#</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="XAMPP">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">XAMPP</h5>
+                                        <p class="skill-description">Local development environment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Databases & Cloud -->
+                        <div class="skills-category">
+                            <h4 class="category-title">Databases & Cloud</h4>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">MySQL</h5>
+                                        <p class="skill-description">Relational database, SQL queries</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">PostgreSQL</h5>
+                                        <p class="skill-description">Advanced SQL database, ACID compliance</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">MongoDB</h5>
+                                        <p class="skill-description">NoSQL database, CRUD operations</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Firebase</h5>
+                                        <p class="skill-description">Backend services, Authentication</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" alt="Netlify">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Netlify</h5>
+                                        <p class="skill-description">Deployment, Hosting</p>
+                                    </div>
+                                </div>
+                                <div class="skill-card">
+                                    <div class="skill-logo">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" alt="Heroku">
+                                    </div>
+                                    <div class="skill-info">
+                                        <h5 class="skill-name">Heroku</h5>
+                                        <p class="skill-description">Cloud platform, App deployment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -514,8 +577,24 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Load non-critical scripts with proper deferring -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="script.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
 
