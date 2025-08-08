@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Test - IT Business</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .css-status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .css-working {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .css-not-working {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>CSS Test Page</h1>
+        
+        <div class="test-section">
+            <h2>CSS Loading Test</h2>
+            <div id="css-status" class="css-status">
+                Checking CSS...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Navigation Test</h2>
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                        <a href="#home">IT Business</a>
+                    </div>
+                    <div class="nav-menu">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#services" class="nav-link">Services</a>
+                        <a href="#about" class="nav-link">About</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="test-section">
+            <h2>Button Test</h2>
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn">Secondary Button</button>
+        </div>
+
+        <div class="test-section">
+            <h2>Card Test</h2>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3 class="feature-title">Web Development</h3>
+                <p class="feature-description">Custom websites and web applications built with modern technologies</p>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Form Test</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="test-name">Name</label>
+                    <input type="text" id="test-name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="test-email">Email</label>
+                    <input type="email" id="test-email" name="email">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Test if CSS is loaded
+        function checkCSS() {
+            const testElement = document.createElement('div');
+            testElement.className = 'btn btn-primary';
+            testElement.style.display = 'none';
+            document.body.appendChild(testElement);
+            
+            const computedStyle = window.getComputedStyle(testElement);
+            const backgroundColor = computedStyle.backgroundColor;
+            
+            // Check if the CSS is applied (should have a blue background)
+            if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)' && backgroundColor !== 'transparent') {
+                document.getElementById('css-status').className = 'css-status css-working';
+                document.getElementById('css-status').textContent = '✅ CSS is working correctly!';
+            } else {
+                document.getElementById('css-status').className = 'css-status css-not-working';
+                document.getElementById('css-status').textContent = '❌ CSS is not loading properly. Check the file path.';
+            }
+            
+            document.body.removeChild(testElement);
+        }
+
+        // Run the test when page loads
+        window.addEventListener('load', checkCSS);
+    </script>
+</body>
+</html> 
