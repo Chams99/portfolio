@@ -210,7 +210,7 @@ const projects = [
     { 
         title: 'Epic Chicken Adventure - Next.js', 
         description: 'A modern Next.js application featuring the Epic Chicken Adventure game with enhanced UI, responsive design, and professional styling. Built with React, Tailwind CSS, and modern web technologies.', 
-        category: 'web',
+        category: ['web', 'game'],
         image: 'Images/optimized/chicken-small.webp',
         imageSrcSet: 'Images/optimized/chicken-small.webp 486w, Images/optimized/chicken-medium.webp 972w, Images/optimized/chicken-large.webp 1458w',
         imageFallback: 'Images/optimized/chicken-fallback.jpg',
@@ -339,7 +339,13 @@ function initializePortfolio() {
             // Filter projects based on category
             const filteredProjects = filterValue === 'all' 
                 ? projects 
-                : projects.filter(project => project.category === filterValue);
+                : projects.filter(project => {
+                    // Handle both string and array categories
+                    if (Array.isArray(project.category)) {
+                        return project.category.includes(filterValue);
+                    }
+                    return project.category === filterValue;
+                });
 
             // Create and animate filtered items
             createPortfolioItems(filteredProjects);
