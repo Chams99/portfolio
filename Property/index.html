@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Investment - Premium Investment Opportunities</title>
+    <meta name="description" content="Discover exclusive property investment opportunities with proven returns. Download our comprehensive investment guide today.">
+    <meta name="keywords" content="property investment, real estate, Manchester properties, investment opportunities">
+    <meta name="author" content="Property Investment">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ukpropertyinvestment.com/">
+    <meta property="og:title" content="Property Investment - Premium Investment Opportunities">
+    <meta property="og:description" content="Discover exclusive property investment opportunities with proven returns of 8-12% annually.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ukpropertyinvestment.com/">
+    <meta property="twitter:title" content="Property Investment - Premium Investment Opportunities">
+    <meta property="twitter:description" content="Discover exclusive property investment opportunities with proven returns of 8-12% annually.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Popup Gate Modal -->
+    <div id="popupGate" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div class="popup-logo">
+                    <i class="fas fa-building"></i>
+                    <span>Property Investment</span>
+                </div>
+                <h2>Unlock Exclusive Investment Opportunities</h2>
+                <p>Join over 500 successful investors and access our premium property portfolio with proven returns of 8-12% annually.</p>
+            </div>
+            <form id="gateForm" class="gate-form">
+                <div class="form-group">
+                    <label for="gateFirstName">First Name *</label>
+                    <input type="text" id="gateFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateLastName">Last Name *</label>
+                    <input type="text" id="gateLastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateEmail">Email Address *</label>
+                    <input type="email" id="gateEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="gatePhone">Phone Number *</label>
+                    <input type="tel" id="gatePhone" name="phone" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="gatePrivacy" name="privacy" required>
+                    <label for="gatePrivacy">I agree to the <a href="#" class="privacy-link">Privacy Policy</a> and <a href="#" class="privacy-link">Terms of Service</a> *</label>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-unlock"></i>
+                    Access Investment Guide
+                </button>
+            </form>
+            <div class="popup-footer">
+                <p><i class="fas fa-shield-alt"></i> Your data is secure and will never be shared</p>
+            </div>
+        </div>
+    </div>
+
+            <!-- Main Landing Page -->
+        <div id="mainContent" class="main-content" style="display: none;">
+            <!-- Open Investment Guide Button -->
+            <button onclick="openInvestmentGuide()" class="open-guide-btn" title="Open Investment Guide">
+                <i class="fas fa-book"></i>
+                <span>Open Investment Guide</span>
+            </button>
+        
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-building"></i>
+                    <div class="logo-text">Property Investment</div>
+                </div>
+                <div class="nav-menu">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#why-invest" class="nav-link">Why Invest</a>
+                    <a href="#properties" class="nav-link">Properties</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#testimonials" class="nav-link">Reviews</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="nav-cta">
+                    <button class="btn btn-outline" onclick="openBookCallForm()">Book a Call</button>
+                </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-background">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=1080&fit=crop&crop=center" alt="Modern property development" loading="lazy">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-text">
+                        <div class="hero-badge">
+                            <i class="fas fa-star"></i>
+                            <span>Trusted by 500+ Investors</span>
+                        </div>
+                        <h1 class="hero-title">Premium Property Investment Opportunities</h1>
+                        <p class="hero-subtitle">Discover exclusive investment properties with proven returns of 8-12% annually. Join our growing community of successful investors building wealth through strategic real estate.</p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number">£2.5M+</span>
+                                <span class="stat-label">Total Portfolio Value</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">11.2%</span>
+                                <span class="stat-label">Average Annual Returns</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Happy Investors</span>
+                            </div>
+                        </div>
+                        <div class="hero-cta">
+                            <button class="btn btn-primary btn-large" onclick="openDownloadForm()">
+                                <i class="fas fa-download"></i>
+                                Download Investment Guide
+                            </button>
+                            <button class="btn btn-secondary btn-large" onclick="openBookCallForm()">
+                                <i class="fas fa-phone"></i>
+                                Book Free Consultation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Strip -->
+        <section class="trust-strip">
+            <div class="container">
+                <div class="trust-logos">
+                    <div class="trust-logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>FCA Regulated</span>
+                    </div>
+                    <div class="trust-logo">
+                        <i class="fas fa-award"></i>
+                        <span>5-Star Rated</span>
+                    </div>
+                    <div class="trust-logo">
+                        <i class="fas fa-star"></i>
+                        <span>Premium Properties</span>
+                    </div>
+                    <div class="trust-logo">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified Returns</span>
+                    </div>
+                    <div class="trust-logo">
+                        <i class="fas fa-gem"></i>
+                        <span>Exclusive Access</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Brochure Form Modal -->
+        <div id="downloadModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Download Your Investment Guide</h3>
+                    <button class="modal-close" onclick="closeDownloadForm()">&times;</button>
+                </div>
+                <form id="downloadForm" class="download-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="investmentAmount">Investment Budget *</label>
+                        <select id="investmentAmount" name="investmentAmount" required>
+                            <option value="">Select your budget</option>
+                            <option value="25k-50k">£25,000 - £50,000</option>
+                            <option value="50k-100k">£50,000 - £100,000</option>
+                            <option value="100k-250k">£100,000 - £250,000</option>
+                            <option value="250k-500k">£250,000 - £500,000</option>
+                            <option value="500k+">£500,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">I agree to the <a href="#" class="privacy-link">Privacy Policy</a> and <a href="#" class="privacy-link">Terms of Service</a> *</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-download"></i>
+                        Download Investment Guide
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Book Call Modal -->
+        <div id="bookCallModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Book Your Free Consultation</h3>
+                    <button class="modal-close" onclick="closeBookCallForm()">&times;</button>
+                </div>
+                <form id="bookCallForm" class="download-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="callFirstName">First Name *</label>
+                            <input type="text" id="callFirstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="callLastName">Last Name *</label>
+                            <input type="text" id="callLastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="callEmail">Email Address *</label>
+                        <input type="email" id="callEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="callPhone">Phone Number *</label>
+                        <input type="tel" id="callPhone" name="phone" required>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="callDate">Preferred Date *</label>
+                        <input type="date" id="callDate" name="preferredDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="callTime">Preferred Time *</label>
+                        <select id="callTime" name="preferredTime" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="callMessage">Investment Goals (Optional)</label>
+                        <textarea id="callMessage" name="message" rows="3" placeholder="Tell us about your investment goals and experience level..."></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="callPrivacy" name="privacy" required>
+                        <label for="callPrivacy">I agree to the <a href="#" class="privacy-link">Privacy Policy</a> and <a href="#" class="privacy-link">Terms of Service</a> *</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-calendar-check"></i>
+                        Book Free Consultation
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Portfolio Modal -->
+        <div id="portfolioModal" class="modal-overlay">
+            <div class="modal-content portfolio-modal">
+                <div class="modal-header">
+                    <h3>Complete Investment Portfolio</h3>
+                    <button class="modal-close" onclick="closePortfolioModal()">&times;</button>
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Properties</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-pound-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">£2.5M+</div>
+                                <div class="stat-label">Portfolio Value</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">11.2%</div>
+                                <div class="stat-label">Avg. Returns</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Investors</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-filters">
+                        <button class="filter-btn active" data-filter="all">All Properties</button>
+                        <button class="filter-btn" data-filter="manchester">Manchester</button>
+                        <button class="filter-btn" data-filter="birmingham">Birmingham</button>
+                        <button class="filter-btn" data-filter="leeds">Leeds</button>
+                        <button class="filter-btn" data-filter="london">London</button>
+                    </div>
+                    
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item" data-location="manchester">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Manchester City Centre Apartments" loading="lazy">
+                                <div class="portfolio-badge">Available</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>Manchester City Centre Apartments</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Manchester, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£250,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">7.2%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">2-Bed Apartment</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Luxury 2-bedroom apartments in the heart of Manchester's business district. Excellent transport links and amenities.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-location="birmingham">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop" alt="Birmingham Student Accommodation" loading="lazy">
+                                <div class="portfolio-badge">Popular</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>Birmingham Student Accommodation</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Birmingham, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£180,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">8.5%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">Studio</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Purpose-built student accommodation near major universities. High demand and consistent occupancy rates.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-location="leeds">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop" alt="Leeds Residential Development" loading="lazy">
+                                <div class="portfolio-badge">Limited</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>Leeds Residential Development</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Leeds, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£320,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">6.8%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">3-Bed House</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Family homes in a growing residential area with excellent transport links and local amenities.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-location="london">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop" alt="London Docklands Apartments" loading="lazy">
+                                <div class="portfolio-badge">Premium</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>London Docklands Apartments</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> London, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£450,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">5.2%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">1-Bed Apartment</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Premium apartments in London's thriving Docklands area. Excellent capital growth potential.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-location="manchester">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Manchester Media City" loading="lazy">
+                                <div class="portfolio-badge">New</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>Manchester Media City</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Manchester, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£280,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">7.8%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">2-Bed Apartment</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Modern apartments in Manchester's Media City. Close to BBC and major tech companies.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-location="birmingham">
+                            <div class="portfolio-image">
+                                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop" alt="Birmingham Business District" loading="lazy">
+                                <div class="portfolio-badge">Exclusive</div>
+                            </div>
+                            <div class="portfolio-details">
+                                <h4>Birmingham Business District</h4>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Birmingham, UK</p>
+                                <div class="portfolio-metrics">
+                                    <div class="metric">
+                                        <span class="label">Price</span>
+                                        <span class="value">£220,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Yield</span>
+                                        <span class="value">8.2%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Type</span>
+                                        <span class="value">1-Bed Apartment</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description">
+                                    <p>Executive apartments in Birmingham's business district. Perfect for professionals and investors.</p>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-outline btn-small">View Details</button>
+                                    <button class="btn btn-primary btn-small">Invest Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-cta">
+                        <p>Ready to start your investment journey? Our team is here to help you choose the perfect property.</p>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary" onclick="openBookCallForm()">
+                                <i class="fas fa-phone"></i>
+                                Book Free Consultation
+                            </button>
+                            <button class="btn btn-secondary" onclick="openDownloadForm()">
+                                <i class="fas fa-download"></i>
+                                Download Portfolio Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Invest Section -->
+        <section id="why-invest" class="why-invest">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Invest with Us?</h2>
+                    <p>Join hundreds of successful investors who trust our proven investment strategy and benefit from our expertise in the property market.</p>
+                </div>
+                <div class="case-study">
+                    <div class="case-study-content">
+                        <div class="case-study-badge">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Success Story</span>
+                        </div>
+                        <h3>Manchester Residential Portfolio: 5-Year Performance</h3>
+                        <p>Our flagship Manchester portfolio has delivered exceptional returns, outperforming the market average by 3.2%. With properties strategically located in high-growth areas, we've achieved consistent rental yields and capital appreciation.</p>
+                        <div class="metrics">
+                            <div class="metric">
+                                <div class="metric-value">11.2%</div>
+                                <div class="metric-label">Annual Returns</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">6.8%</div>
+                                <div class="metric-label">Rental Yield</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">4.4%</div>
+                                <div class="metric-label">Capital Growth</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">500+</div>
+                                <div class="metric-label">Happy Investors</div>
+                            </div>
+                        </div>
+                        <div class="case-study-cta">
+                            <button class="btn btn-primary" onclick="openPortfolioModal()">
+                                <i class="fas fa-download"></i>
+                                View Full Portfolio
+                            </button>
+                        </div>
+                    </div>
+                    <div class="case-study-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop" alt="Manchester property development" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Manchester, UK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Properties Section -->
+        <section id="properties" class="properties">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Investment Properties</h2>
+                    <p>Explore our curated selection of premium properties with proven investment potential</p>
+                </div>
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Modern apartment complex" loading="lazy">
+                            <div class="property-badge">New</div>
+                        </div>
+                        <div class="property-content">
+                            <h3>Manchester City Centre Apartments</h3>
+                            <p>Luxury 2-bedroom apartments in the heart of Manchester's business district</p>
+                            <div class="property-details">
+                                <div class="detail">
+                                    <i class="fas fa-pound-sign"></i>
+                                    <span>From £250,000</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-percentage"></i>
+                                    <span>7.2% Yield</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Ready Q2 2025</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-full">View Details</button>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop" alt="Student accommodation" loading="lazy">
+                            <div class="property-badge">Popular</div>
+                        </div>
+                        <div class="property-content">
+                            <h3>Birmingham Student Accommodation</h3>
+                            <p>Purpose-built student accommodation near major universities</p>
+                            <div class="property-details">
+                                <div class="detail">
+                                    <i class="fas fa-pound-sign"></i>
+                                    <span>From £180,000</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-percentage"></i>
+                                    <span>8.5% Yield</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Ready Q1 2025</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-full">View Details</button>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop" alt="Residential development" loading="lazy">
+                            <div class="property-badge">Limited</div>
+                        </div>
+                        <div class="property-content">
+                            <h3>Leeds Residential Development</h3>
+                            <p>Family homes in a growing residential area with excellent transport links</p>
+                            <div class="property-details">
+                                <div class="detail">
+                                    <i class="fas fa-pound-sign"></i>
+                                    <span>From £320,000</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-percentage"></i>
+                                    <span>6.8% Yield</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Ready Q3 2025</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-full">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Simple 3-step process to start your investment journey with us</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>1. Discover Opportunities</h3>
+                        <p>Browse our curated selection of premium UK properties with detailed analysis, market insights, and projected returns.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>2. Book Consultation</h3>
+                        <p>Schedule a free consultation with our investment specialists to discuss your goals and find the perfect property match.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>3. Start Investing</h3>
+                        <p>Complete your investment and start earning returns from day one with our fully managed property portfolio service.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Investors Say</h2>
+                    <p>Real testimonials from successful property investors who have built wealth with us</p>
+                </div>
+                <div class="testimonials-slider">
+                    <div class="testimonial active" data-index="0">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Outstanding investment opportunities with transparent returns. I've seen 12% annual returns on my Manchester portfolio. The team is professional and the properties are well-maintained. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Sarah Johnson" loading="lazy">
+                            <div class="author-info">
+                            <strong>Sarah Johnson</strong>
+                            <span>Property Investor, London</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-progress">
+                            <div class="testimonial-progress-bar active"></div>
+                        </div>
+                    </div>
+                    <div class="testimonial" data-index="1">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Professional service from start to finish. The team helped me build a diversified portfolio that's generating consistent monthly income. Their market knowledge is exceptional and they truly care about their investors."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Michael Chen" loading="lazy">
+                            <div class="author-info">
+                            <strong>Michael Chen</strong>
+                            <span>Retired Professional, Birmingham</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-progress">
+                            <div class="testimonial-progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="testimonial" data-index="2">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Best investment decision I've made. The properties are well-maintained and the returns exceed my expectations. The team is responsive and always available to answer questions. Great investment partner!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=60&h=60&fit=crop&crop=face" alt="Emma Thompson" loading="lazy">
+                            <div class="author-info">
+                            <strong>Emma Thompson</strong>
+                            <span>Business Owner, Manchester</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-progress">
+                            <div class="testimonial-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Ready to Start Your Investment Journey?</h2>
+                        <p>Join hundreds of successful investors and start building your property portfolio today. Our team is ready to help you achieve your financial goals.</p>
+                        <div class="contact-stats">
+                            <div class="contact-stat">
+                                <i class="fas fa-users"></i>
+                                <span>500+ Active Investors</span>
+                            </div>
+                            <div class="contact-stat">
+                                <i class="fas fa-chart-line"></i>
+                                <span>11.2% Average Returns</span>
+                            </div>
+                            <div class="contact-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 Support</span>
+                            </div>
+                        </div>
+                        <div class="contact-cta">
+                            <button class="btn btn-primary btn-large" onclick="openDownloadForm()">
+                                <i class="fas fa-download"></i>
+                                Download Investment Guide
+                            </button>
+                            <button class="btn btn-secondary btn-large" onclick="openBookCallForm()">
+                                <i class="fas fa-phone"></i>
+                                Book Free Consultation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                                        <div class="footer-logo">
+                        <i class="fas fa-building"></i>
+                        <div class="logo-text">Property Investment</div>
+                    </div>
+                    <p>Your trusted partner for premium property investments with proven returns and exceptional service.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#hero">Home</a></li>
+                            <li><a href="#why-invest">Why Invest</a></li>
+                            <li><a href="#properties">Properties</a></li>
+                            <li><a href="#how-it-works">How It Works</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Investment Guide</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contact Info</h4>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> +44 (0) 20 1234 5678</p>
+                            <p><i class="fas fa-envelope"></i> info@ukpropertyinvestment.com</p>
+                            <p><i class="fas fa-map-marker-alt"></i> London, United Kingdom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Property Investment. All rights reserved. | FCA Regulated</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Investment Guide Modal -->
+    <div id="investmentGuideModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-book"></i> Property Investment Guide</h2>
+                <button onclick="closeInvestmentGuide()" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="guide-content">
+                <div class="guide-section">
+                    <h3><i class="fas fa-chart-line"></i> Why Invest in Property?</h3>
+                    <p>The property market offers exceptional opportunities for investors seeking stable, long-term returns. With strong rental demand, capital appreciation potential, and favorable tax incentives, property investment remains one of the most reliable wealth-building strategies.</p>
+                    <ul>
+                        <li><strong>Stable Returns:</strong> Average rental yields of 5-8% annually</li>
+                        <li><strong>Capital Growth:</strong> Historical appreciation of 3-5% per year</li>
+                        <li><strong>Tax Benefits:</strong> Deductible expenses and favorable tax treatment</li>
+                        <li><strong>Diversification:</strong> Hedge against inflation and market volatility</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Top Investment Locations</h3>
+                    <div class="location-grid">
+                        <div class="location-card">
+                            <h4>Manchester</h4>
+                            <p>Strong rental demand, excellent transport links, and growing tech sector</p>
+                            <div class="location-stats">
+                                <span><i class="fas fa-percentage"></i> 7.2% Yield</span>
+                                <span><i class="fas fa-pound-sign"></i> From £180k</span>
+                            </div>
+                        </div>
+                        <div class="location-card">
+                            <h4>Birmingham</h4>
+                            <p>Major business hub with high student population and regeneration projects</p>
+                            <div class="location-stats">
+                                <span><i class="fas fa-percentage"></i> 8.5% Yield</span>
+                                <span><i class="fas fa-pound-sign"></i> From £160k</span>
+                            </div>
+                        </div>
+                        <div class="location-card">
+                            <h4>Leeds</h4>
+                            <p>Thriving financial district with excellent infrastructure and amenities</p>
+                            <div class="location-stats">
+                                <span><i class="fas fa-percentage"></i> 6.8% Yield</span>
+                                <span><i class="fas fa-pound-sign"></i> From £200k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-calculator"></i> Investment Calculator</h3>
+                    <div class="calculator">
+                        <div class="calc-input">
+                            <label>Property Value (£)</label>
+                            <input type="number" id="propertyValue" placeholder="250,000" value="250000">
+                        </div>
+                        <div class="calc-input">
+                            <label>Monthly Rent (£)</label>
+                            <input type="number" id="monthlyRent" placeholder="1,500" value="1500">
+                        </div>
+                        <div class="calc-result">
+                            <div class="result-item">
+                                <span>Annual Yield:</span>
+                                <strong id="annualYield">7.2%</strong>
+                            </div>
+                            <div class="result-item">
+                                <span>Annual Income:</span>
+                                <strong id="annualIncome">£18,000</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-handshake"></i> Next Steps</h3>
+                    <p>Ready to start your investment journey? Our team of experts is here to help you every step of the way.</p>
+                    <div class="guide-cta">
+                        <button class="btn btn-primary" onclick="closeInvestmentGuide(); openDownloadForm();">
+                            <i class="fas fa-download"></i>
+                            Download Full Guide
+                        </button>
+                        <button class="btn btn-outline" onclick="closeInvestmentGuide(); openBookCallForm();">
+                            <i class="fas fa-calendar"></i>
+                            Book Free Consultation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 

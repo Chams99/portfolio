@@ -174,6 +174,27 @@ const projects = [
         tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
     },
     { 
+        title: 'Property Investment - Premium Investment Opportunities', 
+        description: 'A comprehensive property investment platform showcasing exclusive investment opportunities with proven returns of 8-12% annually. Features lead generation forms, investment guides, and professional property listings.', 
+        category: 'web',
+        image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=486&h=324&fit=crop&crop=center',
+        imageSrcSet: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=486&h=324&fit=crop&crop=center 486w, https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=972&h=648&fit=crop&crop=center 972w, https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1458&h=972&fit=crop&crop=center 1458w',
+        imageFallback: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=486&h=324&fit=crop&crop=center',
+        github: 'https://github.com/Chams99/portfolio/tree/main/Property',
+        demo: 'Property/',
+        features: [
+            '🏠 Premium Property Listings',
+            '📊 Investment Analytics Dashboard',
+            '📝 Lead Generation Forms',
+            '📱 Fully Responsive Design',
+            '🎨 Modern Professional UI',
+            '📈 ROI Calculator',
+            '📞 Consultation Booking System',
+            '📋 Investment Guide Downloads'
+        ],
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'Property Investment', 'Real Estate', 'Lead Generation', 'Professional']
+    },
+    { 
         title: 'E-commerce website DEMO', 
         description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
         category: 'web',
