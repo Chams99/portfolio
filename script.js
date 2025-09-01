@@ -1,22 +1,132 @@
-// Performance monitoring - Only run in development
+// Performance monitoring and optimization - Only run in development
 if ('performance' in window && window.location.hostname === 'localhost') {
     window.addEventListener('load', () => {
         setTimeout(() => {
             const perfData = performance.getEntriesByType('navigation')[0];
             const paintMetrics = performance.getEntriesByType('paint');
-            
-            console.log('Performance Metrics:');
+
+            console.log('🚀 Performance Metrics:');
             console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
             console.log('Load Complete:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
             console.log('Total Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-            
+
             if (paintMetrics.length > 0) {
                 console.log('First Paint:', paintMetrics.find(p => p.name === 'first-paint')?.startTime, 'ms');
                 console.log('First Contentful Paint:', paintMetrics.find(p => p.name === 'first-contentful-paint')?.startTime, 'ms');
             }
+
+            // Performance optimization suggestions
+            if (perfData.loadEventEnd - perfData.fetchStart > 3000) {
+                console.warn('⚠️ Slow load time detected. Consider optimizing images and reducing JavaScript bundle size.');
+            }
         }, 0);
     });
 }
+
+// Performance optimizations
+function optimizePerformance() {
+    // Debounce scroll events
+    let scrollTimeout;
+    const debounceScroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // Throttled scroll handling
+            ensureContactVisibility();
+        }, 16); // ~60fps
+    };
+
+    // Use passive listeners for better scroll performance
+    window.addEventListener('scroll', debounceScroll, { passive: true });
+
+    // Preload critical images
+    const preloadImages = [
+        'Images/optimized/chams-large.webp',
+        'Images/optimized/energy-large.webp',
+        'Images/optimized/Fitness-large.webp'
+    ];
+
+    preloadImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    // Optimize Intersection Observer
+    const observerConfig = {
+        threshold: 0.1,
+        rootMargin: '50px 0px'
+    };
+
+    // Implement virtual scrolling for large lists if needed
+    // For now, we'll use efficient DOM manipulation
+}
+
+// Accessibility enhancements
+function enhanceAccessibility() {
+    // Add ARIA labels and roles
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (portfolioGrid) {
+        portfolioGrid.setAttribute('role', 'main');
+        portfolioGrid.setAttribute('aria-label', 'Portfolio projects grid');
+    }
+
+    // Improve keyboard navigation
+    const focusableElements = document.querySelectorAll('button, a, input, textarea');
+    focusableElements.forEach(element => {
+        element.addEventListener('focus', () => {
+            element.style.outline = '2px solid var(--green)';
+            element.style.outlineOffset = '2px';
+        });
+
+        element.addEventListener('blur', () => {
+            element.style.outline = '';
+            element.style.outlineOffset = '';
+        });
+    });
+
+    // Add skip links for screen readers
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'skip-link sr-only';
+    skipLink.textContent = 'Skip to main content';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+
+    // Improve color contrast for better accessibility
+    const highContrastElements = document.querySelectorAll('.skill-name, .portfolio-title');
+    highContrastElements.forEach(element => {
+        element.style.color = 'var(--high-contrast-beige)';
+    });
+}
+
+// Add screen reader only class
+const style = document.createElement('style');
+style.textContent = `
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .sr-only:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0.5rem;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        background: var(--dark-gray);
+        color: var(--beige);
+        border: 2px solid var(--green);
+        z-index: 1000;
+    }
+`;
+document.head.appendChild(style);
 
 // Lazy load GSAP plugins only when needed
 let gsapLoaded = false;
@@ -105,14 +215,14 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
         demo: 'Energy/',
         features: [
-            '☀️ Solar & Wind Energy Solutions',
-            '📱 Fully Responsive Design',
-            '⚡ Next.js 14 Performance',
-            '🎨 Modern Professional UI',
-            '📊 SEO Optimized',
-            '♿ WCAG Accessibility Compliant',
-            '📝 Blog & Project Showcase',
-            '📞 Lead Generation Forms'
+            '<i data-lucide="sun"></i> Solar & Wind Energy Solutions',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="zap"></i> Next.js 14 Performance',
+            '<i data-lucide="palette"></i> Modern Professional UI',
+            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
+            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
+            '<i data-lucide="file-text"></i> Blog & Project Showcase',
+            '<i data-lucide="mail"></i> Lead Generation Forms'
         ],
         tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
     },
@@ -126,12 +236,12 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/fitness_app',
         demo: 'fitness_app/',
         features: [
-            '🌙 Dynamic Dark/Light Theme',
-            '📱 Mobile-First Responsive Design',
-            '⚡ Performance Optimized (95+ Lighthouse)',
-            '🎨 Modern Glassmorphism UI',
-            '🔄 Real-time Image Switching',
-            '📊 SEO Optimized'
+            '<i data-lucide="moon"></i> Dynamic Dark/Light Theme',
+            '<i data-lucide="smartphone"></i> Mobile-First Responsive Design',
+            '<i data-lucide="zap"></i> Performance Optimized (95+ Lighthouse)',
+            '<i data-lucide="layers"></i> Modern Glassmorphism UI',
+            '<i data-lucide="refresh-cw"></i> Real-time Image Switching',
+            '<i data-lucide="bar-chart-3"></i> SEO Optimized'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Mobile App', 'AI', 'Performance']
     },
@@ -145,14 +255,14 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/restaurents',
         demo: 'restaurents/',
         features: [
-            '🍽️ Interactive Menu System',
-            '📱 Mobile-First Responsive Design',
-            '⚡ Performance Optimized',
-            '🎨 Modern Professional UI',
-            '📊 SEO Optimized',
-            '♿ WCAG Accessibility Compliant',
-            '📝 Reservation Form',
-            '📞 Contact Integration'
+            '<i data-lucide="utensils-crossed"></i> Interactive Menu System',
+            '<i data-lucide="smartphone"></i> Mobile-First Responsive Design',
+            '<i data-lucide="zap"></i> Performance Optimized',
+            '<i data-lucide="palette"></i> Modern Professional UI',
+            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
+            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
+            '<i data-lucide="calendar"></i> Reservation Form',
+            '<i data-lucide="phone"></i> Contact Integration'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Restaurant', 'Professional', 'Responsive']
     },
@@ -166,10 +276,10 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
         demo: 'messenger_app/',
         features: [
-            '💬 Real-time Messaging',
-            '🔒 Secure Communication',
-            '👤 User Profiles',
-            '👥 Group Chats'
+            '<i data-lucide="message-circle"></i> Real-time Messaging',
+            '<i data-lucide="shield"></i> Secure Communication',
+            '<i data-lucide="user"></i> User Profiles',
+            '<i data-lucide="users"></i> Group Chats'
         ],
         tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
     },
@@ -183,14 +293,14 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/Property',
         demo: 'Property/',
         features: [
-            '🏠 Premium Property Listings',
-            '📊 Investment Analytics Dashboard',
-            '📝 Lead Generation Forms',
-            '📱 Fully Responsive Design',
-            '🎨 Modern Professional UI',
-            '📈 ROI Calculator',
-            '📞 Consultation Booking System',
-            '📋 Investment Guide Downloads'
+            '<i data-lucide="home"></i> Premium Property Listings',
+            '<i data-lucide="trending-up"></i> Investment Analytics Dashboard',
+            '<i data-lucide="clipboard-list"></i> Lead Generation Forms',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="palette"></i> Modern Professional UI',
+            '<i data-lucide="calculator"></i> ROI Calculator',
+            '<i data-lucide="calendar"></i> Consultation Booking System',
+            '<i data-lucide="download"></i> Investment Guide Downloads'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Property Investment', 'Real Estate', 'Lead Generation', 'Professional']
     },
@@ -204,10 +314,10 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
         demo: 'ChamsShop/Public/core/',
         features: [
-            '🛒 Dynamic Shopping Cart',
-            '🔐 User Authentication',
-            '💳 Checkout System',
-            '📱 Responsive Design'
+            '<i data-lucide="shopping-cart"></i> Dynamic Shopping Cart',
+            '<i data-lucide="lock"></i> User Authentication',
+            '<i data-lucide="credit-card"></i> Checkout System',
+            '<i data-lucide="smartphone"></i> Responsive Design'
         ],
         tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
     },
@@ -221,10 +331,10 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
         demo: 'lolchat/',
         features: [
-            '🎮 League of Legends Theme',
-            '🦸‍♂️ Champion Data Integration',
-            '💬 Chat Interface',
-            '📱 Responsive Design'
+            '<i data-lucide="swords"></i> League of Legends Theme',
+            '<i data-lucide="crown"></i> Champion Data Integration',
+            '<i data-lucide="message-circle"></i> Chat Interface',
+            '<i data-lucide="smartphone"></i> Responsive Design'
         ],
         tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
     },
@@ -238,12 +348,12 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/chicken',
         demo: 'chicken/',
         features: [
-            '⚛️ Next.js 14 Framework',
-            '🎨 Modern React Components',
-            '📱 Responsive Design',
-            '🎯 Interactive Game Elements',
-            '⚡ Performance Optimized',
-            '🎨 Tailwind CSS Styling'
+            '<i data-lucide="atom"></i> Next.js 14 Framework',
+            '<i data-lucide="palette"></i> Modern React Components',
+            '<i data-lucide="smartphone"></i> Responsive Design',
+            '<i data-lucide="crosshair"></i> Interactive Game Elements',
+            '<i data-lucide="zap"></i> Performance Optimized',
+            '<i data-lucide="layout"></i> Tailwind CSS Styling'
         ],
         tags: ['Next.js', 'React', 'Tailwind CSS', 'JavaScript', 'Web App', 'Game']
     },
@@ -257,10 +367,10 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/typing game',
         demo: 'typing-game/',
         features: [
-            '⌨️ Real-time WPM calculation',
-            '🏆 High score tracking',
-            '🔤 Multiple difficulty levels',
-            '📊 Performance statistics'
+            '<i data-lucide="keyboard"></i> Real-time WPM calculation',
+            '<i data-lucide="award"></i> High score tracking',
+            '<i data-lucide="bar-chart-3"></i> Multiple difficulty levels',
+            '<i data-lucide="trending-up"></i> Performance statistics'
         ],
         tags: ['JavaScript', 'HTML5', 'CSS3', 'Web Game']
     },
@@ -272,10 +382,10 @@ const projects = [
         github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
         demo: 'wallpaper/',
         features: [
-            '🎨 Dynamic Pattern Generation',
-            '🖼️ Customizable Colors',
-            '💫 Interactive Elements',
-            '📱 Responsive Design'
+            '<i data-lucide="palette"></i> Dynamic Pattern Generation',
+            '<i data-lucide="image"></i> Customizable Colors',
+            '<i data-lucide="mouse-pointer"></i> Interactive Elements',
+            '<i data-lucide="smartphone"></i> Responsive Design'
         ],
         tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Design']
     }
@@ -723,6 +833,255 @@ async function initializeGSAPAnimations() {
     addHoverAnimation(document.querySelectorAll('.game-btn'));
 }
 
+// Magnetic effect for interactive elements
+function initializeMagneticEffect() {
+    const magneticElements = document.querySelectorAll('.magnetic');
+
+    magneticElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            element.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+        });
+
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = 'translate(0px, 0px) scale(1)';
+        });
+    });
+}
+
+// Enhanced scroll-triggered animations
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    }, observerOptions);
+
+    // Observe portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        observer.observe(item);
+    });
+
+    // Observe skill cards
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Observe experience items
+    const experienceItems = document.querySelectorAll('.experience-item');
+    experienceItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        observer.observe(item);
+    });
+}
+
+// Enhanced particle interaction
+function initializeParticleInteraction() {
+    const canvas = document.getElementById('particles-js');
+    if (!canvas) return;
+
+    canvas.addEventListener('mousemove', (e) => {
+        const particles = window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS;
+        if (particles) {
+            const rect = canvas.getBoundingClientRect();
+            particles.interactivity.mouse.pos_x = e.clientX - rect.left;
+            particles.interactivity.mouse.pos_y = e.clientY - rect.top;
+        }
+    });
+}
+
+// Smooth page transitions
+function initializePageTransitions() {
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+
+            if (target) {
+                // Add fade effect
+                document.body.style.opacity = '0.7';
+                setTimeout(() => {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    document.body.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+}
+
+// Advanced interactions and page transitions
+function initializeAdvancedInteractions() {
+    // Smooth section transitions with loading states
+    const sectionLinks = document.querySelectorAll('a[href^="#"]');
+    sectionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                // Add loading state
+                showLoadingState(link);
+                link.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+
+                // Smooth scroll with enhanced easing
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+
+                // Reset after transition
+                setTimeout(() => {
+                    hideLoadingState(link);
+                    link.innerHTML = link.textContent || 'View Section';
+                }, 800);
+            }
+        });
+    });
+
+    // Advanced hover effects for portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach((item, index) => {
+        let mouseX = 0;
+        let mouseY = 0;
+
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (mouseY - centerY) / 10;
+            const rotateY = (centerX - mouseX) / 10;
+
+            item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+    });
+
+    // Interactive skill cards with ripple effect
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            ripple.style.left = `${e.offsetX}px`;
+            ripple.style.top = `${e.offsetY}px`;
+
+            card.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Parallax scrolling effect
+    let parallaxElements = document.querySelectorAll('.parallax-element');
+    if (parallaxElements.length === 0) {
+        // Add parallax class to elements that should have parallax
+        document.querySelectorAll('.hero-image, .hero-blob, .section-title').forEach(el => {
+            el.classList.add('parallax-element');
+        });
+        parallaxElements = document.querySelectorAll('.parallax-element');
+    }
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+
+        parallaxElements.forEach((element, index) => {
+            const rate = (index + 1) * 0.5;
+            element.style.transform = `translateY(${scrolled * rate}px)`;
+        });
+    });
+
+    // Removed custom cursor effect as requested
+
+    // Theme toggle with smooth transition (if needed in future)
+    // const themeToggle = document.createElement('button');
+    // themeToggle.className = 'theme-toggle';
+    // themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    // document.body.appendChild(themeToggle);
+
+    // themeToggle.addEventListener('click', () => {
+    //     document.body.classList.toggle('dark-theme');
+    //     themeToggle.innerHTML = document.body.classList.contains('dark-theme')
+    //         ? '<i class="fas fa-sun"></i>'
+    //         : '<i class="fas fa-moon"></i>';
+    // });
+}
+
+// Enhanced loading states
+function showLoadingState(element) {
+    element.classList.add('loading-dots');
+    element.style.position = 'relative';
+}
+
+function hideLoadingState(element) {
+    element.classList.remove('loading-dots');
+}
+
+// Professional CV functionality
+function downloadResume() {
+    // Open the professional CV in a new tab
+    window.open('cv.html', '_blank');
+    
+    // Also provide option to download as PDF (users can print to PDF)
+    setTimeout(() => {
+        if (confirm('Professional CV opened in new tab. Would you like to download it as a PDF? (Print to PDF)')) {
+            window.open('cv.html', '_blank');
+        }
+    }, 1000);
+}
+
+// Initialize Lucide icons (2025 best practice)
+function initializeLucideIcons() {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    } else {
+        // Fallback initialization if Lucide loads after DOM
+        setTimeout(() => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }, 100);
+    }
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize critical functionality immediately
@@ -730,14 +1089,137 @@ document.addEventListener('DOMContentLoaded', () => {
     animateSkillCards();
     initializeContactForm();
     ensureContactVisibility();
-    
+
+    // Initialize performance optimizations
+    optimizePerformance();
+    enhanceAccessibility();
+
+    // Initialize enhanced features
+    initializeMagneticEffect();
+    initializeScrollAnimations();
+    initializeParticleInteraction();
+    initializePageTransitions();
+    initializeMobileOptimizations();
+    initializeAdvancedInteractions();
+
+    // Initialize modern icon system (2025 best practice)
+    initializeLucideIcons();
+
     // Initialize GSAP animations after a short delay to prioritize critical content
     setTimeout(() => {
         initializeGSAPAnimations();
     }, 100);
 });
 
-// Ensure contact visibility on scroll events
+// Mobile-specific enhancements
+function initializeMobileOptimizations() {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Add touch-friendly interactions
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            item.addEventListener('touchstart', (e) => {
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            item.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].screenY;
+                const diff = touchStartY - touchEndY;
+
+                // Detect swipe gestures
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        // Swipe up - maybe scroll to next section
+                        const nextSection = item.closest('section').nextElementSibling;
+                        if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                } else {
+                    // Regular tap - trigger hover effect briefly
+                    item.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        item.style.transform = '';
+                    }, 150);
+                }
+            }, { passive: true });
+        });
+
+        // Improve mobile scrolling performance
+        document.body.style.overscrollBehavior = 'none';
+        document.documentElement.style.overscrollBehavior = 'none';
+
+        // Add pull-to-refresh functionality
+        let startY = 0;
+        let pullDistance = 0;
+        const pullThreshold = 80;
+
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.scrollY === 0) {
+                pullDistance = e.touches[0].clientY - startY;
+                if (pullDistance > 0) {
+                    e.preventDefault();
+                    const opacity = Math.min(pullDistance / pullThreshold, 1);
+                    document.body.style.transform = `translateY(${pullDistance * 0.5}px)`;
+                    // Could add a refresh indicator here
+                }
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', () => {
+            if (pullDistance > pullThreshold) {
+                // Trigger refresh action
+                location.reload();
+            }
+            document.body.style.transform = '';
+            pullDistance = 0;
+        }, { passive: true });
+
+        // Optimize animations for mobile
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                * {
+                    -webkit-transform: translateZ(0);
+                    transform: translateZ(0);
+                }
+
+                .portfolio-item, .skill-card, .experience-item {
+                    will-change: transform, opacity;
+                }
+
+                .hero-blob {
+                    display: none; /* Reduce GPU usage on mobile */
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Add viewport height fix for mobile browsers
+    function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+}
+
+// Enhanced scroll event handling
+let scrollTimeout;
 window.addEventListener('scroll', () => {
-    setTimeout(ensureContactVisibility, 100);
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        ensureContactVisibility();
+    }, 100);
 });
