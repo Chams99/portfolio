@@ -72,13 +72,13 @@
         <div id="particles-js"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <p class="hero-subtitle">Hello, I'm</p>
-                <h1>Dhibi Chames Eddine</h1>
-                <div class="typewriter"></div>
-                <p class="hero-description">Turning ideas into reality through elegant code and creative solutions. I build responsive websites and mobile applications from front to back.</p>
-                <div class="hero-buttons">
-                    <button class="cta-button primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">View My Work</button>
-                    <button class="cta-button secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Me</button>
+                <p class="hero-subtitle float-animation stagger-1">Hello, I'm</p>
+                <h1 class="text-glow stagger-2">Dhibi Chames Eddine</h1>
+                <div class="typewriter stagger-3"></div>
+                <p class="hero-description stagger-4">Turning ideas into reality through elegant code and creative solutions. I build responsive websites and mobile applications from front to back.</p>
+                <div class="hero-buttons stagger-5">
+                    <button class="cta-button primary shimmer-btn magnetic" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">View My Work</button>
+                    <button class="cta-button secondary shimmer-btn magnetic" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Me</button>
                 </div>
             </div>
             <div class="hero-image">
@@ -128,7 +128,9 @@
                         <h2 class="experience-title">Education & Experience</h2>
                         <div class="experience-container">
                             <div class="experience-item">
-                                <div class="experience-icon">🎓</div>
+                                <div class="experience-icon">
+                                    <i data-lucide="graduation-cap"></i>
+                                </div>
                                 <div class="experience-content">
                                     <h3>Software Engineering</h3>
                                     <p class="experience-place">Faculty of Science Gafsa</p>
@@ -136,27 +138,33 @@
                                     <p class="experience-description">Currently pursuing a degree in Software Engineering, developing skills in programming, software design, and development methodologies.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="experience-item">
-                                <div class="experience-icon">🖥️</div>
+                                <div class="experience-icon">
+                                    <i data-lucide="terminal"></i>
+                                </div>
                                 <div class="experience-content">
                                     <h3>Full Stack Python Developer Training</h3>
                                     <p class="experience-place">Go My Code</p>
                                     <p class="experience-description">Completed intensive training in full stack development using Python, covering web frameworks, databases, and modern development practices.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="experience-item">
-                                <div class="experience-icon">📚</div>
+                                <div class="experience-icon">
+                                    <i data-lucide="calculator"></i>
+                                </div>
                                 <div class="experience-content">
                                     <h3>Baccalauria in Mathematics</h3>
                                     <p class="experience-place">Houssen Bouzayen Gafsa</p>
                                     <p class="experience-description">Developed strong analytical and problem-solving skills through rigorous mathematical education.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="experience-item">
-                                <div class="experience-icon">🌍</div>
+                                <div class="experience-icon">
+                                    <i data-lucide="languages"></i>
+                                </div>
                                 <div class="experience-content">
                                     <h3>TOEFL iBT Score</h3>
                                     <p class="experience-place">84/120</p>
@@ -464,6 +472,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Resume Download Section -->
+                    <div class="resume-section">
+                        <h3>Download My Resume</h3>
+                        <p>Get a detailed overview of my experience, skills, and qualifications.</p>
+                        <a href="#" class="resume-btn" onclick="downloadResume()">
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -473,10 +491,10 @@
         <h2 class="section-title">My Projects</h2>
         <div class="portfolio-container">
             <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="game">Games</button>
-                <button class="filter-btn" data-filter="web">Web Apps</button>
-                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn active magnetic stagger-1" data-filter="all">All</button>
+                <button class="filter-btn magnetic stagger-2" data-filter="game">Games</button>
+                <button class="filter-btn magnetic stagger-3" data-filter="web">Web Apps</button>
+                <button class="filter-btn magnetic stagger-4" data-filter="mobile">Mobile Apps</button>
             </div>
             
             <div class="portfolio-grid">
@@ -534,13 +552,13 @@
                 </div>
 
                 <div class="social-links">
-                    <a href="https://github.com/Chams99" class="social-link" title="GitHub">
+                    <a href="https://github.com/Chams99" class="social-link icon-bounce stagger-1" title="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/dhibi-chams-827146344/" class="social-link" title="LinkedIn">
+                    <a href="https://www.linkedin.com/in/dhibi-chams-827146344/" class="social-link icon-bounce stagger-2" title="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="https://x.com/ChamesDhibi" class="social-link" title="X (Twitter)">
+                    <a href="https://x.com/ChamesDhibi" class="social-link icon-bounce stagger-3" title="X (Twitter)">
                         <i class="fab fa-x-twitter"></i>
                     </a>
                 </div>
@@ -586,6 +604,9 @@
             </form>
         </div>
     </section>
+
+    <!-- Load modern icon library - Lucide (2025 best practice) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <!-- Load non-critical scripts with proper deferring -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
