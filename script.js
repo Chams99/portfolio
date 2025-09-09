@@ -1,11 +1,11 @@
 // Performance monitoring and optimization - Only run in development
 if ('performance' in window && window.location.hostname === 'localhost') {
     window.addEventListener('load', () => {
-        setTimeout(() => {
+        requestIdleCallback(() => {
             const perfData = performance.getEntriesByType('navigation')[0];
             const paintMetrics = performance.getEntriesByType('paint');
 
-            console.log('🚀 Performance Metrics:');
+            console.log('=== Performance Metrics ===');
             console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
             console.log('Load Complete:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
             console.log('Total Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
@@ -19,26 +19,30 @@ if ('performance' in window && window.location.hostname === 'localhost') {
             if (perfData.loadEventEnd - perfData.fetchStart > 3000) {
                 console.warn('⚠️ Slow load time detected. Consider optimizing images and reducing JavaScript bundle size.');
             }
-        }, 0);
+        });
     });
 }
 
 // Performance optimizations
 function optimizePerformance() {
-    // Debounce scroll events
+    // Throttle scroll events for better performance
     let scrollTimeout;
-    const debounceScroll = () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            // Throttled scroll handling
-            ensureContactVisibility();
-        }, 16); // ~60fps
+    let isScrolling = false;
+    
+    const throttleScroll = () => {
+        // Removed ensureContactVisibility call - contact section remains visible once loaded
+        if (!isScrolling) {
+            requestAnimationFrame(() => {
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
     };
 
     // Use passive listeners for better scroll performance
-    window.addEventListener('scroll', debounceScroll, { passive: true });
+    window.addEventListener('scroll', throttleScroll, { passive: true });
 
-    // Preload critical images
+    // Preload critical images with error handling
     const preloadImages = [
         'Images/optimized/chams-large.webp',
         'Images/optimized/energy-large.webp',
@@ -47,17 +51,22 @@ function optimizePerformance() {
 
     preloadImages.forEach(src => {
         const img = new Image();
+        img.onload = () => console.log(`Preloaded: ${src}`);
+        img.onerror = () => console.warn(`Failed to preload: ${src}`);
         img.src = src;
     });
 
-    // Optimize Intersection Observer
+    // Optimize Intersection Observer with better performance
     const observerConfig = {
-        threshold: 0.1,
+        threshold: [0, 0.1, 0.5],
         rootMargin: '50px 0px'
     };
 
-    // Implement virtual scrolling for large lists if needed
-    // For now, we'll use efficient DOM manipulation
+    // Enable hardware acceleration for smooth animations
+    const animatedElements = document.querySelectorAll('.portfolio-item, .skill-card, .experience-item');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'transform, opacity';
+    });
 }
 
 // Accessibility enhancements
@@ -185,22 +194,46 @@ if (typewriter) {
     type();
 }
 
-// Initialize particles.js - Only if particles container exists
-const particlesContainer = document.getElementById('particles-js');
-if (particlesContainer && typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 30 },
-            color: { value: '#ECDBBA' },
-            shape: { type: 'circle' },
-            opacity: { value: 0.3 },
-            size: { value: 2 },
-            move: {
-                enable: true,
-                speed: 1
-            }
+// Initialize particles.js - Lazy loaded for better performance
+function initializeParticles() {
+    const particlesContainer = document.getElementById('particles-js');
+    if (particlesContainer && typeof particlesJS !== 'undefined') {
+        // Use requestIdleCallback for non-critical initialization
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 25 }, // Reduced for better performance
+                        color: { value: '#ECDBBA' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.2 }, // Reduced opacity
+                        size: { value: 1.5 }, // Smaller particles
+                        move: {
+                            enable: true,
+                            speed: 0.8 // Slower movement
+                        }
+                    }
+                });
+            });
+        } else {
+            // Fallback for browsers without requestIdleCallback
+            setTimeout(() => {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 25 },
+                        color: { value: '#ECDBBA' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.2 },
+                        size: { value: 1.5 },
+                        move: {
+                            enable: true,
+                            speed: 0.8
+                        }
+                    }
+                });
+            }, 100);
         }
-    });
+    }
 }
 
 // Portfolio items data with optimized responsive images
@@ -391,8 +424,9 @@ const projects = [
     }
 ];
 
-// Portfolio filtering functionality - Lazy loaded
+// Portfolio filtering functionality - Optimized for performance
 let portfolioInitialized = false;
+let portfolioItemsCache = new Map();
 
 function initializePortfolio() {
     if (portfolioInitialized) return;
@@ -405,177 +439,179 @@ function initializePortfolio() {
     // Clear existing portfolio items
     portfolioGrid.innerHTML = '';
 
-    // Function to create and append portfolio items
+    // Function to create and append portfolio items with caching
     function createPortfolioItems(projects) {
-        portfolioGrid.innerHTML = ''; // Clear existing items
+        // Use DocumentFragment for better performance
+        const fragment = document.createDocumentFragment();
+        
         projects.forEach(project => {
-            const item = document.createElement('div');
-            item.className = 'portfolio-item';
-            item.setAttribute('data-category', project.category);
+            let item;
             
-            let portfolioHTML = `
-                <div class="portfolio-item-inner">
-                    <div class="portfolio-image">
-                        ${project.image ? `
-                            <picture>
-                                <source srcset="${project.imageSrcSet || project.image}" type="image/webp">
-                                <img src="${project.imageFallback || project.image}" alt="${project.title}" loading="lazy">
-                            </picture>
-                        ` : ''}
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-buttons">
-                                ${project.github ? `<a href="${project.github}" class="portfolio-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
-                                ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn ${project.category?.includes('game') ? 'game-btn' : ''}">Live Demo</a>` : ''}
+            // Check cache first
+            if (portfolioItemsCache.has(project.title)) {
+                item = portfolioItemsCache.get(project.title).cloneNode(true);
+            } else {
+                item = document.createElement('div');
+                item.className = 'portfolio-item';
+                item.setAttribute('data-category', project.category);
+                
+                let portfolioHTML = `
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-image">
+                            ${project.image ? `
+                                <picture>
+                                    <source srcset="${project.imageSrcSet || project.image}" type="image/webp">
+                                    <img src="${project.imageFallback || project.image}" alt="${project.title}" loading="lazy">
+                                </picture>
+                            ` : ''}
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-buttons">
+                                    ${project.github ? `<a href="${project.github}" class="portfolio-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
+                                    ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn ${project.category?.includes('game') ? 'game-btn' : ''}">Live Demo</a>` : ''}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">${project.title}</h3>
-                        <p class="portfolio-description">${project.description}</p>
-                        ${project.features ? `
-                        <div class="portfolio-features">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                            </ul>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title">${project.title}</h3>
+                            <p class="portfolio-description">${project.description}</p>
+                            ${project.features ? `
+                            <div class="portfolio-features">
+                                <h4>Key Features:</h4>
+                                <ul>
+                                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                                </ul>
+                            </div>
+                            ` : ''}
+                            ${project.tags ? `
+                            <div class="portfolio-tags">
+                                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                            ` : ''}
                         </div>
-                        ` : ''}
-                        ${project.tags ? `
-                        <div class="portfolio-tags">
-                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                        ` : ''}
                     </div>
-                </div>
-            `;
+                `;
+                
+                item.innerHTML = portfolioHTML;
+                
+                // Cache the item for future use
+                portfolioItemsCache.set(project.title, item.cloneNode(true));
+            }
             
-            item.innerHTML = portfolioHTML;
-            portfolioGrid.appendChild(item);
+            fragment.appendChild(item);
         });
+        
+        // Clear and append all items at once
+        portfolioGrid.innerHTML = '';
+        portfolioGrid.appendChild(fragment);
     }
 
     // Initial load of all projects
     createPortfolioItems(projects);
 
-    // Add click event listeners to filter buttons
+    // Add click event listeners to filter buttons with debouncing
+    let filterTimeout;
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
+            // Debounce filter operations
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(() => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
 
-            const filterValue = button.getAttribute('data-filter');
+                const filterValue = button.getAttribute('data-filter');
 
-            // Filter projects based on category
-            const filteredProjects = filterValue === 'all' 
-                ? projects 
-                : projects.filter(project => {
-                    // Handle both string and array categories
-                    if (Array.isArray(project.category)) {
-                        return project.category.includes(filterValue);
-                    }
-                    return project.category === filterValue;
-                });
-
-            // Create and animate filtered items
-            createPortfolioItems(filteredProjects);
-
-            // Animate the new items only if GSAP is loaded
-            if (typeof gsap !== 'undefined') {
-                const newItems = document.querySelectorAll('.portfolio-item');
-                if (newItems.length > 0) {
-                    gsap.from(newItems, {
-                        duration: 0.5,
-                        y: 20,
-                        opacity: 0,
-                        stagger: 0.1,
-                        ease: 'power2.out'
+                // Filter projects based on category
+                const filteredProjects = filterValue === 'all' 
+                    ? projects 
+                    : projects.filter(project => {
+                        // Handle both string and array categories
+                        if (Array.isArray(project.category)) {
+                            return project.category.includes(filterValue);
+                        }
+                        return project.category === filterValue;
                     });
-                }
-            }
 
-            // Ensure contact form remains visible after filtering
-            setTimeout(() => {
-                const contactForm = document.querySelector('.contact-form');
-                const contactInfo = document.querySelector('.contact-info');
-                const contactSection = document.getElementById('contact');
-                
-                if (contactForm) {
-                    gsap.set(contactForm, { opacity: 1, x: 0, visibility: 'visible', display: 'block' });
+                // Create and animate filtered items
+                createPortfolioItems(filteredProjects);
+
+                // Re-initialize Lucide icons after DOM update
+                setTimeout(() => {
+                    initializeLucideIcons();
+                }, 10);
+
+                // Animate the new items only if GSAP is loaded
+                if (typeof gsap !== 'undefined') {
+                    const newItems = document.querySelectorAll('.portfolio-item');
+                    if (newItems.length > 0) {
+                        gsap.from(newItems, {
+                            duration: 0.4,
+                            y: 20,
+                            opacity: 0,
+                            stagger: 0.05,
+                            ease: 'power2.out'
+                        });
+                    }
                 }
-                if (contactInfo) {
-                    gsap.set(contactInfo, { opacity: 1, x: 0, visibility: 'visible', display: 'block' });
-                }
-                if (contactSection) {
-                    gsap.set(contactSection, { opacity: 1, visibility: 'visible', display: 'block' });
-                }
-            }, 100);
+
+                // Contact section remains visible after filtering - no need to force visibility
+            }, 50);
         });
     });
 
     portfolioInitialized = true;
 }
 
-// Animate skill cards on scroll - Lazy loaded
+// Animate skill cards on scroll - Optimized for performance
 function animateSkillCards() {
     const skillCards = document.querySelectorAll('.skill-card');
     if (skillCards.length === 0) return;
     
-    const animatedCards = new Set(); // Track which cards have been animated
+    const animatedCards = new Set();
+    let animationFrameId;
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !animatedCards.has(entry.target)) {
-                // Mark this card as animated
                 animatedCards.add(entry.target);
                 
-                // Set initial state
-                entry.target.style.opacity = '0';
-                entry.target.style.transform = 'translateY(30px)';
-                entry.target.style.transition = 'all 0.6s ease';
+                // Use requestAnimationFrame for smooth animation
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
                 
-                // Animate in
-                requestAnimationFrame(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                animationFrameId = requestAnimationFrame(() => {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+                    entry.target.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+                    
+                    // Trigger animation on next frame
+                    requestAnimationFrame(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    });
                 });
                 
                 // Unobserve after animation
                 setTimeout(() => {
                     observer.unobserve(entry.target);
-                }, 600);
+                }, 400);
             }
         });
     }, { 
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
     });
 
     skillCards.forEach(card => {
-        // Ensure cards start visible
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
         observer.observe(card);
     });
 }
 
-// Function to ensure contact section is always visible
-function ensureContactVisibility() {
-    const contactForm = document.querySelector('.contact-form');
-    const contactInfo = document.querySelector('.contact-info');
-    const contactSection = document.getElementById('contact');
-    
-    if (contactForm && typeof gsap !== 'undefined') {
-        gsap.set(contactForm, { opacity: 1, x: 0, visibility: 'visible' });
-    }
-    if (contactInfo && typeof gsap !== 'undefined') {
-        gsap.set(contactInfo, { opacity: 1, x: 0, visibility: 'visible' });
-    }
-    if (contactSection && typeof gsap !== 'undefined') {
-        gsap.set(contactSection, { opacity: 1, visibility: 'visible' });
-    }
-}
+// Removed ensureContactVisibility function - contact section remains visible once loaded
 
 // Contact form handling - Lazy loaded
 function initializeContactForm() {
@@ -720,13 +756,7 @@ async function initializeGSAPAnimations() {
             scrollTrigger: {
                 trigger: '.contact-container',
                 start: 'top 75%',
-                toggleActions: 'play none none none',
-                onLeave: () => {
-                    gsap.set(contactInfo, { opacity: 1, x: 0, visibility: 'visible' });
-                },
-                onEnterBack: () => {
-                    gsap.set(contactInfo, { opacity: 1, x: 0, visibility: 'visible' });
-                }
+                toggleActions: 'play none none reverse'
             },
             duration: 1,
             x: -50,
@@ -739,13 +769,7 @@ async function initializeGSAPAnimations() {
             scrollTrigger: {
                 trigger: '.contact-container',
                 start: 'top 75%',
-                toggleActions: 'play none none none',
-                onLeave: () => {
-                    gsap.set(contactForm, { opacity: 1, x: 0, visibility: 'visible' });
-                },
-                onEnterBack: () => {
-                    gsap.set(contactForm, { opacity: 1, x: 0, visibility: 'visible' });
-                }
+                toggleActions: 'play none none reverse'
             },
             duration: 1,
             x: 50,
@@ -852,48 +876,55 @@ function initializeMagneticEffect() {
     });
 }
 
-// Enhanced scroll-triggered animations
+// Enhanced scroll-triggered animations - Optimized
 function initializeScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -30px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
+                // Use requestAnimationFrame for smooth animation
+                requestAnimationFrame(() => {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
+                });
+                
+                // Unobserve after animation to improve performance
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe portfolio items
+    // Observe portfolio items with optimized transitions
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     portfolioItems.forEach(item => {
         item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+        item.style.willChange = 'transform, opacity';
         observer.observe(item);
     });
 
     // Observe skill cards
     const skillCards = document.querySelectorAll('.skill-card');
-    skillCards.forEach((card, index) => {
+    skillCards.forEach(card => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+        card.style.willChange = 'transform, opacity';
         observer.observe(card);
     });
 
     // Observe experience items
     const experienceItems = document.querySelectorAll('.experience-item');
-    experienceItems.forEach((item, index) => {
+    experienceItems.forEach(item => {
         item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+        item.style.willChange = 'transform, opacity';
         observer.observe(item);
     });
 }
@@ -1082,7 +1113,7 @@ function initializeLucideIcons() {
     }
 }
 
-// Initialize everything when DOM is ready
+// Initialize everything when DOM is ready - Optimized loading order
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize critical functionality immediately
     initializePortfolio();
@@ -1094,13 +1125,18 @@ document.addEventListener('DOMContentLoaded', () => {
     optimizePerformance();
     enhanceAccessibility();
 
-    // Initialize enhanced features
-    initializeMagneticEffect();
-    initializeScrollAnimations();
-    initializeParticleInteraction();
-    initializePageTransitions();
-    initializeMobileOptimizations();
-    initializeAdvancedInteractions();
+    // Initialize enhanced features with staggered loading
+    requestIdleCallback(() => {
+        initializeMagneticEffect();
+        initializeScrollAnimations();
+        initializeParticleInteraction();
+        initializePageTransitions();
+        initializeMobileOptimizations();
+        initializeAdvancedInteractions();
+        
+        // Initialize particles after other features
+        initializeParticles();
+    });
 
     // Initialize modern icon system (2025 best practice)
     initializeLucideIcons();
@@ -1108,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize GSAP animations after a short delay to prioritize critical content
     setTimeout(() => {
         initializeGSAPAnimations();
-    }, 100);
+    }, 200);
 });
 
 // Mobile-specific enhancements
@@ -1215,11 +1251,4 @@ function initializeMobileOptimizations() {
     window.addEventListener('orientationchange', setVH);
 }
 
-// Enhanced scroll event handling
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        ensureContactVisibility();
-    }, 100);
-});
+// Removed scroll handler for contact visibility - contact section should remain visible once loaded

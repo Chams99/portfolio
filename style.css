@@ -35,10 +35,12 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 /* Hero Section */
@@ -204,19 +206,34 @@ html {
     animation: shimmer 2s infinite;
 }
 
-/* Enhanced hover effects */
+/* Enhanced hover effects - Optimized for performance */
+.skill-card {
+    will-change: transform, box-shadow;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
 .skill-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-8px) scale(1.02) translateZ(0);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(52, 103, 81, 0.2);
     border-color: rgba(52, 103, 81, 0.4);
 }
 
+.portfolio-item {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
 .portfolio-item:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-8px) scale(1.02) translateZ(0);
+}
+
+.experience-item {
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
 }
 
 .experience-item:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-8px) scale(1.02) translateZ(0);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(52, 103, 81, 0.2);
 }
 
@@ -290,9 +307,13 @@ html {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Smooth transitions for all interactive elements */
+/* Smooth transitions for all interactive elements - Optimized */
 button, a, .portfolio-item, .skill-card, .experience-item {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s ease,
+                box-shadow 0.3s ease;
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force hardware acceleration */
 }
 
 /* Loading animation for page transitions */
@@ -319,7 +340,7 @@ textarea:focus-visible {
     border-radius: 4px;
 }
 
-/* Reduced motion preferences */
+/* Reduced motion preferences and performance optimizations */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -328,6 +349,29 @@ textarea:focus-visible {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+/* Performance optimizations for animations */
+@media (prefers-reduced-motion: no-preference) {
+    .skill-card,
+    .portfolio-item,
+    .experience-item,
+    .contact-item,
+    .info-item {
+        will-change: transform, opacity;
+        transform: translateZ(0);
+    }
+    
+    /* Optimize expensive animations */
+    .hero-blob {
+        will-change: transform;
+        transform: translateZ(0);
+    }
+    
+    .parallax-element {
+        will-change: transform;
+        transform: translateZ(0);
     }
 }
 
@@ -558,6 +602,28 @@ textarea:focus-visible {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* Disable expensive animations on mobile for better performance */
+    .hero-blob {
+        display: none;
+    }
+    
+    .parallax-element {
+        transform: none !important;
+    }
+    
+    /* Optimize hover effects for touch devices */
+    .skill-card:hover,
+    .portfolio-item:hover,
+    .experience-item:hover {
+        transform: none;
+    }
+    
+    /* Reduce animation complexity on mobile */
+    * {
+        animation-duration: 0.2s !important;
+        transition-duration: 0.2s !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -682,8 +748,8 @@ section:last-of-type {
 /* Modern Glass Containers */
 .about-text {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 2rem;
@@ -705,8 +771,8 @@ section:last-of-type {
 
 .experience-section {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 2rem;
@@ -727,8 +793,8 @@ section:last-of-type {
 
 .skills-container {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 2rem;
@@ -781,8 +847,8 @@ section:last-of-type {
 
 .info-item {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1rem;
@@ -924,8 +990,8 @@ section:last-of-type {
 
 .skill-card {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     padding: 0.75rem;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1387,8 +1453,8 @@ section:last-of-type {
 .experience-item {
     display: flex;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
     border-radius: 16px;
     padding: 1rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -1659,9 +1725,6 @@ section:last-of-type {
     background: linear-gradient(to bottom, rgba(22, 22, 22, 0.95), rgba(22, 22, 22, 0.98));
     position: relative;
     overflow: hidden;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
 }
 
 .contact-container {
@@ -1678,13 +1741,10 @@ section:last-of-type {
     padding: 1.5rem;
     background: var(--card-bg);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     transition: var(--transition);
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
 }
 
 .contact-info:hover {
@@ -1800,13 +1860,10 @@ section:last-of-type {
     padding: 1.5rem;
     background: var(--card-bg);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     transition: var(--transition);
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
 }
 
 .contact-form:hover {

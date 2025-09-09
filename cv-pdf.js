@@ -1,11 +1,36 @@
-// CV PDF Generation Helper
-// This script helps users easily convert the CV to PDF
+// Simple CV Display System
+// Clean, straightforward approach for viewing and printing CV
+
+// Configuration
+const CONFIG = {
+    ui: {
+        buttonText: 'Download CV',
+        printText: 'Print CV'
+    }
+};
+
+// Simple CV functions
+function downloadCV() {
+    // Direct download of the existing PDF file
+    const link = document.createElement('a');
+    link.href = 'cv/Chames_eddine_Dhibi_CV_2025-09-09T14-16-47.pdf';
+    link.download = 'Chames_eddine_Dhibi_CV.pdf';
+    link.style.display = 'none';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function printCV() {
+    window.print();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Add print button to the CV
-    addPrintButton();
+    // Add simple download button
+    addSimpleDownloadButton();
     
-    // Add keyboard shortcut (Ctrl+P or Cmd+P)
+    // Add keyboard shortcuts
     document.addEventListener('keydown', function(e) {
         if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
             e.preventDefault();
@@ -14,26 +39,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function addPrintButton() {
-    // Create print button
-    const printBtn = document.createElement('button');
-    printBtn.innerHTML = `
+function addSimpleDownloadButton() {
+    // Create simple download button
+    const downloadBtn = document.createElement('button');
+    downloadBtn.innerHTML = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6,9 6,2 18,2 18,9"></polyline>
-            <path d="M6,18H4a2,2,0,0,1-2-2V11a2,2,0,0,1,2-2H20a2,2,0,0,1,2,2v5a2,2,0,0,1-2,2H18"></path>
-            <polyline points="6,14 6,18 18,18 18,14"></polyline>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7,10 12,15 17,10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
-        Download PDF
+        ${CONFIG.ui.buttonText}
     `;
-    printBtn.className = 'print-button';
-    printBtn.onclick = printCV;
+    downloadBtn.className = 'download-cv-button';
+    downloadBtn.setAttribute('aria-label', 'Download CV');
+    downloadBtn.setAttribute('title', 'Download your CV as PDF');
+    downloadBtn.onclick = () => {
+        downloadCV();
+    };
     
-    // Style the button
-    printBtn.style.cssText = `
+    // Simple styling
+    downloadBtn.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #2d5a3d;
+        background: linear-gradient(135deg, #2d5a3d 0%, #1e3a2a 100%);
         color: white;
         border: none;
         padding: 12px 20px;
@@ -51,156 +80,104 @@ function addPrintButton() {
     `;
     
     // Hover effects
-    printBtn.addEventListener('mouseenter', function() {
+    downloadBtn.addEventListener('mouseenter', function() {
         this.style.background = '#1e3a2a';
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 16px rgba(45, 90, 61, 0.4)';
     });
     
-    printBtn.addEventListener('mouseleave', function() {
+    downloadBtn.addEventListener('mouseleave', function() {
         this.style.background = '#2d5a3d';
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 12px rgba(45, 90, 61, 0.3)';
     });
     
     // Add button to page
-    document.body.appendChild(printBtn);
-    
-    // Add print instructions
-    addPrintInstructions();
+    document.body.appendChild(downloadBtn);
 }
 
-function addPrintInstructions() {
-    const instructions = document.createElement('div');
-    instructions.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 16px;
-            max-width: 280px;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            line-height: 1.5;
-            color: #4a4a4a;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 999;
-        ">
-            <strong>💡 PDF Download Tips:</strong><br><br>
-            • Click "Download PDF" button<br>
-            • Or press <kbd>Ctrl+P</kbd> (Windows) / <kbd>Cmd+P</kbd> (Mac)<br>
-            • Choose "Save as PDF" in destination<br>
-            • Select "More settings" → "Background graphics" for colors<br>
-            • <strong>✅ Guaranteed 1 page layout</strong><br>
-            • Click "Save" to download
-        </div>
-    `;
-    
-    document.body.appendChild(instructions);
-}
+// Print styles for clean PDF output
 
-function printCV() {
-    // Show print dialog
-    window.print();
-    
-    // Show success message
-    setTimeout(() => {
-        showNotification('Print dialog opened! Choose "Save as PDF" to download your CV.');
-    }, 500);
-}
-
-function showNotification(message) {
-    // Create notification
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #2d5a3d;
-        color: white;
-        padding: 16px 24px;
-        border-radius: 8px;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        animation: slideIn 0.3s ease;
-    `;
-    
-    // Add animation keyframes
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { opacity: 0; transform: translate(-50%, -60%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    document.body.appendChild(notification);
-    
-    // Remove notification after 4 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 4000);
-}
-
-// Add print-specific styles
+// Enhanced print-specific styles for modern browsers
 const printStyles = document.createElement('style');
 printStyles.textContent = `
     @media print {
+        /* Hide all interactive elements */
+        .download-pdf-button,
         .print-button,
-        div[style*="position: fixed"] {
+        div[style*="position: fixed"],
+        div[style*="backdrop-filter"] {
             display: none !important;
         }
         
+        /* Reset page layout */
         body {
             margin: 0;
             padding: 0;
+            background: white !important;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            print-color-adjust: exact;
         }
         
+        /* Optimize CV container for printing */
         .cv-container {
-            box-shadow: none;
-            max-width: none;
-            margin: 0;
+            box-shadow: none !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
         }
         
-        .header {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        
-        .section-title {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        
-        .skill-tag, .tech-tag, .language-level {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        
-        .skill-category {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        
+        /* Ensure colors print correctly */
+        .header,
+        .section-title,
+        .skill-tag, 
+        .tech-tag, 
+        .language-level,
+        .skill-category,
         .project-item {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
+        /* Optimize spacing for print */
+        .section {
+            page-break-inside: avoid;
+            margin-bottom: 0.8rem;
+        }
+        
+        .experience-item,
+        .project-item {
+            page-break-inside: avoid;
+        }
+        
+        /* Ensure proper font rendering */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Hide any animations during print */
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    /* Modern CSS for better PDF generation */
+    .cv-container {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    
+    /* Ensure high-quality rendering */
+    @media screen {
+        .cv-container {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
     }
 `;
