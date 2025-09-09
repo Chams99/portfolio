@@ -18,7 +18,7 @@
             line-height: 1.5;
             color: #1a1a1a;
             background: #ffffff;
-            font-size: 13px;
+            font-size: 12px;
         }
         
         .cv-container {
@@ -26,36 +26,38 @@
             margin: 0 auto;
             background: white;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            height: 297mm; /* A4 height */
+            overflow: hidden;
         }
         
-        /* Header Section */
+        /* Header Section - Optimized for Single Page */
         .header {
             background: linear-gradient(135deg, #2d5a3d 0%, #1e3a2a 100%);
             color: white;
-            padding: 1.5rem 1.5rem;
+            padding: 1rem 1.5rem;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 2.4rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
             letter-spacing: -0.02em;
         }
         
         .header .title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 400;
             opacity: 0.9;
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
         }
         
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         .contact-item {
@@ -70,21 +72,21 @@
             fill: currentColor;
         }
         
-        /* Main Content */
+        /* Main Content - Optimized for Single Page */
         .main-content {
-            padding: 1.2rem;
+            padding: 0.8rem 1.2rem;
         }
         
         .section {
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
         }
         
         .section-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #2d5a3d;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.2rem;
             border-bottom: 2px solid #e8f5e8;
             position: relative;
         }
@@ -99,55 +101,56 @@
             background: #2d5a3d;
         }
         
-        /* Summary */
+        /* Summary - Compact for Single Page */
         .summary {
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
+            line-height: 1.4;
             color: #4a4a4a;
             text-align: justify;
+            margin-bottom: 0.3rem;
         }
         
-        /* Skills */
+        /* Skills - Compact Layout for Single Page */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.6rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.4rem;
         }
         
         .skill-category {
             background: #f8f9fa;
-            padding: 0.5rem;
-            border-radius: 6px;
-            border-left: 3px solid #2d5a3d;
+            padding: 0.3rem;
+            border-radius: 4px;
+            border-left: 2px solid #2d5a3d;
         }
         
         .skill-category h4 {
             color: #2d5a3d;
             font-weight: 600;
-            margin-bottom: 0.6rem;
-            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
         }
         
         .skill-list {
             list-style: none;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.3rem;
         }
         
         .skill-tag {
             background: #e8f5e8;
             color: #2d5a3d;
-            padding: 0.25rem 0.6rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         
-        /* Experience */
+        /* Experience - Compact for Single Page */
         .experience-item {
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
             border-bottom: 1px solid #f0f0f0;
         }
         
@@ -161,11 +164,11 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
         
         .experience-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #2d5a3d;
         }
@@ -173,51 +176,52 @@
         .experience-company {
             font-weight: 500;
             color: #666;
+            font-size: 0.85rem;
         }
         
         .experience-date {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #888;
             font-weight: 500;
         }
         
         .experience-description {
             color: #4a4a4a;
-            line-height: 1.4;
-            font-size: 0.9rem;
+            line-height: 1.3;
+            font-size: 0.8rem;
         }
         
-        /* Projects */
+        /* Projects - Compact for Single Page */
         .project-item {
-            margin-bottom: 0.6rem;
-            padding: 0.5rem;
+            margin-bottom: 0.4rem;
+            padding: 0.3rem;
             background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 3px solid #2d5a3d;
+            border-radius: 4px;
+            border-left: 2px solid #2d5a3d;
         }
         
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
         
         .project-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #2d5a3d;
         }
         
         .project-links {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.4rem;
         }
         
         .project-link {
             color: #2d5a3d;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         
@@ -227,32 +231,32 @@
         
         .project-description {
             color: #4a4a4a;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+            font-size: 0.75rem;
         }
         
         .project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
+            gap: 0.2rem;
         }
         
         .tech-tag {
             background: #e8f5e8;
             color: #2d5a3d;
-            padding: 0.15rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 0.1rem 0.3rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
             font-weight: 500;
         }
         
-        /* Education */
+        /* Education - Compact for Single Page */
         .education-item {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 0.6rem 0;
+            padding: 0.3rem 0;
             border-bottom: 1px solid #f0f0f0;
         }
         
@@ -263,50 +267,51 @@
         .education-content h4 {
             color: #2d5a3d;
             font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.1rem;
+            font-size: 0.85rem;
         }
         
         .education-place {
             color: #666;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         .education-date {
             color: #888;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
         }
         
-        /* Languages */
+        /* Languages - Compact for Single Page */
         .languages {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
         
         .language-item {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
         
         .language-level {
             background: #e8f5e8;
             color: #2d5a3d;
-            padding: 0.15rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         
-        /* Print Styles */
+        /* Print Styles - Optimized for Single Page */
         @media print {
             body {
                 background: white;
                 margin: 0;
                 padding: 0;
+                font-size: 12px;
             }
             
             .cv-container {
@@ -314,27 +319,30 @@
                 max-width: none;
                 margin: 0;
                 padding: 0;
+                height: 100vh;
+                overflow: hidden;
             }
             
             .header {
                 -webkit-print-color-adjust: exact;
                 color-adjust: exact;
-                padding: 1rem 1.5rem;
+                padding: 0.8rem 1.2rem;
             }
             
             .main-content {
-                padding: 0.8rem 1.5rem;
+                padding: 0.6rem 1.2rem;
             }
             
             .section {
-                margin-bottom: 0.6rem;
+                margin-bottom: 0.4rem;
                 page-break-inside: avoid;
             }
             
             .section-title {
                 -webkit-print-color-adjust: exact;
                 color-adjust: exact;
-                margin-bottom: 0.4rem;
+                margin-bottom: 0.3rem;
+                font-size: 1rem;
             }
             
             .skill-tag, .tech-tag, .language-level {
@@ -343,57 +351,88 @@
             }
             
             .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.3rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.2rem;
             }
             
             .project-item {
-                margin-bottom: 0.4rem;
-                padding: 0.3rem;
+                margin-bottom: 0.3rem;
+                padding: 0.2rem;
             }
             
             .experience-item {
-                margin-bottom: 0.4rem;
-                padding-bottom: 0.4rem;
+                margin-bottom: 0.3rem;
+                padding-bottom: 0.3rem;
             }
             
-            /* Force one page */
+            /* Ensure single page layout */
             .cv-container {
                 height: 100vh;
                 overflow: hidden;
+                page-break-inside: avoid;
+            }
+            
+            /* Compact spacing for print */
+            .summary {
+                font-size: 0.8rem;
+                line-height: 1.3;
+                margin-bottom: 0.2rem;
+            }
+            
+            .skill-category {
+                padding: 0.2rem;
+            }
+            
+            .skill-category h4 {
+                font-size: 0.75rem;
+                margin-bottom: 0.2rem;
+            }
+            
+            .skill-tag {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.3rem;
             }
         }
         
-        /* Compact Layout for One Page */
+        /* Ultra-Compact Layout for Single Page */
         .compact-layout .section {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
         
         .compact-layout .skills-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.4rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.3rem;
         }
         
         .compact-layout .skill-category {
-            padding: 0.4rem;
+            padding: 0.25rem;
         }
         
         .compact-layout .project-item {
-            margin-bottom: 0.5rem;
-            padding: 0.4rem;
+            margin-bottom: 0.3rem;
+            padding: 0.25rem;
         }
         
         .compact-layout .experience-item {
-            margin-bottom: 0.6rem;
-            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            padding-bottom: 0.4rem;
         }
         
         .compact-layout .section-title {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
         
         .compact-layout .summary {
-            line-height: 1.4;
+            line-height: 1.3;
+            font-size: 0.8rem;
+        }
+        
+        .compact-layout .main-content {
+            padding: 0.6rem 1rem;
+        }
+        
+        .compact-layout .header {
+            padding: 0.8rem 1rem;
         }
         
         /* Responsive */
@@ -437,9 +476,8 @@
     <div class="cv-container compact-layout">
         <!-- Header Section -->
         <div class="header">
-            <h1>Chams</h1>
+            <h1>Chames eddine Dhibi</h1>
             <div class="title">Full Stack Web & Mobile Developer</div>
-            <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.3rem;">📄 Guaranteed 1 Page Layout</div>
             <div class="contact-info">
                 <div class="contact-item">
                     <svg viewBox="0 0 24 24">
@@ -451,7 +489,7 @@
                     <svg viewBox="0 0 24 24">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                     </svg>
-                    <span>+216 XX XXX XXX</span>
+                    <span>+216 51091800</span>
                 </div>
                 <div class="contact-item">
                     <svg viewBox="0 0 24 24">
@@ -480,9 +518,8 @@
             <div class="section">
                 <h2 class="section-title">Professional Summary</h2>
                 <div class="summary">
-                    Passionate Full Stack Web & Mobile Developer with expertise in modern web technologies and mobile app development. 
-                    Specialized in responsive, performance-optimized applications with elegant user experiences. 
-                    Proven track record of delivering high-quality projects using cutting-edge frameworks and best practices.
+                    Full Stack Web & Mobile Developer specializing in modern web technologies and responsive applications. 
+                    Proven expertise in delivering high-quality projects with cutting-edge frameworks and performance optimization.
                 </div>
             </div>
 
@@ -491,47 +528,36 @@
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <h4>Frontend Development</h4>
+                        <h4>Frontend</h4>
                         <ul class="skill-list">
                             <li class="skill-tag">HTML5</li>
                             <li class="skill-tag">CSS3</li>
-                            <li class="skill-tag">JavaScript (ES6+)</li>
+                            <li class="skill-tag">JavaScript</li>
                             <li class="skill-tag">React.js</li>
                             <li class="skill-tag">Next.js</li>
-                            <li class="skill-tag">Tailwind CSS</li>
-                            <li class="skill-tag">Responsive Design</li>
+                            <li class="skill-tag">Tailwind</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h4>Backend Development</h4>
+                        <h4>Backend</h4>
                         <ul class="skill-list">
+                            <li class="skill-tag">PHP</li>
                             <li class="skill-tag">Python</li>
                             <li class="skill-tag">Node.js</li>
                             <li class="skill-tag">Express.js</li>
-                            <li class="skill-tag">RESTful APIs</li>
-                            <li class="skill-tag">Database Design</li>
-                            <li class="skill-tag">Authentication</li>
+                            <li class="skill-tag">REST APIs</li>
+                            <li class="skill-tag">Database</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h4>Mobile Development</h4>
+                        <h4>Mobile & Tools</h4>
                         <ul class="skill-list">
-                            <li class="skill-tag">React Native</li>
-                            <li class="skill-tag">Mobile-First Design</li>
-                            <li class="skill-tag">Touch Interactions</li>
-                            <li class="skill-tag">Performance Optimization</li>
-                            <li class="skill-tag">Cross-Platform</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Tools & Technologies</h4>
-                        <ul class="skill-list">
+                            <li class="skill-tag">Flutter</li>
                             <li class="skill-tag">Git & GitHub</li>
                             <li class="skill-tag">VS Code</li>
                             <li class="skill-tag">Figma</li>
-                            <li class="skill-tag">Docker</li>
+                            <li class="skill-tag">Auth</li>
                             <li class="skill-tag">Webpack</li>
-                            <li class="skill-tag">Lighthouse</li>
                         </ul>
                     </div>
                 </div>
@@ -543,14 +569,13 @@
                 <div class="experience-item">
                     <div class="experience-header">
                         <div>
-                            <div class="experience-title">Full Stack Python Developer Training</div>
+                            <div class="experience-title">Python Programming Training</div>
                             <div class="experience-company">Go My Code</div>
                         </div>
-                        <div class="experience-date">2024</div>
+                        <div class="experience-date">2022</div>
                     </div>
                     <div class="experience-description">
-                        Completed intensive training program covering full stack development using Python, web frameworks, databases, 
-                        and modern development practices. Developed practical skills in building complete web applications.
+                        Intensive training in Python programming, web frameworks, databases, and modern development practices.
                     </div>
                 </div>
                 <div class="experience-item">
@@ -559,11 +584,10 @@
                             <div class="experience-title">Freelance Web Developer</div>
                             <div class="experience-company">Self-Employed</div>
                         </div>
-                        <div class="experience-date">2023 - Present</div>
+                        <div class="experience-date">2025</div>
                     </div>
                     <div class="experience-description">
-                        Successfully delivered multiple client projects including e-commerce platforms, portfolio websites, and business applications. 
-                        Managed project timelines, client communication, and technical implementation.
+                        Beginning freelance journey, working on personal projects and learning client management while developing web applications.
                     </div>
                 </div>
             </div>
@@ -573,62 +597,45 @@
                 <h2 class="section-title">Notable Projects</h2>
                 <div class="project-item">
                     <div class="project-header">
-                        <div class="project-title">ChamsShop - E-commerce Platform</div>
-                        <div class="project-links">
-                            <a href="ChamsShop/" class="project-link">Live Demo</a>
-                            <a href="https://github.com/Chams99/portfolio/tree/main/ChamsShop" class="project-link">GitHub</a>
-                        </div>
+                        <div class="project-title">Lava - E-commerce Platform</div>
                     </div>
                     <div class="project-description">
-                        Full-stack e-commerce solution with user authentication, product management, shopping cart functionality, 
-                        and secure payment processing. Built with Node.js, Express, and modern frontend technologies.
+                        Full-stack e-commerce with authentication, product management, shopping cart, and payment processing.
                     </div>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">Express</span>
                         <span class="tech-tag">MongoDB</span>
                         <span class="tech-tag">EJS</span>
-                        <span class="tech-tag">CSS3</span>
                     </div>
                 </div>
                 <div class="project-item">
                     <div class="project-header">
                         <div class="project-title">Fitness App - Mobile Application</div>
-                        <div class="project-links">
-                            <a href="fitness_app/" class="project-link">Live Demo</a>
-                            <a href="https://github.com/Chams99/portfolio/tree/main/fitness_app" class="project-link">GitHub</a>
-                        </div>
                     </div>
                     <div class="project-description">
-                        Mobile-first fitness application featuring dynamic theme switching, responsive design, and performance optimization. 
-                        Achieved 95+ Lighthouse performance score.
+                        Mobile fitness app with AI integration, object recognition, dynamic themes, and Git APIs for data management.
                     </div>
                     <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Tailwind CSS</span>
-                        <span class="tech-tag">Mobile-First</span>
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Git APIs</span>
+                        <span class="tech-tag">AI Integration</span>
+                        <span class="tech-tag">Object Recognition</span>
                     </div>
                 </div>
                 <div class="project-item">
                     <div class="project-header">
-                        <div class="project-title">Energy Portfolio - Next.js Application</div>
-                        <div class="project-links">
-                            <a href="Energy/" class="project-link">Live Demo</a>
-                            <a href="https://github.com/Chams99/portfolio/tree/main/Energy" class="project-link">GitHub</a>
-                        </div>
+                        <div class="project-title">Energy Portfolio - Next.js App</div>
                     </div>
                     <div class="project-description">
-                        Modern portfolio website built with Next.js 14, featuring React components, Tailwind CSS styling, 
-                        and optimized performance. Includes interactive elements and responsive design.
+                        Modern portfolio built with Next.js 14, React components, Tailwind CSS, and optimized performance.
                     </div>
                     <div class="project-tech">
                         <span class="tech-tag">Next.js 14</span>
                         <span class="tech-tag">React</span>
-                        <span class="tech-tag">Tailwind CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Performance</span>
+                        <span class="tech-tag">Tailwind</span>
+                        <span class="tech-tag">Optimization</span>
                     </div>
                 </div>
             </div>
@@ -640,9 +647,9 @@
                     <div class="education-content">
                         <h4>Software Engineering</h4>
                         <div class="education-place">Faculty of Science Gafsa</div>
-                        <div>Currently pursuing degree in Software Engineering</div>
+                        <div>Currently pursuing Bachelor's degree in Software Engineering</div>
                     </div>
-                    <div class="education-date">2021 - Present</div>
+                    <div class="education-date">2023 - 2026</div>
                 </div>
             </div>
 

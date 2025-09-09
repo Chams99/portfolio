@@ -57,6 +57,9 @@
     
     <!-- Load only essential GSAP core - defer non-critical plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="apple-touch-icon" sizes="180x180" href="fa/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="fa/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="fa/favicon-16x16.png">
@@ -605,12 +608,52 @@
         </div>
     </section>
 
-    <!-- Load modern icon library - Lucide (2025 best practice) -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Load modern icon library - Lucide (2025 best practice) with lazy loading -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
-    <!-- Load non-critical scripts with proper deferring -->
+    <!-- Load non-critical scripts with proper deferring and lazy loading -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="script.js" defer></script>
+    
+    <!-- Lazy load non-critical resources -->
+    <script>
+        // Lazy load particles.js only when needed
+        function lazyLoadParticles() {
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Load particles.js when hero section is visible
+                            if (typeof particlesJS !== 'undefined') {
+                                particlesJS('particles-js', {
+                                    particles: {
+                                        number: { value: 30 },
+                                        color: { value: '#ECDBBA' },
+                                        shape: { type: 'circle' },
+                                        opacity: { value: 0.3 },
+                                        size: { value: 2 },
+                                        move: {
+                                            enable: true,
+                                            speed: 1
+                                        }
+                                    }
+                                });
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                const heroSection = document.querySelector('.hero');
+                if (heroSection) {
+                    observer.observe(heroSection);
+                }
+            }
+        }
+        
+        // Initialize lazy loading when DOM is ready
+        document.addEventListener('DOMContentLoaded', lazyLoadParticles);
+    </script>
     
     <!-- Service Worker Registration -->
     <script>
