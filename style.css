@@ -33,19 +33,25 @@ body {
     color: var(--beige);
     line-height: 1.6;
     overflow-x: hidden;
+    overflow-y: auto; /* Ensure vertical scrolling works properly */
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    /* Use custom vh property on mobile to fix viewport height issues */
+    min-height: calc(var(--vh, 1vh) * 100);
+    /* Prevent infinite scrolling gap */
+    height: auto;
 }
 
 html {
     scroll-behavior: smooth;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
 }
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    /* Use custom vh property on mobile to fix viewport height issues */
+    min-height: calc(var(--vh, 1vh) * 100);
     padding: 0 5%;
     display: flex;
     align-items: center;
@@ -340,6 +346,59 @@ textarea:focus-visible {
     border-radius: 4px;
 }
 
+/* Ensure text elements remain visible after animations */
+.portfolio-title,
+.section-title,
+.contact-header h3,
+.skill-name,
+.experience-title,
+.about-intro,
+.skill-description,
+.portfolio-description,
+.contact-description,
+.experience-description {
+    opacity: 1 !important; /* Override any animation opacity changes */
+    visibility: visible !important;
+    transform: none !important; /* Prevent any transform issues */
+}
+
+/* Ensure contact section elements stay visible */
+.contact-info,
+.contact-form,
+.contact-details,
+.contact-item,
+.social-links {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Ensure portfolio items stay visible after filtering */
+.portfolio-item,
+.portfolio-item-inner,
+.portfolio-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Ensure skill cards stay visible */
+.skill-card,
+.skill-info {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Force visibility for all animated elements */
+.about-content,
+.skills-container,
+.portfolio-grid,
+.contact-container {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 /* Reduced motion preferences and performance optimizations */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -602,23 +661,33 @@ textarea:focus-visible {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    /* Fix infinite scrolling gap on mobile */
+    html, body {
+        height: auto;
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
+
+    .hero {
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
+
     /* Disable expensive animations on mobile for better performance */
     .hero-blob {
         display: none;
     }
-    
+
     .parallax-element {
         transform: none !important;
     }
-    
+
     /* Optimize hover effects for touch devices */
     .skill-card:hover,
     .portfolio-item:hover,
     .experience-item:hover {
         transform: none;
     }
-    
+
     /* Reduce animation complexity on mobile */
     * {
         animation-duration: 0.2s !important;
@@ -641,6 +710,16 @@ textarea:focus-visible {
 
     .cta-button {
         width: 100%;
+    }
+
+    /* Fix infinite scrolling gap on mobile */
+    html, body {
+        height: auto;
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
+
+    .hero {
+        min-height: calc(var(--vh, 1vh) * 100);
     }
 }
 
@@ -1206,6 +1285,11 @@ section:last-of-type {
     padding: 0 2rem;
 }
 
+#portfolio {
+    min-height: auto; /* Allow dynamic height calculation */
+    contain: layout; /* Optimize for dynamic content changes */
+}
+
 .portfolio-filters {
     display: flex;
     justify-content: center;
@@ -1258,6 +1342,7 @@ section:last-of-type {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+    min-height: auto; /* Ensure dynamic height calculation */
 }
 
 .portfolio-item {
