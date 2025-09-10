@@ -407,9 +407,9 @@ const projects = [
         ],
         tags: ['JavaScript', 'HTML5', 'CSS3', 'Web Game']
     },
-    { 
-        title: 'Wallpaper Generator DEMO', 
-        description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.', 
+    {
+        title: 'Wallpaper Generator DEMO',
+        description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.',
         category: 'web',
         image: 'wallpaper/Capture d\'écran 2025-05-31 092043.png',
         github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
@@ -536,12 +536,21 @@ function initializePortfolio() {
                 // Create and animate filtered items
                 createPortfolioItems(filteredProjects);
 
+                // Ensure all portfolio items remain visible after filtering
+                setTimeout(() => {
+                    const allPortfolioItems = document.querySelectorAll('.portfolio-item');
+                    allPortfolioItems.forEach(item => {
+                        item.style.opacity = '1';
+                        item.style.visibility = 'visible';
+                    });
+                }, 10);
+
                 // Re-initialize Lucide icons after DOM update
                 setTimeout(() => {
                     initializeLucideIcons();
-                }, 10);
+                }, 50);
 
-                // Animate the new items only if GSAP is loaded
+                            // Animate the new items only if GSAP is loaded
                 if (typeof gsap !== 'undefined') {
                     const newItems = document.querySelectorAll('.portfolio-item');
                     if (newItems.length > 0) {
@@ -550,10 +559,37 @@ function initializePortfolio() {
                             y: 20,
                             opacity: 0,
                             stagger: 0.05,
-                            ease: 'power2.out'
+                            ease: 'power2.out',
+                            onComplete: () => {
+                                // Ensure elements remain visible after animation
+                                newItems.forEach(item => {
+                                    item.style.opacity = '1';
+                                    item.style.visibility = 'visible';
+                                });
+                            }
                         });
                     }
                 }
+
+                // Fix viewport height issues after filtering on mobile
+                setTimeout(() => {
+                    if (typeof setVH === 'function') {
+                        setVH(); // Recalculate viewport height after content change
+                    }
+
+                    // Force a reflow to fix any layout issues
+                    document.body.offsetHeight;
+
+                    // Additional fix for dynamic content height changes
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        // Temporarily set height to auto to recalculate
+                        portfolioSection.style.minHeight = 'auto';
+                        setTimeout(() => {
+                            portfolioSection.style.minHeight = '';
+                        }, 10);
+                    }
+                }, 100);
 
                 // Contact section remains visible after filtering - no need to force visibility
             }, 50);
@@ -567,48 +603,59 @@ function initializePortfolio() {
 function animateSkillCards() {
     const skillCards = document.querySelectorAll('.skill-card');
     if (skillCards.length === 0) return;
-    
+
+    // Ensure all skill cards are visible immediately to prevent disappearing
+    skillCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        card.style.visibility = 'visible';
+    });
+
+    // Disabled intersection observer to prevent conflicts with GSAP animations
+    /*
     const animatedCards = new Set();
     let animationFrameId;
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !animatedCards.has(entry.target)) {
                 animatedCards.add(entry.target);
-                
+
                 // Use requestAnimationFrame for smooth animation
                 if (animationFrameId) {
                     cancelAnimationFrame(animationFrameId);
                 }
-                
+
                 animationFrameId = requestAnimationFrame(() => {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(30px)';
-                    entry.target.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
-                    
-                    // Trigger animation on next frame
-                    requestAnimationFrame(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    });
+                    // Only animate if element is not already visible
+                    if (getComputedStyle(entry.target).opacity === '0' || entry.target.style.opacity === '0') {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(30px)';
+                        entry.target.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+
+                        // Trigger animation on next frame
+                        requestAnimationFrame(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        });
+                    }
                 });
-                
+
                 // Unobserve after animation
                 setTimeout(() => {
                     observer.unobserve(entry.target);
                 }, 400);
             }
         });
-    }, { 
+    }, {
         threshold: 0.1,
         rootMargin: '0px 0px -30px 0px'
     });
 
     skillCards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
         observer.observe(card);
     });
+    */
 }
 
 // Removed ensureContactVisibility function - contact section remains visible once loaded
@@ -705,13 +752,15 @@ async function initializeGSAPAnimations() {
         gsap.from(aboutContent, {
             scrollTrigger: {
                 trigger: aboutContent,
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
+                start: 'top 80%'
             },
             duration: 1,
             y: 60,
             opacity: 0,
-            stagger: 0.2
+            stagger: 0.2,
+            onComplete: () => {
+                gsap.set(aboutContent, { opacity: 1, y: 0, clearProps: 'transform' });
+            }
         });
     }
 
@@ -721,13 +770,17 @@ async function initializeGSAPAnimations() {
         gsap.from(skillItems, {
             scrollTrigger: {
                 trigger: '.skills-container',
-                start: 'top 75%',
-                toggleActions: 'play none none reverse'
+                start: 'top 75%'
             },
             duration: 0.8,
             y: 40,
             opacity: 0,
-            stagger: 0.1
+            stagger: 0.1,
+            onComplete: () => {
+                skillItems.forEach(item => {
+                    gsap.set(item, { opacity: 1, y: 0, clearProps: 'transform' });
+                });
+            }
         });
     }
 
@@ -737,30 +790,37 @@ async function initializeGSAPAnimations() {
         gsap.from(portfolioItems, {
             scrollTrigger: {
                 trigger: '.portfolio-grid',
-                start: 'top 75%',
-                toggleActions: 'play none none reverse'
+                start: 'top 75%'
             },
             duration: 0.8,
             y: 50,
             opacity: 0,
-            stagger: 0.2
+            stagger: 0.2,
+            onComplete: () => {
+                // Explicitly ensure elements stay visible after animation
+                portfolioItems.forEach(item => {
+                    gsap.set(item, { opacity: 1, y: 0, clearProps: 'transform' });
+                });
+            }
         });
     }
 
-    // Contact Section Animation - Modified to prevent disappearing
+    // Contact Section Animation - Fixed to prevent disappearing
     const contactInfo = document.querySelector('.contact-info');
     const contactForm = document.querySelector('.contact-form');
-    
+
     if (contactInfo) {
         gsap.from(contactInfo, {
             scrollTrigger: {
                 trigger: '.contact-container',
-                start: 'top 75%',
-                toggleActions: 'play none none reverse'
+                start: 'top 75%'
             },
             duration: 1,
             x: -50,
-            opacity: 0
+            opacity: 0,
+            onComplete: () => {
+                gsap.set(contactInfo, { opacity: 1, x: 0, clearProps: 'transform' });
+            }
         });
     }
 
@@ -768,12 +828,14 @@ async function initializeGSAPAnimations() {
         gsap.from(contactForm, {
             scrollTrigger: {
                 trigger: '.contact-container',
-                start: 'top 75%',
-                toggleActions: 'play none none reverse'
+                start: 'top 75%'
             },
             duration: 1,
             x: 50,
-            opacity: 0
+            opacity: 0,
+            onComplete: () => {
+                gsap.set(contactForm, { opacity: 1, x: 0, clearProps: 'transform' });
+            }
         });
     }
 
@@ -784,12 +846,14 @@ async function initializeGSAPAnimations() {
             gsap.from(title, {
                 scrollTrigger: {
                     trigger: title,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
+                    start: 'top 85%'
                 },
                 duration: 0.8,
                 y: 30,
-                opacity: 0
+                opacity: 0,
+                onComplete: () => {
+                    gsap.set(title, { opacity: 1, y: 0, clearProps: 'transform' });
+                }
             });
         });
     }
@@ -818,14 +882,18 @@ async function initializeGSAPAnimations() {
         gsap.to(skillCards, {
             scrollTrigger: {
                 trigger: '.skills-container',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
+                start: 'top 80%'
             },
             duration: 0.8,
             y: 0,
             opacity: 1,
             stagger: 0.1,
-            ease: 'power2.out'
+            ease: 'power2.out',
+            onComplete: () => {
+                skillCards.forEach(card => {
+                    gsap.set(card, { opacity: 1, y: 0, clearProps: 'transform' });
+                });
+            }
         });
     }
 
@@ -1101,16 +1169,27 @@ function downloadResume() {
 
 // Initialize Lucide icons (2025 best practice)
 function initializeLucideIcons() {
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    } else {
-        // Fallback initialization if Lucide loads after DOM
-        setTimeout(() => {
-            if (typeof lucide !== 'undefined') {
+    const initIcons = () => {
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+            try {
                 lucide.createIcons();
+                console.log('Lucide icons initialized successfully');
+            } catch (error) {
+                console.warn('Error initializing Lucide icons:', error);
             }
-        }, 100);
-    }
+        } else {
+            console.warn('Lucide library not loaded yet');
+        }
+    };
+
+    // Try to initialize immediately
+    initIcons();
+
+    // Fallback: try again after a short delay in case Lucide loads after DOM
+    setTimeout(initIcons, 100);
+
+    // Additional fallback: try again after portfolio is loaded
+    setTimeout(initIcons, 500);
 }
 
 // Initialize everything when DOM is ready - Optimized loading order
@@ -1119,11 +1198,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePortfolio();
     animateSkillCards();
     initializeContactForm();
-    ensureContactVisibility();
 
     // Initialize performance optimizations
     optimizePerformance();
     enhanceAccessibility();
+
+    // Initialize viewport height fix for all devices
+    initializeViewportHeightFix();
 
     // Initialize enhanced features with staggered loading
     requestIdleCallback(() => {
@@ -1133,7 +1214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initializePageTransitions();
         initializeMobileOptimizations();
         initializeAdvancedInteractions();
-        
+
         // Initialize particles after other features
         initializeParticles();
     });
@@ -1146,6 +1227,85 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeGSAPAnimations();
     }, 200);
 });
+
+// Global viewport height fix function
+let setVH;
+let portfolioObserver;
+
+function initializeViewportHeightFix() {
+    // Add viewport height fix for mobile browsers
+    setVH = function() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        // Also update body height to prevent infinite scrolling gap
+        document.body.style.minHeight = `calc(${vh}px * 100)`;
+
+        // Force reflow to fix layout issues
+        document.body.offsetHeight; // Trigger reflow
+    };
+
+    // Initial call
+    setVH();
+
+    // Add event listeners with debouncing to prevent excessive calls
+    let vhTimeout;
+    function debouncedSetVH() {
+        clearTimeout(vhTimeout);
+        vhTimeout = setTimeout(setVH, 100);
+    }
+
+    window.addEventListener('resize', debouncedSetVH);
+    window.addEventListener('orientationchange', debouncedSetVH);
+
+    // Also call on load to ensure proper initialization
+    window.addEventListener('load', setVH);
+
+    // Set up observer for portfolio content changes
+    setupPortfolioObserver();
+}
+
+function setupPortfolioObserver() {
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (!portfolioGrid) return;
+
+    // Create a MutationObserver to watch for content changes
+    portfolioObserver = new MutationObserver((mutations) => {
+        let contentChanged = false;
+
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                contentChanged = true;
+            }
+        });
+
+        if (contentChanged) {
+            // Content changed, recalculate viewport height after a short delay
+            setTimeout(() => {
+                if (typeof setVH === 'function') {
+                    setVH();
+
+                    // Force layout recalculation
+                    document.body.offsetHeight;
+
+                    // Reset portfolio section height calculation
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        portfolioSection.style.minHeight = 'auto';
+                        setTimeout(() => {
+                            portfolioSection.style.minHeight = '';
+                        }, 10);
+                    }
+                }
+            }, 100);
+        }
+    });
+
+    // Start observing
+    portfolioObserver.observe(portfolioGrid, {
+        childList: true,
+        subtree: false
+    });
+}
 
 // Mobile-specific enhancements
 function initializeMobileOptimizations() {
@@ -1240,15 +1400,45 @@ function initializeMobileOptimizations() {
         document.head.appendChild(style);
     }
 
-    // Add viewport height fix for mobile browsers
-    function setVH() {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-
-    setVH();
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', setVH);
+    // Initialize viewport height fix
+    initializeViewportHeightFix();
 }
+
+// Global function to ensure all elements stay visible
+function ensureAllElementsVisible() {
+    // Force visibility for all critical elements
+    const elementsToShow = [
+        '.portfolio-title',
+        '.section-title',
+        '.contact-header h3',
+        '.skill-name',
+        '.experience-title',
+        '.about-intro',
+        '.portfolio-item',
+        '.skill-card',
+        '.contact-info',
+        '.contact-form',
+        '.experience-item'
+    ];
+
+    elementsToShow.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            element.style.opacity = '1';
+            element.style.visibility = 'visible';
+            element.style.transform = 'none';
+        });
+    });
+}
+
+// Call this function periodically to ensure visibility
+setInterval(ensureAllElementsVisible, 1000);
+
+// Cleanup observer on page unload
+window.addEventListener('beforeunload', () => {
+    if (portfolioObserver) {
+        portfolioObserver.disconnect();
+    }
+});
 
 // Removed scroll handler for contact visibility - contact section should remain visible once loaded
