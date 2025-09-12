@@ -238,30 +238,30 @@ function initializeParticles() {
 
 // Portfolio items data with optimized responsive images
 const projects = [
-    { 
-        title: 'Energy - Renewable Energy Solutions', 
-        description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.', 
+    {
+        title: 'Dent - Premium Dental Care & Cosmetic Dentistry',
+        description: 'A modern, responsive dental clinic website built with Next.js featuring premium dental care services including teeth whitening, Invisalign, cosmetic dentistry, and dental implants. Professional design with appointment booking system.',
         category: 'web',
-        image: 'Images/optimized/energy-small.webp',
-        imageSrcSet: 'Images/optimized/energy-small.webp 486w, Images/optimized/energy-medium.webp 972w, Images/optimized/energy-large.webp 1458w',
-        imageFallback: 'Images/optimized/energy-fallback.jpg',
-        github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
-        demo: 'Energy/',
+        image: 'Images/white.png',
+        imageSrcSet: 'Images/white.png 486w',
+        imageFallback: 'Images/white.png',
+        github: 'https://github.com/Chams99/portfolio/tree/main/white',
+        demo: 'white/',
         features: [
-            '<i data-lucide="sun"></i> Solar & Wind Energy Solutions',
+            '<i data-lucide="smile"></i> Complete Dental Services',
             '<i data-lucide="smartphone"></i> Fully Responsive Design',
-            '<i data-lucide="zap"></i> Next.js 14 Performance',
+            '<i data-lucide="zap"></i> Next.js Performance',
             '<i data-lucide="palette"></i> Modern Professional UI',
-            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
-            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
-            '<i data-lucide="file-text"></i> Blog & Project Showcase',
-            '<i data-lucide="mail"></i> Lead Generation Forms'
+            '<i data-lucide="calendar"></i> Appointment Booking System',
+            '<i data-lucide="users"></i> Patient Testimonials',
+            '<i data-lucide="star"></i> 5-Star Rated Services',
+            '<i data-lucide="phone"></i> Contact Integration'
         ],
-        tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
+        tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dental Clinic', 'Healthcare', 'Professional']
     },
-    { 
-        title: 'FitLite - AI Fitness Companion DEMO', 
-        description: 'A modern, responsive landing page for FitLite - an AI-powered fitness companion app. Features dynamic theme switching, smooth animations, and mobile-first design with cutting-edge web technologies.', 
+    {
+        title: 'FitLite - AI Fitness Companion DEMO',
+        description: 'A modern, responsive landing page for FitLite - an AI-powered fitness companion app. Features dynamic theme switching, smooth animations, and mobile-first design with cutting-edge web technologies.',
         category: 'mobile',
         image: 'Images/optimized/Fitness-small.webp',
         imageSrcSet: 'Images/optimized/Fitness-small.webp 557w, Images/optimized/Fitness-medium.webp 1114w, Images/optimized/Fitness-large.webp 1671w',
@@ -278,9 +278,9 @@ const projects = [
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Mobile App', 'AI', 'Performance']
     },
-    { 
-        title: 'La Cuisine - Fine Dining Restaurant', 
-        description: 'A modern, responsive single-page restaurant website built with 2025 best practices, featuring elegant design, smooth animations, and excellent user experience. Complete with interactive menu, reservation system, and professional styling.', 
+    {
+        title: 'La Cuisine - Fine Dining Restaurant',
+        description: 'A modern, responsive single-page restaurant website built with 2025 best practices, featuring elegant design, smooth animations, and excellent user experience. Complete with interactive menu, reservation system, and professional styling.',
         category: 'web',
         image: 'Images/optimized/restaurents-small.webp',
         imageSrcSet: 'Images/optimized/restaurents-small.webp 486w, Images/optimized/restaurents-medium.webp 972w, Images/optimized/restaurents-large.webp 1458w',
@@ -298,6 +298,27 @@ const projects = [
             '<i data-lucide="phone"></i> Contact Integration'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Restaurant', 'Professional', 'Responsive']
+    },
+    {
+        title: 'Energy - Renewable Energy Solutions',
+        description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.',
+        category: 'web',
+        image: 'Images/optimized/energy-small.webp',
+        imageSrcSet: 'Images/optimized/energy-small.webp 486w, Images/optimized/energy-medium.webp 972w, Images/optimized/energy-large.webp 1458w',
+        imageFallback: 'Images/optimized/energy-fallback.jpg',
+        github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
+        demo: 'Energy/',
+        features: [
+            '<i data-lucide="sun"></i> Solar & Wind Energy Solutions',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="zap"></i> Next.js 14 Performance',
+            '<i data-lucide="palette"></i> Modern Professional UI',
+            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
+            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
+            '<i data-lucide="file-text"></i> Blog & Project Showcase',
+            '<i data-lucide="mail"></i> Lead Generation Forms'
+        ],
+        tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
     },
     { 
         title: 'Chamsado Messenger DEMO', 
@@ -411,7 +432,7 @@ const projects = [
         title: 'Wallpaper Generator DEMO',
         description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.',
         category: 'web',
-        image: 'wallpaper/Capture d\'écran 2025-05-31 092043.png',
+        image: 'wallpaper/Capture%20d%27%C3%A9cran%202025-05-31%20092043.png',
         github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
         demo: 'wallpaper/',
         features: [
@@ -467,7 +488,7 @@ function initializePortfolio() {
                             <div class="portfolio-overlay">
                                 <div class="portfolio-buttons">
                                     ${project.github ? `<a href="${project.github}" class="portfolio-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
-                                    ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn ${project.category?.includes('game') ? 'game-btn' : ''}">Live Demo</a>` : ''}
+                                    ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn">Live Demo</a>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -858,7 +879,7 @@ async function initializeGSAPAnimations() {
         });
     }
 
-    // Parallax Effect for Hero Image
+    // Parallax Effect for Hero Image - Reduced for better control
     const heroImage = document.querySelector('.hero-image');
     if (heroImage) {
         gsap.to(heroImage, {
@@ -868,7 +889,7 @@ async function initializeGSAPAnimations() {
                 end: 'bottom top',
                 scrub: 1
             },
-            y: 100,
+            y: 30, // Reduced from 100px to 30px for subtle effect
             ease: 'none'
         });
     }
@@ -1018,8 +1039,15 @@ function initializePageTransitions() {
 
     links.forEach(link => {
         link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+
+            // Skip if href is just "#" or empty
+            if (!href || href === '#') {
+                return;
+            }
+
             e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
+            const target = document.querySelector(href);
 
             if (target) {
                 // Add fade effect
@@ -1042,8 +1070,14 @@ function initializeAdvancedInteractions() {
     const sectionLinks = document.querySelectorAll('a[href^="#"]');
     sectionLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetId = link.getAttribute('href');
+
+            // Skip if targetId is just "#" or empty
+            if (!targetId || targetId === '#') {
+                return;
+            }
+
+            e.preventDefault();
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
@@ -1123,7 +1157,9 @@ function initializeAdvancedInteractions() {
         const scrolled = window.pageYOffset;
 
         parallaxElements.forEach((element, index) => {
-            const rate = (index + 1) * 0.5;
+            // Reduced parallax rates for more subtle movement
+            const baseRate = 0.15; // Reduced from 0.5
+            const rate = index === 0 ? baseRate : (index + 1) * baseRate * 0.8;
             element.style.transform = `translateY(${scrolled * rate}px)`;
         });
     });
@@ -1156,15 +1192,16 @@ function hideLoadingState(element) {
 
 // Professional CV functionality
 function downloadResume() {
-    // Open the professional CV in a new tab
-    window.open('cv.html', '_blank');
-    
-    // Also provide option to download as PDF (users can print to PDF)
-    setTimeout(() => {
-        if (confirm('Professional CV opened in new tab. Would you like to download it as a PDF? (Print to PDF)')) {
-            window.open('cv.html', '_blank');
-        }
-    }, 1000);
+    // Create a link to download the PDF file
+    const link = document.createElement('a');
+    link.href = 'cv/Chames_eddine_Dhibi_CV_2025-09-09T14-16-47.pdf'; // Direct link to PDF file
+    link.download = 'Chames_eddine_Dhibi_CV_2025.pdf';
+    link.target = '_blank';
+
+    // Trigger the download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Initialize Lucide icons (2025 best practice)

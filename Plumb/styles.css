@@ -1,0 +1,529 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Section */
+header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+header h2 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Hero Section with Coupon */
+.hero {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    padding: 60px 0;
+    text-align: center;
+}
+
+.coupon-section {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.coupon-section h3 {
+    color: #ff6b35;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.coupon-amount {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ff6b35;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.coupon-section p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+    line-height: 1.4;
+}
+
+.coupon-fine-print {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 20px;
+    line-height: 1.4;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+/* Schedule Service Section */
+.schedule-service {
+    padding: 60px 0;
+    background: white;
+}
+
+.schedule-service h3 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.schedule-service > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.service-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-form input,
+.service-form textarea {
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.service-form input:focus,
+.service-form textarea:focus {
+    outline: none;
+    border-color: #1e3a8a;
+}
+
+.service-form button {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 0;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.testimonials h3 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+}
+
+.testimonial {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial blockquote {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial cite {
+    color: #666;
+    font-weight: bold;
+}
+
+.guarantee {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.guarantee p {
+    font-size: 1.3rem;
+    margin: 5px 0;
+}
+
+/* Trust Badges Section */
+.trust-badges {
+    padding: 40px 0;
+    background: white;
+}
+
+.trust-badges .container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #1e3a8a;
+    min-width: 150px;
+}
+
+.badge h4 {
+    color: #1e3a8a;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Main Content Section */
+.main-content {
+    padding: 60px 0;
+    background: white;
+}
+
+.intro-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.intro-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-section {
+    margin-bottom: 60px;
+}
+
+.services-section h3 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.services-section > p {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.plumbing-problems,
+.hvac-problems {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.plumbing-problems li,
+.hvac-problems li {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #1e3a8a;
+    font-size: 1rem;
+}
+
+.hvac-section h3 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.hvac-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Service Van Section */
+.service-van {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.van-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.van-image-container {
+    text-align: center;
+}
+
+.van-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.van-text h3 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+}
+
+.van-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.van-features {
+    list-style: none;
+    padding: 0;
+}
+
+.van-features li {
+    padding: 8px 0;
+    font-size: 1rem;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.van-features li:last-child {
+    border-bottom: none;
+}
+
+/* Our Team Section */
+.our-team {
+    padding: 80px 0;
+    background: white;
+}
+
+.our-team h3 {
+    font-size: 2.5rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.team-member {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.team-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #1e3a8a;
+}
+
+.team-member h4 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+
+.team-title {
+    color: #ff6b35;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.team-description {
+    color: #475569;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Footer CTA */
+footer {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-cta h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.phone-number {
+    display: inline-block;
+    background: #ff6b35;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.phone-number:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header h2 {
+        font-size: 1rem;
+    }
+
+    .coupon-amount {
+        font-size: 3rem;
+    }
+
+    .van-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .van-text h3 {
+        font-size: 1.5rem;
+    }
+
+    .our-team h3 {
+        font-size: 2rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-badges .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .badge {
+        min-width: 200px;
+    }
+
+    .plumbing-problems,
+    .hvac-problems {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-number {
+        font-size: 1.3rem;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    header {
+        padding: 30px 0;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .coupon-section {
+        padding: 30px 20px;
+    }
+
+    .coupon-amount {
+        font-size: 2.5rem;
+    }
+
+    .testimonial blockquote {
+        font-size: 1rem;
+    }
+
+    .phone-number {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+}

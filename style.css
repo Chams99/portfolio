@@ -658,9 +658,6 @@ textarea:focus-visible {
         grid-template-columns: 1fr;
     }
 
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
 
     /* Fix infinite scrolling gap on mobile */
     html, body {
@@ -725,7 +722,7 @@ textarea:focus-visible {
 
 /* Sections */
 section {
-    padding: 3rem 2rem;
+    padding: 3rem 1rem;
 }
 
 section:last-of-type {
@@ -737,21 +734,19 @@ section:last-of-type {
     color: var(--red);
     margin-bottom: 2rem;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
-/* Portfolio Grid */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-}
 
 .portfolio-item {
     background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item:hover {
@@ -787,15 +782,15 @@ section:last-of-type {
 
 /* About Section Styles */
 .about-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 0.75rem;
 }
 
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
     margin-bottom: 1rem;
     align-items: start;
     align-content: start;
@@ -1280,14 +1275,35 @@ section:last-of-type {
 
 /* Portfolio Section Styles */
 .portfolio-container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 0.75rem;
+    position: relative;
+    z-index: 1;
 }
 
 #portfolio {
     min-height: auto; /* Allow dynamic height calculation */
     contain: layout; /* Optimize for dynamic content changes */
+    position: relative;
+}
+
+#portfolio::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(52, 103, 81, 0.08) 30%,
+        rgba(52, 103, 81, 0.12) 60%,
+        rgba(200, 75, 49, 0.08) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
 }
 
 .portfolio-filters {
@@ -1296,6 +1312,8 @@ section:last-of-type {
     gap: 1rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
 }
 
 .filter-btn {
@@ -1339,10 +1357,12 @@ section:last-of-type {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
+    gap: 3rem;
     margin-bottom: 2rem;
     min-height: auto; /* Ensure dynamic height calculation */
+    position: relative;
+    z-index: 1;
 }
 
 .portfolio-item {
@@ -1356,6 +1376,9 @@ section:last-of-type {
     border-radius: 15px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item-inner:hover {
@@ -1364,7 +1387,7 @@ section:last-of-type {
 
 .portfolio-image {
     position: relative;
-    aspect-ratio: 16/9;
+    aspect-ratio: 2/1;
     overflow: hidden;
 }
 
@@ -1432,7 +1455,11 @@ section:last-of-type {
 }
 
 .portfolio-content {
-    padding: 1rem;
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .portfolio-title {
@@ -1477,20 +1504,38 @@ section:last-of-type {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .portfolio-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(400px, 1fr));
+        gap: 2.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .portfolio-filters {
         flex-wrap: wrap;
     }
-    
+
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(1, minmax(350px, 1fr));
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .portfolio-item {
+        min-height: 140px;
     }
 }
 
 /* Add to your existing portfolio styles */
 .portfolio-features {
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 10px;
 }
@@ -1807,17 +1852,103 @@ section:last-of-type {
 /* Contact Section Styles */
 #contact {
     padding: 4rem 5%;
-    background: linear-gradient(to bottom, rgba(22, 22, 22, 0.95), rgba(22, 22, 22, 0.98));
+    background: linear-gradient(
+        135deg,
+        rgba(22, 22, 22, 0.95) 0%,
+        rgba(52, 103, 81, 0.08) 20%,
+        rgba(52, 103, 81, 0.12) 40%,
+        rgba(52, 103, 81, 0.15) 60%,
+        rgba(200, 75, 49, 0.08) 80%,
+        rgba(200, 75, 49, 0.15) 100%
+    );
     position: relative;
     overflow: hidden;
 }
 
+#contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(52, 103, 81, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(200, 75, 49, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 40% 40%, rgba(236, 219, 186, 0.03) 0%, transparent 40%);
+    animation: contactBackgroundShift 25s ease-in-out infinite;
+}
+
+@keyframes contactBackgroundShift {
+    0%, 100% {
+        background-position: 0% 0%, 100% 0%, 50% 50%;
+    }
+    50% {
+        background-position: 100% 100%, 0% 100%, 50% 50%;
+    }
+}
+
+/* Floating elements for contact section */
+.contact-floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.contact-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--green), var(--red));
+    opacity: 0.1;
+    animation: contactFloat 15s ease-in-out infinite;
+}
+
+.contact-circle.circle-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.contact-circle.circle-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 5s;
+}
+
+.contact-circle.circle-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 60%;
+    animation-delay: 10s;
+}
+
+@keyframes contactFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-20px) rotate(120deg);
+    }
+    66% {
+        transform: translateY(10px) rotate(240deg);
+    }
+}
+
 .contact-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
     position: relative;
     z-index: 1;
 }
@@ -2074,10 +2205,16 @@ section:last-of-type {
     .contact-container {
         grid-template-columns: 1fr;
         gap: 2rem;
+        max-width: 100%;
+        padding: 0 1rem;
     }
-    
+
     .contact-details {
         grid-template-columns: 1fr;
+    }
+
+    .contact-floating-elements {
+        display: none; /* Hide floating elements on mobile for better performance */
     }
 }
 
@@ -2098,44 +2235,152 @@ section:last-of-type {
 
 
 
+/* Laravel Icon Styling */
+.laravel-icon {
+    font-size: 2.5rem;
+    color: #FF2D20;
+}
+
 /* Resume Download Section */
 .resume-section {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    margin: 1rem auto 0;
-    max-width: 600px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(52, 103, 81, 0.5), transparent);
+}
+
+.resume-section h3 {
+    color: var(--high-contrast-beige);
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--beige), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.resume-section p {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.resume-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .resume-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
-    background: var(--green);
-    color: var(--beige);
-    text-decoration: none;
+    padding: 0.875rem 1.5rem;
     border-radius: 12px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid var(--green);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-btn.primary {
+    background: var(--green);
+    color: var(--beige);
+    border-color: var(--green);
+}
+
+.resume-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--beige);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .resume-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 103, 81, 0.3);
+}
+
+.resume-btn.primary:hover {
     background: transparent;
     color: var(--green);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(52, 103, 81, 0.3);
+    border-color: var(--green);
+}
+
+.resume-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--green);
+    color: var(--green);
 }
 
 .resume-btn i {
     transition: transform 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .resume-btn:hover i {
-    transform: translateX(5px);
+    transform: translateX(3px);
+}
+
+/* Resume Section Responsive Design */
+@media (max-width: 768px) {
+    .resume-section {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .resume-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .resume-btn {
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-section {
+        padding: 1.25rem;
+        margin-top: 1.25rem;
+    }
+
+    .resume-section h3 {
+        font-size: 1.2rem;
+    }
+
+.resume-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+}
+
 }
 
 /* Animation Classes */
