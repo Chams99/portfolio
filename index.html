@@ -175,8 +175,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Resume Download Section -->
+                    <div class="resume-section">
+                        <h3>Download My Professional Resume</h3>
+                        <p>Get a comprehensive overview of my experience, skills, and qualifications in software development.</p>
+                        <div class="resume-actions">
+                            <a href="#" class="resume-btn primary" onclick="downloadResume()" title="Download PDF version">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                            <a href="cv.html" class="resume-btn secondary" target="_blank" title="View interactive version">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <!-- Right Column: Technical Skills -->
                 <div class="about-right-column">
                     <div class="skills-container">
@@ -350,7 +366,7 @@
                                 </div>
                                 <div class="skill-card">
                                     <div class="skill-logo">
-                                        <i class="fab fa-laravel" style="font-size: 2.5rem; color: #FF2D20;"></i>
+                                        <i class="fab fa-laravel laravel-icon"></i>
                                     </div>
                                     <div class="skill-info">
                                         <h5 class="skill-name">Laravel</h5>
@@ -474,15 +490,6 @@
                         </div>
                     </div>
 
-                    <!-- Resume Download Section -->
-                    <div class="resume-section">
-                        <h3>Download My Resume</h3>
-                        <p>Get a detailed overview of my experience, skills, and qualifications.</p>
-                        <a href="#" class="resume-btn" onclick="downloadResume()">
-                            <i class="fas fa-download"></i>
-                            Download CV
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -505,6 +512,13 @@
     </section>
 
     <section id="contact">
+        <!-- Floating Elements -->
+        <div class="contact-floating-elements">
+            <div class="contact-circle circle-1"></div>
+            <div class="contact-circle circle-2"></div>
+            <div class="contact-circle circle-3"></div>
+        </div>
+
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-container">
             <div class="contact-info">
