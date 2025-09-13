@@ -69,7 +69,155 @@
     <meta name="apple-mobile-web-app-title" content="Chames Portfolio">
 </head>
 <body>
-    <section class="hero">
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo/Brand -->
+            <div class="nav-brand">
+                <a href="#" class="brand-link" onclick="refreshPage()">
+                    <svg class="brand-logo" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#346751;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#C84B31;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Background Container -->
+                        <rect x="5" y="5" width="70" height="50" rx="25" fill="none" stroke="url(#logoGradient)" stroke-width="2" class="logo-bg"/>
+                        
+                        <!-- Letter C - Clear and Bold -->
+                        <path d="M20 30 Q20 15 35 15 L35 20 Q25 20 25 30 Q25 40 35 40 L35 45 Q20 45 20 30 Z" fill="url(#logoGradient)" class="logo-c"/>
+                        
+                        <!-- Letter D - Clear and Bold -->
+                        <path d="M45 15 L55 15 Q65 15 65 30 Q65 45 55 45 L45 45 Z M50 20 L50 40 L55 40 Q60 40 60 30 Q60 20 55 20 Z" fill="url(#logoGradient)" class="logo-d"/>
+                        
+                        <!-- Decorative Elements -->
+                        <circle cx="15" cy="15" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot1"/>
+                        <circle cx="65" cy="15" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot2"/>
+                        <circle cx="65" cy="45" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot3"/>
+                        <circle cx="15" cy="45" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot4"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation Menu -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#hero" class="nav-link active" data-section="hero">
+                            <span class="nav-text">Home</span>
+                            <span class="nav-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-section="about">
+                            <span class="nav-text">Skills & Experience</span>
+                            <span class="nav-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#portfolio" class="nav-link" data-section="portfolio">
+                            <span class="nav-text">Projects</span>
+                            <span class="nav-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-section="contact">
+                            <span class="nav-text">Contact</span>
+                            <span class="nav-indicator"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <div class="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay"></div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-brand">
+                    <svg class="mobile-brand-logo" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="mobileLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#346751;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#C84B31;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Background Container -->
+                        <rect x="5" y="5" width="70" height="50" rx="25" fill="none" stroke="url(#mobileLogoGradient)" stroke-width="2" class="logo-bg"/>
+                        
+                        <!-- Letter C - Clear and Bold -->
+                        <path d="M20 30 Q20 15 35 15 L35 20 Q25 20 25 30 Q25 40 35 40 L35 45 Q20 45 20 30 Z" fill="url(#mobileLogoGradient)" class="logo-c"/>
+                        
+                        <!-- Letter D - Clear and Bold -->
+                        <path d="M45 15 L55 15 Q65 15 65 30 Q65 45 55 45 L45 45 Z M50 20 L50 40 L55 40 Q60 40 60 30 Q60 20 55 20 Z" fill="url(#mobileLogoGradient)" class="logo-d"/>
+                        
+                        <!-- Decorative Elements -->
+                        <circle cx="15" cy="15" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot1"/>
+                        <circle cx="65" cy="15" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot2"/>
+                        <circle cx="65" cy="45" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot3"/>
+                        <circle cx="15" cy="45" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot4"/>
+                    </svg>
+                </div>
+                <button class="mobile-close" id="mobile-close" aria-label="Close mobile menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="#hero" class="mobile-nav-link active" data-section="hero">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#about" class="mobile-nav-link" data-section="about">
+                        <i class="fas fa-user-graduate nav-icon"></i>
+                        <span>Skills & Experience</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#portfolio" class="mobile-nav-link" data-section="portfolio">
+                        <i class="fas fa-briefcase nav-icon"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#contact" class="mobile-nav-link" data-section="contact">
+                        <i class="fas fa-envelope nav-icon"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mobile-menu-footer">
+                <div class="mobile-social-links">
+                    <a href="https://github.com/Chams99" class="mobile-social-link" target="_blank" rel="noopener" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/dhibi-chams-827146344/" class="mobile-social-link" target="_blank" rel="noopener" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://x.com/ChamesDhibi" class="mobile-social-link" target="_blank" rel="noopener" title="X (Twitter)">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
         <div id="particles-js"></div>
         <div class="hero-content">
             <div class="hero-text">
