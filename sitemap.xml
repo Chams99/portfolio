@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Main Portfolio Page -->
+    <url>
+        <loc>https://chames.youssef.tn/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Portfolio Sections -->
+    <url>
+        <loc>https://chames.youssef.tn/#hero</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/#about</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/#portfolio</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/#contact</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- CV/Resume Page -->
+    <url>
+        <loc>https://chames.youssef.tn/cv.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Project Demos -->
+    <url>
+        <loc>https://chames.youssef.tn/white/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/fitness_app/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/restaurents/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/Energy/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/messenger_app/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/Property/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/ChamsShop/Public/core/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/chicken/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/typing-game/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://chames.youssef.tn/wallpaper/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>
