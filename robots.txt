@@ -1,0 +1,104 @@
+# Robots.txt for Dhibi Chames Eddine Portfolio
+# https://chames.youssef.tn
+
+User-agent: *
+
+# Allow all search engines to crawl the main site
+Allow: /
+
+# Disallow access to sensitive directories and files
+Disallow: /config/
+Disallow: /node_modules/
+Disallow: /auth-test/
+Disallow: /StageurApp/
+Disallow: /hooks/
+Disallow: /objects/
+Disallow: /refs/
+Disallow: /info/
+Disallow: /scripts/
+Disallow: /IT-test/
+Disallow: /fa/
+Disallow: /css/
+Disallow: /sw.js
+Disallow: /telegram-proxy.php
+Disallow: /send_telegram.php
+Disallow: /telegram_token.php
+Disallow: /cv-pdf.js
+Disallow: /optimize_images.py
+Disallow: /description
+Disallow: /manifest.json
+Disallow: /package-lock.json
+Disallow: /package.json
+Disallow: /README-image-optimization.md
+Disallow: /CV_README.md
+Disallow: /HEAD
+
+# Disallow common files that shouldn't be indexed
+Disallow: *.log
+Disallow: *.sql
+Disallow: *.bat
+Disallow: *.md
+Disallow: *.sh
+Disallow: *.mjs
+Disallow: *.tsbuildinfo
+Disallow: *.env
+Disallow: *.config.js
+Disallow: *.config.ts
+
+# Allow important project demo directories
+Allow: /white/
+Allow: /fitness_app/
+Allow: /restaurents/
+Allow: /Energy/
+Allow: /messenger_app/
+Allow: /Property/
+Allow: /ChamsShop/
+Allow: /chicken/
+Allow: /typing-game/
+Allow: /wallpaper/
+
+# Allow CV page
+Allow: /cv.html
+
+# Allow static assets
+Allow: /Images/
+Allow: /images/
+Allow: /style.css
+Allow: /script.js
+Allow: /index.html
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://chames.youssef.tn/sitemap.xml
+
+# Additional directives for specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
