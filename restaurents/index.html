@@ -31,12 +31,66 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="https://www.svgrepo.com/show/448752/diner.svg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#d4af37">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="La Cuisine">
+    <link rel="apple-touch-icon" href="https://www.svgrepo.com/show/448752/diner.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Theme detection script to prevent FOUC -->
+    <script>
+        (function() {
+            // Function to get system theme preference
+            function getSystemTheme() {
+                try {
+                    if (window.matchMedia) {
+                        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                        return darkModeQuery.matches ? 'dark' : 'light';
+                    }
+                } catch (e) {
+                    // System theme detection not supported
+                }
+                return 'light';
+            }
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            let theme;
+            
+            if (savedTheme) {
+                // Use saved preference
+                theme = savedTheme;
+            } else {
+                // Detect system preference
+                theme = getSystemTheme();
+                // Save the detected system preference
+                localStorage.setItem('theme', theme);
+            }
+            
+            // Set theme immediately to prevent flash
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -50,9 +104,14 @@
                     </a>
                 </div>
                 
-                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                    <span class="hamburger"></span>
-                </button>
+                <div class="nav-controls">
+                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
                 
                 <ul class="nav-menu" role="menubar">
                     <li role="none"><a href="#home" role="menuitem">Home</a></li>
@@ -109,7 +168,7 @@
                     <div class="about-image">
                         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                              alt="Chef preparing a beautiful dish in our kitchen" 
-                             loading="lazy">
+>
                     </div>
                 </div>
             </div>
@@ -133,25 +192,43 @@
                     <div class="menu-category active" id="starters">
                         <div class="menu-grid">
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Bruschetta al Pomodoro</h3>
-                                    <span class="price">$12</span>
+                                <div class="menu-item-image">
+                                    <img src="https://cardamommagazine.com/wp-content/uploads/2021/03/italian-bruschetta.jpg?w=400&h=300&fit=crop" 
+                                         alt="Bruschetta al Pomodoro">
                                 </div>
-                                <p>Fresh tomatoes, basil, and garlic on toasted artisan bread</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Bruschetta al Pomodoro</h3>
+                                        <span class="price">$12</span>
+                                    </div>
+                                    <p>Fresh tomatoes, basil, and garlic on toasted artisan bread</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Burrata Caprese</h3>
-                                    <span class="price">$16</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400&h=300&fit=crop" 
+                                         alt="Burrata Caprese with heirloom tomatoes">
                                 </div>
-                                <p>Creamy burrata with heirloom tomatoes and aged balsamic</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Burrata Caprese</h3>
+                                        <span class="price">$16</span>
+                                    </div>
+                                    <p>Creamy burrata with heirloom tomatoes and aged balsamic</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Wild Mushroom Arancini</h3>
-                                    <span class="price">$14</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" 
+                                         alt="Wild Mushroom Arancini with truffle aioli">
                                 </div>
-                                <p>Crispy risotto balls with truffle aioli</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Wild Mushroom Arancini</h3>
+                                        <span class="price">$14</span>
+                                    </div>
+                                    <p>Crispy risotto balls with truffle aioli</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,25 +237,43 @@
                     <div class="menu-category" id="mains">
                         <div class="menu-grid">
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Wagyu Beef Tenderloin</h3>
-                                    <span class="price">$48</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop" 
+                                         alt="Wagyu Beef Tenderloin with roasted vegetables">
                                 </div>
-                                <p>Premium grade wagyu with roasted vegetables and red wine reduction</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Wagyu Beef Tenderloin</h3>
+                                        <span class="price">$48</span>
+                                    </div>
+                                    <p>Premium grade wagyu with roasted vegetables and red wine reduction</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Lobster Linguine</h3>
-                                    <span class="price">$42</span>
+                                <div class="menu-item-image">
+                                    <img src="https://lobstercouncilcanada.ca/wp-content/uploads/Lobster-Linguine-1024x1024.jpg?w=400&h=300&fit=crop" 
+                                         alt="Lobster Linguine with saffron cream">
                                 </div>
-                                <p>Fresh Maine lobster with house-made pasta and saffron cream</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Lobster Linguine</h3>
+                                        <span class="price">$42</span>
+                                    </div>
+                                    <p>Fresh Maine lobster with house-made pasta and saffron cream</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Duck Confit</h3>
-                                    <span class="price">$38</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop" 
+                                         alt="Duck Confit with cherry reduction">
                                 </div>
-                                <p>Slow-cooked duck with cherry reduction and potato gratin</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Duck Confit</h3>
+                                        <span class="price">$38</span>
+                                    </div>
+                                    <p>Slow-cooked duck with cherry reduction and potato gratin</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,25 +282,43 @@
                     <div class="menu-category" id="desserts">
                         <div class="menu-grid">
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Chocolate Soufflé</h3>
-                                    <span class="price">$14</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" 
+                                         alt="Chocolate Soufflé with vanilla bean ice cream">
                                 </div>
-                                <p>Warm chocolate soufflé with vanilla bean ice cream</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Chocolate Soufflé</h3>
+                                        <span class="price">$14</span>
+                                    </div>
+                                    <p>Warm chocolate soufflé with vanilla bean ice cream</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Crème Brûlée</h3>
-                                    <span class="price">$12</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400&h=300&fit=crop" 
+                                         alt="Crème Brûlée with fresh berries">
                                 </div>
-                                <p>Classic vanilla bean crème brûlée with fresh berries</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Crème Brûlée</h3>
+                                        <span class="price">$12</span>
+                                    </div>
+                                    <p>Classic vanilla bean crème brûlée with fresh berries</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Tiramisu</h3>
-                                    <span class="price">$13</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&h=300&fit=crop" 
+                                         alt="Traditional Italian Tiramisu">
                                 </div>
-                                <p>Traditional Italian tiramisu with espresso and mascarpone</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Tiramisu</h3>
+                                        <span class="price">$13</span>
+                                    </div>
+                                    <p>Traditional Italian tiramisu with espresso and mascarpone</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,25 +327,43 @@
                     <div class="menu-category" id="drinks">
                         <div class="menu-grid">
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Signature Cocktails</h3>
-                                    <span class="price">$16</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400&h=300&fit=crop" 
+                                         alt="Signature Cocktails with premium spirits">
                                 </div>
-                                <p>House-crafted cocktails with premium spirits</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Signature Cocktails</h3>
+                                        <span class="price">$16</span>
+                                    </div>
+                                    <p>House-crafted cocktails with premium spirits</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Wine Selection</h3>
-                                    <span class="price">$12-45</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop" 
+                                         alt="Wine Selection with local and international wines">
                                 </div>
-                                <p>Curated wine list featuring local and international selections</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Wine Selection</h3>
+                                        <span class="price">$12-45</span>
+                                    </div>
+                                    <p>Curated wine list featuring local and international selections</p>
+                                </div>
                             </div>
                             <div class="menu-item">
-                                <div class="menu-item-header">
-                                    <h3>Artisan Coffee</h3>
-                                    <span class="price">$6</span>
+                                <div class="menu-item-image">
+                                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop" 
+                                         alt="Artisan Coffee from local roasters">
                                 </div>
-                                <p>Freshly brewed coffee from local roasters</p>
+                                <div class="menu-item-content">
+                                    <div class="menu-item-header">
+                                        <h3>Artisan Coffee</h3>
+                                        <span class="price">$6</span>
+                                    </div>
+                                    <p>Freshly brewed coffee from local roasters</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -436,6 +567,87 @@
     <!-- Back to top button -->
     <button class="back-to-top" aria-label="Back to top">
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM14 21.25C13.5858 21.25 13.25 21.5858 13.25 22C13.25 22.4142 13.5858 22.75 14 22.75V21.25ZM10 22.75C10.4142 22.75 10.75 22.4142 10.75 22C10.75 21.5858 10.4142 21.25 10 21.25V22.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75ZM15 21.25H14V22.75H15V21.25ZM10 21.25H9V22.75H10V21.25Z"/>
+                    <path d="M5 18H13M19 18H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="chatbot-header-text">
+                <h3>Chef Assistant</h3>
+                <span class="chatbot-status">Online • Ready to help</span>
+            </div>
+            <button class="chatbot-close" aria-label="Close chatbot">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-content">
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message bot-message">
+                    <div class="message-avatar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM14 21.25C13.5858 21.25 13.25 21.5858 13.25 22C13.25 22.4142 13.5858 22.75 14 22.75V21.25ZM10 22.75C10.4142 22.75 10.75 22.4142 10.75 22C10.75 21.5858 10.4142 21.25 10 21.25V22.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75ZM15 21.25H14V22.75H15V21.25ZM10 21.25H9V22.75H10V21.25Z"/>
+                            <path d="M5 18H13M19 18H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="message-content">
+                        <p>👋 Welcome to La Cuisine! I'm your personal dining assistant. I'm here to make your experience amazing! What can I help you with today?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-options" id="chatbotOptions">
+                <button class="option-btn" data-option="menu">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                    </svg>
+                    <span>Menu</span>
+                </button>
+                <button class="option-btn" data-option="reservation">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
+                    <span>Reserve</span>
+                </button>
+                <button class="option-btn" data-option="hours">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    </svg>
+                    <span>Hours</span>
+                </button>
+                <button class="option-btn" data-option="location">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span>Location</span>
+                </button>
+                <button class="option-btn" data-option="contact">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <span>Contact</span>
+                </button>
+                <button class="option-btn" data-option="about">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <span>About</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open AI assistant">
+        <i class="fas fa-robot" aria-hidden="true"></i>
+        <span class="chatbot-notification" id="chatbotNotification"></span>
     </button>
 
     <!-- Scripts -->
