@@ -488,7 +488,7 @@ function initializePortfolio() {
                             <div class="portfolio-overlay">
                                 <div class="portfolio-buttons">
                                     ${project.github ? `<a href="${project.github}" class="portfolio-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
-                                    ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn">Live Demo</a>` : ''}
+                                    ${project.demo ? `<a href="${project.demo}" class="portfolio-btn demo-btn" target="_blank" rel="noopener">Live Demo</a>` : ''}
                                 </div>
                             </div>
                         </div>
