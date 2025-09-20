@@ -300,6 +300,27 @@ const projects = [
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Restaurant', 'Professional', 'Responsive']
     },
     {
+        title: 'Sspace - Interactive Star Map',
+        description: 'An interactive web-based star map that lets users explore the sky with real-time rendering. Integrates Stellarium Web Engine with NASA/JPL datasets and features a custom "My Stars" system for personal star naming.',
+        category: 'web',
+        image: 'Images/sspace.png',
+        imageSrcSet: 'Images/sspace.png 800w',
+        imageFallback: 'Images/sspace.png',
+        github: 'https://github.com/Chams99/portfolio/tree/main/sspace',
+        demo: 'https://chames.youssef.tn/sspace',
+        features: [
+            '<i data-lucide="star"></i> Interactive Star Map with Stellarium Web Engine',
+            '<i data-lucide="search"></i> Star Search by Registration Codes',
+            '<i data-lucide="bookmark"></i> Custom "My Stars" Personal Naming System',
+            '<i data-lucide="save"></i> LocalStorage-based Star Saving',
+            '<i data-lucide="camera"></i> Cinematic Zoom and Navigation',
+            '<i data-lucide="globe"></i> Real-time Sky Rendering',
+            '<i data-lucide="database"></i> NASA/JPL Astronomical Data Integration',
+            '<i data-lucide="user"></i> Private Per-Device Star Names'
+        ],
+        tags: ['JavaScript', 'Stellarium Web Engine', 'NASA/JPL Data', 'LocalStorage', 'Astronomy', 'Interactive Map']
+    },
+    {
         title: 'Energy - Renewable Energy Solutions',
         description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.',
         category: 'web',
