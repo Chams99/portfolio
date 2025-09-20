@@ -303,9 +303,9 @@ const projects = [
         title: 'Sspace - Interactive Star Map',
         description: 'An interactive web-based star map that lets users explore the sky with real-time rendering. Integrates Stellarium Web Engine with NASA/JPL datasets and features a custom "My Stars" system for personal star naming.',
         category: 'web',
-        image: 'Images/sspace.png',
-        imageSrcSet: 'Images/sspace.png 800w',
-        imageFallback: 'Images/sspace.png',
+        image: 'Images/optimized/sspace-small.webp',
+        imageSrcSet: 'Images/optimized/sspace-small.webp 486w, Images/optimized/sspace-medium.webp 972w, Images/optimized/sspace-large.webp 1458w',
+        imageFallback: 'Images/optimized/sspace-fallback.jpg',
         github: 'https://github.com/Chams99/portfolio/tree/main/sspace',
         demo: 'https://chames.youssef.tn/sspace',
         features: [
