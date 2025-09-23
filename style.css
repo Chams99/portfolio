@@ -48,6 +48,9 @@ body {
     height: auto;
     /* Add padding for fixed navigation */
     padding-top: 80px;
+    /* Ensure mobile scrolling works */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 /* Navigation Bar Styles */
@@ -61,8 +64,16 @@ body {
     -webkit-backdrop-filter: var(--nav-blur);
     backdrop-filter: var(--nav-blur);
     border-bottom: 1px solid var(--nav-border);
-    transition: var(--transition);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
     transform: translateY(0);
+    /* Ensure smooth following behavior */
+    will-change: transform;
+    /* Force hardware acceleration for mobile */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Ensure navbar stays on top on mobile */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .navbar.scrolled {
@@ -71,9 +82,7 @@ body {
     border-bottom-color: rgba(52, 103, 81, 0.3);
 }
 
-.navbar.hidden {
-    transform: translateY(-100%);
-}
+/* Removed .navbar.hidden class - now using smooth transform behavior */
 
 .nav-container {
     max-width: 1400px;
@@ -385,6 +394,21 @@ html {
     transform-origin: center;
 }
 
+.nav-toggle.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1001;
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    padding: 0.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 .nav-toggle.active .hamburger-line:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
@@ -410,11 +434,13 @@ html {
     backdrop-filter: blur(10px);
     opacity: 0;
     visibility: hidden;
+    display: none;
     transition: var(--transition);
     z-index: 998;
 }
 
 .mobile-overlay.active {
+    display: block;
     opacity: 1;
     visibility: visible;
 }
@@ -433,20 +459,40 @@ html {
     transform: translateX(100%);
     transition: var(--transition);
     z-index: 999;
-    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
+    pointer-events: none;
+    touch-action: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.active {
+    display: flex;
     transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+    overflow: hidden !important;
+    /* Don't use position: fixed to avoid scroll jumping */
+}
+
+html.mobile-menu-open {
+    overflow: hidden !important;
 }
 
 .mobile-menu-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 2rem 1.5rem 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem 1.5rem 1rem;
     border-bottom: 1px solid var(--nav-border);
 }
 
@@ -464,17 +510,7 @@ html {
 }
 
 .mobile-close {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--beige);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none; /* Hide internal close button since we use animated hamburger */
 }
 
 .mobile-close:hover {
@@ -589,6 +625,24 @@ html {
     
     .nav-toggle {
         display: flex;
+        z-index: 1000;
+        position: relative;
+    }
+    
+    .mobile-menu {
+        width: 100%;
+        border-left: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+        pointer-events: none;
+    }
+    
+    .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+        pointer-events: auto;
     }
     
     .nav-container {
@@ -603,6 +657,16 @@ html {
     
     .navbar {
         height: 70px;
+        /* Ensure navbar stays fixed on small screens */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        /* Force hardware acceleration */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
     }
     
     .nav-container {
@@ -1303,7 +1367,7 @@ textarea:focus-visible {
     }
 }
 
-/* Scroll Up Button */
+/* Scroll Up Button - Simple and Clean */
 .scroll-up-btn {
     position: fixed;
     bottom: 20px;
@@ -1320,11 +1384,10 @@ textarea:focus-visible {
     justify-content: center;
     font-size: 1.2rem;
     box-shadow: 0 4px 15px rgba(52, 103, 81, 0.3);
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px);
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .scroll-up-btn:hover {
@@ -1340,29 +1403,69 @@ textarea:focus-visible {
 .scroll-up-btn.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
-/* Mobile-specific styles for scroll up button */
+/* Mobile-specific styles - Simplified */
 @media (max-width: 768px) {
-    .scroll-up-btn {
-        bottom: 15px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
+    /* Ensure mobile scrolling works properly */
+    html, body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+    }
+    
+    /* Enhanced mobile navbar - ensure it follows scroll properly */
+    .navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+        /* Ensure navbar is always visible and follows scroll */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* Force hardware acceleration for smooth scrolling */
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        /* Ensure navbar is visible by default on mobile */
+        transform: translateY(0) !important;
+        -webkit-transform: translateY(0) translateZ(0) !important;
+    }
+    
+    /* Ensure navbar container is properly positioned */
+    .nav-container {
+        position: relative;
+        z-index: 1001;
+    }
+    
+    
+    /* Prevent mobile menu issues */
+    .mobile-menu {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
+    
+    /* Additional mobile touch handling */
+    .navbar {
+        /* Ensure touch events work properly */
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Ensure smooth scrolling on mobile */
+    html {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
     }
 }
 
-@media (max-width: 480px) {
-    .scroll-up-btn {
-        bottom: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-}
 
 /* Sections */
 section {
@@ -3312,4 +3415,181 @@ section:last-of-type {
 
 .about-right-column {
     animation: slideInFromRight 0.8s ease forwards;
+}
+
+/* Portfolio Search Bar */
+.portfolio-search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.search-bar-wrapper {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: var(--beige);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.search-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--green);
+    box-shadow: 0 0 20px rgba(52, 103, 81, 0.2);
+    transform: translateY(-2px);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.search-input:focus::placeholder {
+    color: var(--green);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.search-input:focus ~ .search-icon {
+    color: var(--green);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Show More Button */
+.show-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.show-more-btn {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: var(--beige);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.show-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: all 0.6s ease;
+}
+
+.show-more-btn:hover::before {
+    left: 100%;
+}
+
+.show-more-btn:hover {
+    background: var(--green);
+    border-color: var(--green);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 103, 81, 0.3);
+}
+
+.show-more-btn:active {
+    transform: translateY(-1px);
+}
+
+.show-more-btn i {
+    transition: transform 0.3s ease;
+}
+
+.show-more-btn:hover i {
+    transform: translateY(-2px);
+}
+
+.show-more-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.show-more-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive adjustments for search and show more */
+@media (max-width: 768px) {
+    .search-bar-wrapper {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .search-input {
+        font-size: 0.9rem;
+        padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+    }
+    
+    .search-icon {
+        left: 1rem;
+        font-size: 1rem;
+    }
+    
+    .show-more-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        padding: 0.7rem 0.7rem 0.7rem 2.2rem;
+        font-size: 0.85rem;
+    }
+    
+    .search-icon {
+        left: 2rem;
+        margin-top: -1px;
+        font-size: 0.9rem;
+    }
+    
+    .show-more-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+    }
 }

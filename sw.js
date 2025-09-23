@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v1.0.1';
-const STATIC_CACHE = 'static-v1.0.1';
-const DYNAMIC_CACHE = 'dynamic-v1.0.1';
+const CACHE_NAME = 'portfolio-v2.0.2';
+const STATIC_CACHE = 'static-v2.0.2';
+const DYNAMIC_CACHE = 'dynamic-v2.0.2';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
@@ -77,18 +77,23 @@ const EXTERNAL_RESOURCES = [
 self.addEventListener('install', event => {
     console.log('Service Worker installing...');
     event.waitUntil(
-        caches.open(STATIC_CACHE)
-            .then(cache => {
+        Promise.all([
+            caches.open(STATIC_CACHE).then(cache => {
                 console.log('Caching static assets');
                 return cache.addAll(STATIC_ASSETS);
+            }),
+            caches.open(DYNAMIC_CACHE).then(cache => {
+                console.log('Caching external resources');
+                return cache.addAll(EXTERNAL_RESOURCES);
             })
-            .then(() => {
-                console.log('Static assets cached successfully');
-                return self.skipWaiting();
-            })
-            .catch(error => {
-                console.error('Error caching static assets:', error);
-            })
+        ])
+        .then(() => {
+            console.log('All assets cached successfully');
+            return self.skipWaiting();
+        })
+        .catch(error => {
+            console.error('Error caching assets:', error);
+        })
     );
 });
 
@@ -114,75 +119,96 @@ self.addEventListener('activate', event => {
     );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - Network-first for critical files, cache-first for assets
 self.addEventListener('fetch', event => {
     const { request } = event;
     const url = new URL(request.url);
 
-    // Skip non-GET requests
-    if (request.method !== 'GET') {
+    // Skip non-GET requests and non-http requests
+    if (request.method !== 'GET' || !url.protocol.startsWith('http')) {
         return;
     }
 
-    // Handle external resources (CDN, fonts, etc.)
-    if (url.origin !== location.origin) {
+    // Critical files that should always check network first
+    const criticalFiles = ['/index.html', '/style.css', '/script.js'];
+    const isCriticalFile = criticalFiles.some(file => url.pathname === file);
+
+    if (isCriticalFile) {
+        // Network-first strategy for critical files
+        event.respondWith(
+            fetch(request)
+                .then(fetchResponse => {
+                    // Update cache with fresh content
+                    if (fetchResponse && fetchResponse.status === 200) {
+                        const responseClone = fetchResponse.clone();
+                        caches.open(STATIC_CACHE)
+                            .then(cache => {
+                                cache.put(request, responseClone);
+                            });
+                    }
+                    return fetchResponse;
+                })
+                .catch(error => {
+                    console.warn('Network failed for critical file:', request.url, error);
+                    // Fallback to cache
+                    return caches.match(request)
+                        .then(cachedResponse => {
+                            if (cachedResponse) {
+                                return cachedResponse;
+                            }
+                            // Ultimate fallback
+                            if (request.destination === 'document') {
+                                return caches.match('/index.html');
+                            }
+                            return new Response('', { 
+                                status: 404, 
+                                statusText: 'Not Found' 
+                            });
+                        });
+                })
+        );
+    } else {
+        // Cache-first strategy for assets and external resources
         event.respondWith(
             caches.match(request)
-                .then(response => {
-                    if (response) {
-                        return response;
+                .then(cachedResponse => {
+                    if (cachedResponse) {
+                        // Return cached version immediately
+                        return cachedResponse;
                     }
+
+                    // Fetch from network and cache
                     return fetch(request)
                         .then(fetchResponse => {
-                            // Cache successful responses for external resources
+                            // Only cache successful responses
                             if (fetchResponse && fetchResponse.status === 200) {
                                 const responseClone = fetchResponse.clone();
                                 caches.open(DYNAMIC_CACHE)
                                     .then(cache => {
                                         cache.put(request, responseClone);
+                                        // Clean up old entries if cache gets too large
+                                        return cleanupCache(cache);
                                     });
                             }
                             return fetchResponse;
                         })
-                        .catch(() => {
-                            // Return a fallback for failed external requests
-                            return new Response('', { status: 404 });
+                        .catch(error => {
+                            console.warn('Network failed for:', request.url, error);
+                            
+                            // Return fallback for HTML requests
+                            if (request.destination === 'document') {
+                                return caches.match('/index.html');
+                            }
+                            
+                            // Return empty response for failed requests
+                            return new Response('', { 
+                                status: 404, 
+                                statusText: 'Not Found' 
+                            });
                         });
                 })
         );
-        return;
     }
-
-    // Handle internal resources - Network First Strategy for better updates
-    event.respondWith(
-        fetch(request)
-            .then(fetchResponse => {
-                // Cache successful responses
-                if (fetchResponse && fetchResponse.status === 200) {
-                    const responseClone = fetchResponse.clone();
-                    caches.open(DYNAMIC_CACHE)
-                        .then(cache => {
-                            cache.put(request, responseClone);
-                        });
-                }
-                return fetchResponse;
-            })
-            .catch(error => {
-                console.error('Network failed, trying cache:', error);
-                // Fallback to cache if network fails
-                return caches.match(request)
-                    .then(response => {
-                        if (response) {
-                            return response;
-                        }
-                        // Return a fallback for HTML requests
-                        if (request.destination === 'document') {
-                            return caches.match('/index.html');
-                        }
-                        return new Response('', { status: 404 });
-                    });
-            })
-    );
 });
 
 // Background sync for offline form submissions
@@ -198,6 +224,19 @@ async function doBackgroundSync() {
         console.log('Background sync completed');
     } catch (error) {
         console.error('Background sync failed:', error);
+    }
+}
+
+// Cache cleanup function to prevent unlimited growth
+async function cleanupCache(cache) {
+    const keys = await cache.keys();
+    const maxCacheSize = 50; // Maximum number of cached items
+    
+    if (keys.length > maxCacheSize) {
+        // Delete oldest entries (first in the list)
+        const keysToDelete = keys.slice(0, keys.length - maxCacheSize);
+        await Promise.all(keysToDelete.map(key => cache.delete(key)));
+        console.log(`Cleaned up ${keysToDelete.length} old cache entries`);
     }
 }
 
@@ -238,6 +277,26 @@ self.addEventListener('notificationclick', event => {
     if (event.action === 'explore') {
         event.waitUntil(
             clients.openWindow('/')
+        );
+    }
+});
+
+// Message handler for cache updates
+self.addEventListener('message', event => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        self.skipWaiting();
+    }
+    
+    if (event.data && event.data.type === 'CLEAR_CACHE') {
+        event.waitUntil(
+            caches.keys().then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        console.log('Clearing cache:', cacheName);
+                        return caches.delete(cacheName);
+                    })
+                );
+            })
         );
     }
 }); 

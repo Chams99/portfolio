@@ -14,10 +14,11 @@
     <meta name="description" content="Dhibi Chames Eddine - Full Stack Developer & Computer Science Student. Specializing in web development, mobile apps, and software engineering. View my portfolio of projects and get in touch.">
     <title>Dhibi Chames Eddine - Portfolio</title>
     
-    <!-- Cache Control Headers -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- Cache Control Headers - Force reload for development -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
     
     <!-- Critical CSS for above-the-fold content -->
     <style>
@@ -41,8 +42,8 @@
     </style>
     
     <!-- Preload critical resources -->
+    <link rel="preload" href="style.css?v=1.0.2" as="style">
     <link rel="preload" href="Images/optimized/chams-large.webp" as="image" type="image/webp">
-    <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     
     <!-- DNS prefetch for external domains -->
@@ -52,7 +53,7 @@
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=1.0.1">
+    <link rel="stylesheet" href="style.css?v=1.0.2">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -152,30 +153,6 @@
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobile-menu">
             <div class="mobile-menu-header">
-                <div class="mobile-brand">
-                    <svg class="mobile-brand-logo" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="mobileLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#346751;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#C84B31;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Background Container -->
-                        <rect x="5" y="5" width="70" height="50" rx="25" fill="none" stroke="url(#mobileLogoGradient)" stroke-width="2" class="logo-bg"/>
-                        
-                        <!-- Letter C - Clear and Bold -->
-                        <path d="M20 30 Q20 15 35 15 L35 20 Q25 20 25 30 Q25 40 35 40 L35 45 Q20 45 20 30 Z" fill="url(#mobileLogoGradient)" class="logo-c"/>
-                        
-                        <!-- Letter D - Clear and Bold -->
-                        <path d="M45 15 L55 15 Q65 15 65 30 Q65 45 55 45 L45 45 Z M50 20 L50 40 L55 40 Q60 40 60 30 Q60 20 55 20 Z" fill="url(#mobileLogoGradient)" class="logo-d"/>
-                        
-                        <!-- Decorative Elements -->
-                        <circle cx="15" cy="15" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot1"/>
-                        <circle cx="65" cy="15" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot2"/>
-                        <circle cx="65" cy="45" r="2" fill="#ECDBBA" opacity="0.6" class="logo-dot3"/>
-                        <circle cx="15" cy="45" r="1.5" fill="#ECDBBA" opacity="0.4" class="logo-dot4"/>
-                    </svg>
-                </div>
                 <button class="mobile-close" id="mobile-close" aria-label="Close mobile menu">
                     <i class="fas fa-times"></i>
                 </button>
@@ -636,6 +613,12 @@
     <section id="portfolio">
         <h2 class="section-title">My Projects</h2>
         <div class="portfolio-container">
+            <div class="portfolio-search-container">
+                <div class="search-bar-wrapper">
+                    <input type="text" id="projectSearch" class="search-input" placeholder="Search projects..." autocomplete="off">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
             <div class="portfolio-filters">
                 <button class="filter-btn active magnetic stagger-1" data-filter="all">All</button>
                 <button class="filter-btn magnetic stagger-2" data-filter="game">Games</button>
@@ -768,8 +751,9 @@
 
     <!-- Load non-critical scripts with proper deferring and lazy loading -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
-    <script src="script.js?v=1.0.1" defer></script>
+    <script src="script.js?v=1.0.2" defer></script>
     
+
     <!-- Lazy load non-critical resources -->
     <script>
         // Lazy load particles.js only when needed
