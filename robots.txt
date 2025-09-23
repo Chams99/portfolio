@@ -1,5 +1,6 @@
 # Robots.txt for Dhibi Chames Eddine Portfolio
 # https://chames.youssef.tn
+# Last updated: 2025-01-16
 
 User-agent: *
 
@@ -20,6 +21,9 @@ Disallow: /IT-test/
 Disallow: /fa/
 Disallow: /css/
 Disallow: /sw.js
+Disallow: /Plumb/
+Disallow: /product-listing/
+Disallow: /Sketches/
 Disallow: /telegram-proxy.php
 Disallow: /send_telegram.php
 Disallow: /telegram_token.php
