@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v1.0.0';
-const STATIC_CACHE = 'static-v1.0.0';
-const DYNAMIC_CACHE = 'dynamic-v1.0.0';
+const CACHE_NAME = 'portfolio-v1.0.1';
+const STATIC_CACHE = 'static-v1.0.1';
+const DYNAMIC_CACHE = 'dynamic-v1.0.1';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
@@ -24,6 +24,38 @@ const STATIC_ASSETS = [
     '/Images/optimized/chicken-medium.webp',
     '/Images/optimized/chicken-large.webp',
     '/Images/optimized/chicken-fallback.jpg',
+    '/Images/optimized/white-small.webp',
+    '/Images/optimized/white-medium.webp',
+    '/Images/optimized/white-large.webp',
+    '/Images/optimized/white-fallback.jpg',
+    '/Images/optimized/restaurents-small.webp',
+    '/Images/optimized/restaurents-medium.webp',
+    '/Images/optimized/restaurents-large.webp',
+    '/Images/optimized/restaurents-fallback.jpg',
+    '/Images/optimized/sspace-small.webp',
+    '/Images/optimized/sspace-medium.webp',
+    '/Images/optimized/sspace-large.webp',
+    '/Images/optimized/sspace-fallback.jpg',
+    '/Images/optimized/typing-game-small.webp',
+    '/Images/optimized/typing-game-medium.webp',
+    '/Images/optimized/typing-game-large.webp',
+    '/Images/optimized/typing-game-fallback.jpg',
+    '/Images/optimized/wallpaper-small.webp',
+    '/Images/optimized/wallpaper-medium.webp',
+    '/Images/optimized/wallpaper-large.webp',
+    '/Images/optimized/wallpaper-fallback.jpg',
+    '/Images/optimized/lol-small.webp',
+    '/Images/optimized/lol-medium.webp',
+    '/Images/optimized/lol-large.webp',
+    '/Images/optimized/lol-fallback.jpg',
+    '/Images/optimized/ecommerce-small.webp',
+    '/Images/optimized/ecommerce-medium.webp',
+    '/Images/optimized/ecommerce-large.webp',
+    '/Images/optimized/ecommerce-fallback.jpg',
+    '/Images/optimized/chamsado_messenger-small.webp',
+    '/Images/optimized/chamsado_messenger-medium.webp',
+    '/Images/optimized/chamsado_messenger-large.webp',
+    '/Images/optimized/chamsado_messenger-fallback.jpg',
     '/fa/favicon.ico',
     '/fa/apple-touch-icon.png',
     '/fa/favicon-32x32.png',
@@ -121,27 +153,28 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Handle internal resources
+    // Handle internal resources - Network First Strategy for better updates
     event.respondWith(
-        caches.match(request)
-            .then(response => {
-                if (response) {
-                    return response;
+        fetch(request)
+            .then(fetchResponse => {
+                // Cache successful responses
+                if (fetchResponse && fetchResponse.status === 200) {
+                    const responseClone = fetchResponse.clone();
+                    caches.open(DYNAMIC_CACHE)
+                        .then(cache => {
+                            cache.put(request, responseClone);
+                        });
                 }
-                return fetch(request)
-                    .then(fetchResponse => {
-                        // Cache successful responses
-                        if (fetchResponse && fetchResponse.status === 200) {
-                            const responseClone = fetchResponse.clone();
-                            caches.open(DYNAMIC_CACHE)
-                                .then(cache => {
-                                    cache.put(request, responseClone);
-                                });
+                return fetchResponse;
+            })
+            .catch(error => {
+                console.error('Network failed, trying cache:', error);
+                // Fallback to cache if network fails
+                return caches.match(request)
+                    .then(response => {
+                        if (response) {
+                            return response;
                         }
-                        return fetchResponse;
-                    })
-                    .catch(error => {
-                        console.error('Fetch failed:', error);
                         // Return a fallback for HTML requests
                         if (request.destination === 'document') {
                             return caches.match('/index.html');
