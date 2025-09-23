@@ -242,9 +242,9 @@ const projects = [
         title: 'Dent - Premium Dental Care & Cosmetic Dentistry',
         description: 'A modern, responsive dental clinic website built with Next.js featuring premium dental care services including teeth whitening, Invisalign, cosmetic dentistry, and dental implants. Professional design with appointment booking system.',
         category: 'web',
-        image: 'Images/white.png',
-        imageSrcSet: 'Images/white.png 486w',
-        imageFallback: 'Images/white.png',
+        image: 'Images/optimized/white-small.webp',
+        imageSrcSet: 'Images/optimized/white-small.webp 486w, Images/optimized/white-medium.webp 972w, Images/optimized/white-large.webp 1458w',
+        imageFallback: 'Images/optimized/white-fallback.jpg',
         github: 'https://github.com/Chams99/portfolio/tree/main/white',
         demo: 'white/',
         features: [
@@ -453,7 +453,9 @@ const projects = [
         title: 'Wallpaper Generator DEMO',
         description: 'A dynamic wallpaper generator that creates beautiful and customizable wallpapers with interactive elements and modern design patterns.',
         category: 'web',
-        image: 'wallpaper/Capture%20d%27%C3%A9cran%202025-05-31%20092043.png',
+        image: 'Images/optimized/wallpaper-small.webp',
+        imageSrcSet: 'Images/optimized/wallpaper-small.webp 486w, Images/optimized/wallpaper-medium.webp 972w, Images/optimized/wallpaper-large.webp 1458w',
+        imageFallback: 'Images/optimized/wallpaper-fallback.jpg',
         github: 'https://github.com/Chams99/portfolio/tree/main/wallpaper',
         demo: 'wallpaper/',
         features: [
@@ -1442,13 +1444,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize viewport height fix for all devices
     initializeViewportHeightFix();
 
-    // Initialize enhanced features with staggered loading
-    requestIdleCallback(() => {
-        initializeMagneticEffect();
-        initializeScrollAnimations();
-        initializeParticleInteraction();
-        initializePageTransitions();
-        initializeMobileOptimizations();
+// Scroll Up Button functionality
+function initializeScrollUpButton() {
+    const scrollUpBtn = document.getElementById('scrollUpBtn');
+    if (!scrollUpBtn) return;
+
+    // Show/hide button based on scroll position
+    function toggleScrollUpButton() {
+        const scrollY = window.scrollY;
+        const showThreshold = 300; // Show button after scrolling 300px
+
+        if (scrollY > showThreshold) {
+            scrollUpBtn.classList.add('show');
+        } else {
+            scrollUpBtn.classList.remove('show');
+        }
+    }
+
+    // Scroll to top functionality
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Add event listeners
+    window.addEventListener('scroll', toggleScrollUpButton, { passive: true });
+    scrollUpBtn.addEventListener('click', scrollToTop);
+
+    // Add keyboard support for accessibility
+    scrollUpBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+}
+
+// Initialize enhanced features with staggered loading
+requestIdleCallback(() => {
+    initializeMagneticEffect();
+    initializeScrollAnimations();
+    initializeParticleInteraction();
+    initializePageTransitions();
+    initializeMobileOptimizations();
+    initializeScrollUpButton();
         initializeAdvancedInteractions();
 
         // Initialize particles after other features
