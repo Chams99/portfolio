@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v2.0.2';
-const STATIC_CACHE = 'static-v2.0.2';
-const DYNAMIC_CACHE = 'dynamic-v2.0.2';
+const CACHE_NAME = 'portfolio-v2.0.3';
+const STATIC_CACHE = 'static-v2.0.3';
+const DYNAMIC_CACHE = 'dynamic-v2.0.3';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [

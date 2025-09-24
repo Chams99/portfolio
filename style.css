@@ -2383,17 +2383,21 @@ section:last-of-type {
     }
 
     .portfolio-item {
-        min-height: 280px;
+        min-height: 350px;
         border-radius: 8px;
+        padding: 0.5rem;
     }
     
     .portfolio-item-inner {
-        padding: 1.2rem;
+        padding: 0.8rem;
         border-radius: 8px;
-        min-height: 300px;
+        min-height: 320px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .portfolio-image {
@@ -2401,7 +2405,7 @@ section:last-of-type {
         width: 140px;
         border-radius: 6px;
         overflow: hidden;
-        margin: 0 auto;
+        margin: 4 auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2644,36 +2648,59 @@ section:last-of-type {
 }
 
 @media (max-width: 768px) {
+    .personal-info {
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+    }
+    
+    .info-item {
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+    
+    .info-label {
+        font-size: 0.8rem;
+    }
+    
+    .info-value {
+        font-size: 0.9rem;
+    }
+    
+    .experience-container {
+        gap: 0.5rem;
+    }
+    
     .experience-item {
         flex-direction: column;
-        padding: 0.6rem;
+        padding: 0.4rem;
+        margin-bottom: 0.3rem;
     }
     
     .experience-icon {
         margin-right: 0;
-        margin-bottom: 0.8rem;
-        font-size: 1.5rem;
-        min-width: 40px;
+        margin-bottom: 0.4rem;
+        font-size: 1.2rem;
+        min-width: 30px;
     }
     
     .experience-content h3 {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .experience-place {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         margin-bottom: 0.2rem;
     }
     
+    .experience-place {
+        font-size: 0.75rem;
+        margin-bottom: 0.1rem;
+    }
+    
     .experience-duration {
-        font-size: 0.7rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.65rem;
+        margin-bottom: 0.2rem;
     }
     
     .experience-description {
-        font-size: 0.75rem;
-        line-height: 1.3;
+        font-size: 0.7rem;
+        line-height: 1.2;
     }
 }
 

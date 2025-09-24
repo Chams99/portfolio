@@ -1,5 +1,7 @@
-# Robots.txt for Dhibi Chames Eddine Portfolio
+# Robots.txt for Chames Dhibi (Chames Eddine Dhibi) Portfolio
+# Full Stack Developer & Computer Science Student
 # https://chames.youssef.tn
+# Author: Chames Eddine Dhibi
 # Last updated: 2025-01-16
 
 User-agent: *
@@ -76,6 +78,11 @@ Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://chames.youssef.tn/sitemap.xml
+
+# Additional SEO directives for Chames Dhibi
+# Keywords: Chames Dhibi, Chames Eddine Dhibi, Full Stack Developer, Web Developer, Portfolio
+# Location: Tunisia
+# Specialization: Web Development, Mobile Apps, Software Engineering
 
 # Additional directives for specific bots
 User-agent: Googlebot
