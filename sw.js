@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v2.0.3';
-const STATIC_CACHE = 'static-v2.0.3';
-const DYNAMIC_CACHE = 'dynamic-v2.0.3';
+const CACHE_NAME = 'portfolio-v2.1.0';
+const STATIC_CACHE = 'static-v2.1.0';
+const DYNAMIC_CACHE = 'dynamic-v2.1.0';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
@@ -65,12 +65,11 @@ const STATIC_ASSETS = [
 
 // External resources to cache
 const EXTERNAL_RESOURCES = [
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js',
-    'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
+    'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js',
+    'https://unpkg.com/lucide@latest/dist/umd/lucide.js'
 ];
 
 // Install event - cache static assets
@@ -243,18 +242,24 @@ async function cleanupCache(cache) {
 // Push notification handling
 self.addEventListener('push', event => {
     const options = {
-        body: event.data ? event.data.text() : 'New update available!',
+        body: event.data ? event.data.text() : 'Check out my latest projects and skills!',
         icon: '/fa/favicon-32x32.png',
         badge: '/fa/favicon-16x16.png',
         vibrate: [100, 50, 100],
         data: {
             dateOfArrival: Date.now(),
-            primaryKey: 1
+            primaryKey: 1,
+            url: '/'
         },
         actions: [
             {
                 action: 'explore',
                 title: 'View Portfolio',
+                icon: '/fa/favicon-16x16.png'
+            },
+            {
+                action: 'contact',
+                title: 'Contact Me',
                 icon: '/fa/favicon-16x16.png'
             },
             {
@@ -266,7 +271,7 @@ self.addEventListener('push', event => {
     };
 
     event.waitUntil(
-        self.registration.showNotification('Portfolio Update', options)
+        self.registration.showNotification('Chames Dhibi - Portfolio', options)
     );
 });
 
@@ -278,10 +283,19 @@ self.addEventListener('notificationclick', event => {
         event.waitUntil(
             clients.openWindow('/')
         );
+    } else if (event.action === 'contact') {
+        event.waitUntil(
+            clients.openWindow('/#contact')
+        );
+    } else {
+        // Default action - open portfolio
+        event.waitUntil(
+            clients.openWindow('/')
+        );
     }
 });
 
-// Message handler for cache updates
+// Message handler for cache updates and notifications
 self.addEventListener('message', event => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
@@ -296,6 +310,40 @@ self.addEventListener('message', event => {
                         return caches.delete(cacheName);
                     })
                 );
+            })
+        );
+    }
+    
+    if (event.data && event.data.type === 'SEND_NOTIFICATION') {
+        const { title, body, icon } = event.data;
+        event.waitUntil(
+            self.registration.showNotification(title || 'Portfolio Update', {
+                body: body || 'Check out my latest projects and skills!',
+                icon: icon || '/fa/favicon-32x32.png',
+                badge: '/fa/favicon-16x16.png',
+                vibrate: [100, 50, 100],
+                data: {
+                    dateOfArrival: Date.now(),
+                    primaryKey: 1,
+                    url: '/'
+                },
+                actions: [
+                    {
+                        action: 'explore',
+                        title: 'View Portfolio',
+                        icon: '/fa/favicon-16x16.png'
+                    },
+                    {
+                        action: 'contact',
+                        title: 'Contact Me',
+                        icon: '/fa/favicon-16x16.png'
+                    },
+                    {
+                        action: 'close',
+                        title: 'Close',
+                        icon: '/fa/favicon-16x16.png'
+                    }
+                ]
             })
         );
     }

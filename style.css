@@ -2850,40 +2850,8 @@ section:last-of-type {
 /* Contact Section Styles */
 #contact {
     padding: 4rem 5%;
-    background: linear-gradient(
-        135deg,
-        rgba(22, 22, 22, 0.95) 0%,
-        rgba(52, 103, 81, 0.08) 20%,
-        rgba(52, 103, 81, 0.12) 40%,
-        rgba(52, 103, 81, 0.15) 60%,
-        rgba(200, 75, 49, 0.08) 80%,
-        rgba(200, 75, 49, 0.15) 100%
-    );
+    background-color: var(--dark-gray);
     position: relative;
-    overflow: hidden;
-}
-
-#contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(circle at 20% 80%, rgba(52, 103, 81, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(200, 75, 49, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 40% 40%, rgba(236, 219, 186, 0.03) 0%, transparent 40%);
-    animation: contactBackgroundShift 25s ease-in-out infinite;
-}
-
-@keyframes contactBackgroundShift {
-    0%, 100% {
-        background-position: 0% 0%, 100% 0%, 50% 50%;
-    }
-    50% {
-        background-position: 100% 100%, 0% 100%, 50% 50%;
-    }
 }
 
 /* Floating elements for contact section */
@@ -2900,44 +2868,43 @@ section:last-of-type {
 .contact-circle {
     position: absolute;
     border-radius: 50%;
-    background: linear-gradient(45deg, var(--green), var(--red));
-    opacity: 0.1;
-    animation: contactFloat 15s ease-in-out infinite;
+    background: linear-gradient(45deg, rgba(52, 103, 81, 0.05), rgba(200, 75, 49, 0.05));
+    opacity: 0.3;
+    animation: contactFloat 20s ease-in-out infinite;
 }
 
 .contact-circle.circle-1 {
-    width: 200px;
-    height: 200px;
-    top: 10%;
-    left: 10%;
+    width: 120px;
+    height: 120px;
+    top: 15%;
+    left: 15%;
     animation-delay: 0s;
 }
 
 .contact-circle.circle-2 {
-    width: 150px;
-    height: 150px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 5s;
+    width: 80px;
+    height: 80px;
+    top: 65%;
+    right: 20%;
+    animation-delay: -7s;
 }
 
 .contact-circle.circle-3 {
-    width: 100px;
-    height: 100px;
-    bottom: 20%;
-    left: 60%;
-    animation-delay: 10s;
+    width: 60px;
+    height: 60px;
+    bottom: 25%;
+    left: 25%;
+    animation-delay: -14s;
 }
 
 @keyframes contactFloat {
     0%, 100% {
         transform: translateY(0px) rotate(0deg);
+        opacity: 0.2;
     }
-    33% {
-        transform: translateY(-20px) rotate(120deg);
-    }
-    66% {
-        transform: translateY(10px) rotate(240deg);
+    50% {
+        transform: translateY(-15px) rotate(180deg);
+        opacity: 0.4;
     }
 }
 
