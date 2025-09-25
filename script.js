@@ -946,7 +946,7 @@ function initializeContactForm() {
             const result = await response.json();
 
             if (result.success) {
-                alert('Message sent successfully!');
+                showMessage('Thank you for reaching out! Your message has been successfully delivered. I will review it and respond within 24 hours.', 'success');
                 contactForm.reset();
                 
                 canSubmit = false;
@@ -963,11 +963,105 @@ function initializeContactForm() {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert(error.message || 'Sorry, there was an error sending your message. Please try again.');
+            showMessage('We apologize for the inconvenience. There was an issue sending your message. Please try again or contact us directly.', 'error');
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
         }
     });
+}
+
+// Message display function
+function showMessage(message, type = 'success') {
+    // Remove any existing message
+    const existingMessage = document.querySelector('.professional-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `professional-message ${type}`;
+    
+    const icon = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-triangle';
+    const bgColor = type === 'success' ? '#4CAF50' : '#f44336';
+    
+    messageDiv.innerHTML = `
+        <div class="message-content">
+            <i class="${icon}"></i>
+            <span>${message}</span>
+            <button class="close-btn" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add styles
+    messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${bgColor};
+        color: white;
+        padding: 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease-out;
+        font-family: 'Inter', sans-serif;
+    `;
+    
+    // Add keyframes for animation
+    if (!document.querySelector('#message-animations')) {
+        const style = document.createElement('style');
+        style.id = 'message-animations';
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            .professional-message .message-content {
+                display: flex;
+                align-items: center;
+                padding: 16px 20px;
+                gap: 12px;
+            }
+            .professional-message .message-content i:first-child {
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+            .professional-message .message-content span {
+                flex: 1;
+                line-height: 1.4;
+                font-size: 14px;
+            }
+            .professional-message .close-btn {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 4px;
+                transition: background-color 0.2s;
+                flex-shrink: 0;
+            }
+            .professional-message .close-btn:hover {
+                background-color: rgba(255,255,255,0.2);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Add to page
+    document.body.appendChild(messageDiv);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (messageDiv.parentElement) {
+            messageDiv.style.animation = 'slideInRight 0.3s ease-out reverse';
+            setTimeout(() => messageDiv.remove(), 300);
+        }
+    }, 5000);
 }
 
 // Image preloading utility
