@@ -187,6 +187,46 @@ const projects = [
         tags: ['JavaScript', 'Stellarium Web Engine', 'NASA/JPL Data', 'LocalStorage', 'Astronomy', 'Interactive Map']
     },
     {
+        title: 'FTBall - Authentic Football Equipment Store',
+        description: 'A professional e-commerce platform for authentic football jerseys, banners, and equipment. Features official team merchandise from top leagues including La Liga, Premier League, Ligue 1, and Serie A. Modern French-language interface with comprehensive product catalog and shopping experience.',
+        category: 'web',
+        image: 'Images/optimized/FTBALL-small.webp',
+        imageSrcSet: 'Images/optimized/FTBALL-small.webp 486w, Images/optimized/FTBALL-medium.webp 972w, Images/optimized/FTBALL-large.webp 1458w',
+        imageFallback: 'Images/optimized/FTBALL-fallback.jpg',
+        github: 'https://github.com/Chams99/ftball',
+        demo: 'https://ftball-ten.vercel.app/',
+        features: [
+            '<i data-lucide="shield"></i> Official Team Merchandise',
+            '<i data-lucide="shopping-bag"></i> Comprehensive Product Catalog',
+            '<i data-lucide="star"></i> Featured Products & Promotions',
+            '<i data-lucide="filter"></i> Advanced Category Filtering',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="truck"></i> Free Delivery Over €75',
+            '<i data-lucide="refresh-cw"></i> 30-Day Easy Returns',
+            '<i data-lucide="headphones"></i> 7/7 Customer Support',
+            '<i data-lucide="award"></i> Quality Guarantee',
+            '<i data-lucide="globe"></i> French Language Interface'
+        ],
+        tags: ['Next.js', 'React', 'TypeScript', 'E-commerce', 'Vercel', 'Football', 'Sports', 'Professional']
+    },
+    { 
+        title: 'Chamsado Messenger DEMO', 
+        description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
+        category: 'mobile',
+        image: 'Images/optimized/chamsado_messenger-small.webp',
+        imageSrcSet: 'Images/optimized/chamsado_messenger-small.webp 486w, Images/optimized/chamsado_messenger-medium.webp 972w, Images/optimized/chamsado_messenger-large.webp 1458w',
+        imageFallback: 'Images/optimized/chamsado_messenger-fallback.jpg',
+        github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
+        demo: 'messenger_app/',
+        features: [
+            '<i data-lucide="message-circle"></i> Real-time Messaging',
+            '<i data-lucide="shield"></i> Secure Communication',
+            '<i data-lucide="user"></i> User Profiles',
+            '<i data-lucide="users"></i> Group Chats'
+        ],
+        tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
+    },
+    {
         title: 'Energy - Renewable Energy Solutions',
         description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.',
         category: 'web',
@@ -208,21 +248,21 @@ const projects = [
         tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
     },
     { 
-        title: 'Chamsado Messenger DEMO', 
-        description: 'Connect and chat seamlessly with this modern and user-friendly messenger application.', 
-        category: 'mobile',
-        image: 'Images/optimized/chamsado_messenger-small.webp',
-        imageSrcSet: 'Images/optimized/chamsado_messenger-small.webp 486w, Images/optimized/chamsado_messenger-medium.webp 972w, Images/optimized/chamsado_messenger-large.webp 1458w',
-        imageFallback: 'Images/optimized/chamsado_messenger-fallback.jpg',
-        github: 'https://github.com/Chams99/portfolio/tree/main/messenger_app',
-        demo: 'messenger_app/',
+        title: 'E-commerce website DEMO', 
+        description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
+        category: 'web',
+        image: 'Images/optimized/ecommerce-small.webp',
+        imageSrcSet: 'Images/optimized/ecommerce-small.webp 544w, Images/optimized/ecommerce-medium.webp 1088w, Images/optimized/ecommerce-large.webp 1632w',
+        imageFallback: 'Images/optimized/ecommerce-fallback.jpg',
+        github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
+        demo: 'ChamsShop/Public/core/',
         features: [
-            '<i data-lucide="message-circle"></i> Real-time Messaging',
-            '<i data-lucide="shield"></i> Secure Communication',
-            '<i data-lucide="user"></i> User Profiles',
-            '<i data-lucide="users"></i> Group Chats'
+            '<i data-lucide="shopping-cart"></i> Dynamic Shopping Cart',
+            '<i data-lucide="lock"></i> User Authentication',
+            '<i data-lucide="credit-card"></i> Checkout System',
+            '<i data-lucide="smartphone"></i> Responsive Design'
         ],
-        tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
+        tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
     },
     { 
         title: 'Property Investment - Premium Investment Opportunities', 
@@ -244,23 +284,6 @@ const projects = [
             '<i data-lucide="download"></i> Investment Guide Downloads'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Property Investment', 'Real Estate', 'Lead Generation', 'Professional']
-    },
-    { 
-        title: 'E-commerce website DEMO', 
-        description: 'A modern e-commerce platform with a sleek user interface, secure authentication, and seamless shopping experience. Features a dynamic cart system and responsive design.', 
-        category: 'web',
-        image: 'Images/optimized/ecommerce-small.webp',
-        imageSrcSet: 'Images/optimized/ecommerce-small.webp 544w, Images/optimized/ecommerce-medium.webp 1088w, Images/optimized/ecommerce-large.webp 1632w',
-        imageFallback: 'Images/optimized/ecommerce-fallback.jpg',
-        github: 'https://github.com/Chams99/portfolio/tree/main/ChamsShop',
-        demo: 'ChamsShop/Public/core/',
-        features: [
-            '<i data-lucide="shopping-cart"></i> Dynamic Shopping Cart',
-            '<i data-lucide="lock"></i> User Authentication',
-            '<i data-lucide="credit-card"></i> Checkout System',
-            '<i data-lucide="smartphone"></i> Responsive Design'
-        ],
-        tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'E-commerce']
     },
     { 
         title: 'LolChat', 
