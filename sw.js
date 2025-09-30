@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v2.1.0';
-const STATIC_CACHE = 'static-v2.1.0';
-const DYNAMIC_CACHE = 'dynamic-v2.1.0';
+const CACHE_NAME = 'portfolio-v2.1.1';
+const STATIC_CACHE = 'static-v2.1.1';
+const DYNAMIC_CACHE = 'dynamic-v2.1.1';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
@@ -56,6 +56,10 @@ const STATIC_ASSETS = [
     '/Images/optimized/chamsado_messenger-medium.webp',
     '/Images/optimized/chamsado_messenger-large.webp',
     '/Images/optimized/chamsado_messenger-fallback.jpg',
+    '/Images/optimized/FTBALL-small.webp',
+    '/Images/optimized/FTBALL-medium.webp',
+    '/Images/optimized/FTBALL-large.webp',
+    '/Images/optimized/FTBALL-fallback.jpg',
     '/fa/favicon.ico',
     '/fa/apple-touch-icon.png',
     '/fa/favicon-32x32.png',
