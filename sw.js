@@ -1,6 +1,6 @@
-const CACHE_NAME = 'portfolio-v2.1.1';
-const STATIC_CACHE = 'static-v2.1.1';
-const DYNAMIC_CACHE = 'dynamic-v2.1.1';
+const CACHE_NAME = 'portfolio-v2.1.3';
+const STATIC_CACHE = 'static-v2.1.3';
+const DYNAMIC_CACHE = 'dynamic-v2.1.3';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
@@ -28,6 +28,10 @@ const STATIC_ASSETS = [
     '/Images/optimized/white-medium.webp',
     '/Images/optimized/white-large.webp',
     '/Images/optimized/white-fallback.jpg',
+    '/Images/optimized/converter-small.webp',
+    '/Images/optimized/converter-medium.webp',
+    '/Images/optimized/converter-large.webp',
+    '/Images/optimized/converter-fallback.jpg',
     '/Images/optimized/restaurents-small.webp',
     '/Images/optimized/restaurents-medium.webp',
     '/Images/optimized/restaurents-large.webp',
@@ -48,6 +52,12 @@ const STATIC_ASSETS = [
     '/Images/optimized/lol-medium.webp',
     '/Images/optimized/lol-large.webp',
     '/Images/optimized/lol-fallback.jpg',
+    '/messenger_app/index.html',
+    '/messenger_app/manifest.json',
+    '/messenger_app/images/logo.png',
+    '/messenger_app/images/loginpage.png',
+    '/messenger_app/images/lightmode.png',
+    '/messenger_app/images/darkmode.png',
     '/Images/optimized/ecommerce-small.webp',
     '/Images/optimized/ecommerce-medium.webp',
     '/Images/optimized/ecommerce-large.webp',
