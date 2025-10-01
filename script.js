@@ -166,6 +166,27 @@ const projects = [
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Restaurant', 'Professional', 'Responsive']
     },
     {
+        title: 'Universal Unit Converter',
+        description: 'A comprehensive unit converter web application that converts between length, volume, weight, energy, and temperature units with real-time precision. Features a modern UI with dark mode support, conversion history, and instant results.',
+        category: 'web',
+        image: 'Images/optimized/converter-small.webp',
+        imageSrcSet: 'Images/optimized/converter-small.webp 486w, Images/optimized/converter-medium.webp 972w, Images/optimized/converter-large.webp 1458w',
+        imageFallback: 'Images/optimized/converter-fallback.jpg',
+        github: 'https://github.com/Chams99/unit-converter',
+        demo: 'https://unit-converter-sq3u.vercel.app/',
+        features: [
+            '<i data-lucide="calculator"></i> Multi-Category Conversions',
+            '<i data-lucide="zap"></i> Real-time Conversion as You Type',
+            '<i data-lucide="history"></i> Conversion History Tracking',
+            '<i data-lucide="copy"></i> One-Click Copy to Clipboard',
+            '<i data-lucide="moon"></i> Dark Mode Support',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="ruler"></i> Length, Volume, Weight Units',
+            '<i data-lucide="thermometer"></i> Temperature & Energy Conversions'
+        ],
+        tags: ['JavaScript', 'HTML5', 'CSS3', 'Web App', 'Utility', 'Responsive Design', 'Dark Mode']
+    },
+    {
         title: 'Sspace - Interactive Star Map',
         description: 'An interactive web-based star map that lets users explore the sky with real-time rendering. Integrates Stellarium Web Engine with NASA/JPL datasets and features a custom "My Stars" system for personal star naming.',
         category: 'web',
@@ -226,26 +247,22 @@ const projects = [
         ],
         tags: ['HTML', 'CSS', 'JavaScript', 'Web App', 'Messaging']
     },
-    {
-        title: 'Energy - Renewable Energy Solutions',
-        description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.',
+    { 
+        title: 'LolChat', 
+        description: 'A League of Legends themed chat interface that combines modern web design with the game\'s aesthetic. Features champion data integration and responsive design.', 
         category: 'web',
-        image: 'Images/optimized/energy-small.webp',
-        imageSrcSet: 'Images/optimized/energy-small.webp 486w, Images/optimized/energy-medium.webp 972w, Images/optimized/energy-large.webp 1458w',
-        imageFallback: 'Images/optimized/energy-fallback.jpg',
-        github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
-        demo: 'Energy/',
+        image: 'Images/optimized/lol-small.webp',
+        imageSrcSet: 'Images/optimized/lol-small.webp 486w, Images/optimized/lol-medium.webp 972w, Images/optimized/lol-large.webp 1458w',
+        imageFallback: 'Images/optimized/lol-fallback.jpg',
+        github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
+        demo: 'lolchat/',
         features: [
-            '<i data-lucide="sun"></i> Solar & Wind Energy Solutions',
-            '<i data-lucide="smartphone"></i> Fully Responsive Design',
-            '<i data-lucide="zap"></i> Next.js 14 Performance',
-            '<i data-lucide="palette"></i> Modern Professional UI',
-            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
-            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
-            '<i data-lucide="file-text"></i> Blog & Project Showcase',
-            '<i data-lucide="mail"></i> Lead Generation Forms'
+            '<i data-lucide="swords"></i> League of Legends Theme',
+            '<i data-lucide="crown"></i> Champion Data Integration',
+            '<i data-lucide="message-circle"></i> Chat Interface',
+            '<i data-lucide="smartphone"></i> Responsive Design'
         ],
-        tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
+        tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
     },
     { 
         title: 'E-commerce website DEMO', 
@@ -285,22 +302,26 @@ const projects = [
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript', 'Property Investment', 'Real Estate', 'Lead Generation', 'Professional']
     },
-    { 
-        title: 'LolChat', 
-        description: 'A League of Legends themed chat interface that combines modern web design with the game\'s aesthetic. Features champion data integration and responsive design.', 
+    {
+        title: 'Energy - Renewable Energy Solutions',
+        description: 'A modern, high-performance website for Energy, a leading provider of renewable energy solutions specializing in solar, wind, and sustainable energy projects across California and beyond.',
         category: 'web',
-        image: 'Images/optimized/lol-small.webp',
-        imageSrcSet: 'Images/optimized/lol-small.webp 486w, Images/optimized/lol-medium.webp 972w, Images/optimized/lol-large.webp 1458w',
-        imageFallback: 'Images/optimized/lol-fallback.jpg',
-        github: 'https://github.com/Chams99/portfolio/tree/main/lolchat',
-        demo: 'lolchat/',
+        image: 'Images/optimized/energy-small.webp',
+        imageSrcSet: 'Images/optimized/energy-small.webp 486w, Images/optimized/energy-medium.webp 972w, Images/optimized/energy-large.webp 1458w',
+        imageFallback: 'Images/optimized/energy-fallback.jpg',
+        github: 'https://github.com/Chams99/portfolio/tree/main/Energy',
+        demo: 'Energy/',
         features: [
-            '<i data-lucide="swords"></i> League of Legends Theme',
-            '<i data-lucide="crown"></i> Champion Data Integration',
-            '<i data-lucide="message-circle"></i> Chat Interface',
-            '<i data-lucide="smartphone"></i> Responsive Design'
+            '<i data-lucide="sun"></i> Solar & Wind Energy Solutions',
+            '<i data-lucide="smartphone"></i> Fully Responsive Design',
+            '<i data-lucide="zap"></i> Next.js 14 Performance',
+            '<i data-lucide="palette"></i> Modern Professional UI',
+            '<i data-lucide="bar-chart-3"></i> SEO Optimized',
+            '<i data-lucide="accessibility"></i> WCAG Accessibility Compliant',
+            '<i data-lucide="file-text"></i> Blog & Project Showcase',
+            '<i data-lucide="mail"></i> Lead Generation Forms'
         ],
-        tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'AI']
+        tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Renewable Energy', 'Professional']
     },
     { 
         title: 'Epic Chicken Adventure - Next.js', 

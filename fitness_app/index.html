@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#22c55e">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>FitLite - AI-Powered Fitness Companion</title>
     <meta name="description" content="Transform your fitness journey with FitLite. AI-powered recommendations, food scanning, workout tracking, and personalized health insights all in one app.">
     
@@ -30,6 +34,31 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <script>
+        // Detect and set theme immediately before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            let isDark;
+            
+            if (savedTheme) {
+                // Use saved preference if exists
+                isDark = savedTheme === 'dark';
+            } else {
+                // First-time visitor: detect system preference
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    isDark = true;
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    isDark = false;
+                } else {
+                    // Fallback: default to dark if can't detect system preference
+                    isDark = true;
+                }
+            }
+            
+            document.documentElement.classList.toggle('dark', isDark);
+        })();
+    </script>
     
     <script>
         tailwind.config = {
@@ -136,6 +165,7 @@
         /* Custom CSS for enhanced effects */
         .glass {
             background: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -169,8 +199,9 @@
         
         .phone-frame {
             position: relative;
-            width: 280px;
-            height: 560px;
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1 / 2;
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             border-radius: 40px;
             padding: 8px;
@@ -179,6 +210,7 @@
                 0 20px 40px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0 auto;
         }
         
         .phone-frame.transitioning {
@@ -249,11 +281,18 @@
         
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
         
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
             .bento-grid {
                 grid-template-columns: repeat(3, 1fr);
                 grid-template-rows: repeat(2, 1fr);
@@ -297,11 +336,66 @@
             background-size: 200% 100%;
             animation: shimmer 2s linear infinite;
         }
+        
+        /* Mobile Navigation */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.98);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            z-index: 30;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .light .mobile-menu {
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        /* Touch-friendly buttons */
+        @media (max-width: 768px) {
+            button, a.button-style {
+                min-height: 48px;
+                min-width: 48px;
+            }
+            
+            .feature-card:hover {
+                transform: none;
+            }
+            
+            .feature-card:active {
+                transform: scale(0.98);
+            }
+        }
+        
+        /* Disable animations on mobile for better performance */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-sans antialiased transition-colors duration-300">
     <!-- Theme Toggle -->
-    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full glass hover:scale-110 transition-all duration-300">
+    <button id="theme-toggle" class="fixed top-20 right-4 sm:top-4 z-50 p-2.5 sm:p-3 rounded-full glass hover:scale-110 transition-all duration-300 shadow-lg" aria-label="Toggle theme">
         <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
         <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
     </button>
@@ -312,54 +406,70 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <h1 class="text-2xl font-bold gradient-text">FitLite</h1>
+                        <h1 class="text-xl sm:text-2xl font-bold gradient-text">FitLite</h1>
                     </div>
                 </div>
                 
+                <!-- Desktop Navigation -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#features" class="text-foreground hover:text-primary-500 transition-colors duration-300">Features</a>
-                        <a href="#pricing" class="text-foreground hover:text-primary-500 transition-colors duration-300">Pricing</a>
-                        <a href="#about" class="text-foreground hover:text-primary-500 transition-colors duration-300">About</a>
-                        <a href="#contact" class="text-foreground hover:text-primary-500 transition-colors duration-300">Contact</a>
+                        <a href="#features" class="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300">Features</a>
+                        <a href="#pricing" class="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300">Pricing</a>
+                        <a href="#about" class="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300">About</a>
+                        <a href="#contact" class="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300">Contact</a>
                     </div>
                 </div>
                 
-                <div class="flex items-center space-x-4">
-                    <button class="px-4 py-2 text-foreground hover:text-primary-500 transition-colors duration-300">
-                        Sign In
-                    </button>
-                    <button class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-all duration-300 hover:scale-105">
+                <div class="flex items-center gap-2">
+                    <a href="#features" class="hidden sm:block px-4 sm:px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-all duration-300 hover:scale-105 text-sm sm:text-base">
                         Get Started
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg glass hover:scale-110 transition-all duration-300" aria-label="Toggle mobile menu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
         </nav>
     </header>
+    
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="flex flex-col space-y-6">
+            <a href="#features" class="mobile-menu-link text-2xl font-semibold text-light-text dark:text-dark-text hover:text-primary-500 transition-colors">Features</a>
+            <a href="#pricing" class="mobile-menu-link text-2xl font-semibold text-light-text dark:text-dark-text hover:text-primary-500 transition-colors">Pricing</a>
+            <a href="#about" class="mobile-menu-link text-2xl font-semibold text-light-text dark:text-dark-text hover:text-primary-500 transition-colors">About</a>
+            <a href="#contact" class="mobile-menu-link text-2xl font-semibold text-light-text dark:text-dark-text hover:text-primary-500 transition-colors">Contact</a>
+            <a href="#features" class="mt-4 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-all duration-300 text-center font-semibold">
+                Get Started
+            </a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 animate-fade-in">
-                    <div class="space-y-6">
-                        <h1 class="text-5xl md:text-7xl font-bold leading-tight animate-slide-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pt-24 sm:pt-20">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+                <div class="space-y-6 sm:space-y-8 animate-fade-in">
+                    <div class="space-y-4 sm:space-y-6">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-slide-up">
                             Transform Your
                             <span class="gradient-text">Fitness Journey</span>
                             with AI
                         </h1>
-                        <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl animate-slide-up" style="animation-delay: 0.2s;">
+                        <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl animate-slide-up" style="animation-delay: 0.2s;">
                             FitLite combines AI-powered recommendations, intelligent food scanning, and personalized workout tracking to help you achieve your fitness goals faster than ever.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 animate-slide-up" style="animation-delay: 0.4s;">
                         <button class="px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-all duration-300 hover:scale-105 shadow-lg">
-                            Download App
+                            Download App - Coming Soon
                         </button>
-                        <button class="px-8 py-4 border-2 border-primary-500 text-primary-500 rounded-lg font-semibold hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-105">
+                        <a href="#features" class="px-8 py-4 border-2 border-primary-500 text-primary-500 rounded-lg font-semibold hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-105 text-center">
                             Watch Demo
-                        </button>
+                        </a>
                     </div>
                     
                     <div class="flex items-center space-x-6 text-sm text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.6s;">
@@ -397,46 +507,46 @@
     </section>
 
     <!-- Social Proof -->
-    <section class="py-16 bg-light-surface dark:bg-dark-surface">
+    <section class="py-12 sm:py-16 bg-light-surface dark:bg-dark-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-8">
-                <p class="text-lg text-light-text-secondary dark:text-dark-text-secondary">
+            <div class="text-center space-y-6 sm:space-y-8">
+                <p class="text-base sm:text-lg text-light-text-secondary dark:text-dark-text-secondary">
                     Trusted by fitness enthusiasts worldwide
                 </p>
-                <div class="flex justify-center items-center space-x-8 opacity-60">
-                    <div class="text-2xl font-bold text-primary-500">FitTech</div>
-                    <div class="text-2xl font-bold text-primary-500">HealthFlow</div>
-                    <div class="text-2xl font-bold text-primary-500">WellnessPro</div>
-                    <div class="text-2xl font-bold text-primary-500">ActiveLife</div>
+                <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 opacity-60">
+                    <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary-500">FitTech</div>
+                    <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary-500">HealthFlow</div>
+                    <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary-500">WellnessPro</div>
+                    <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary-500">ActiveLife</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20">
+    <section id="features" class="py-12 sm:py-16 lg:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-8 mb-16">
-                <h2 class="text-4xl md:text-6xl font-bold animate-slide-up">
+            <div class="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-slide-up">
                     Everything You Need for
                     <span class="gradient-text">Fitness Success</span>
                 </h2>
-                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
                     From AI-powered recommendations to intelligent food tracking, FitLite provides all the tools you need to achieve your fitness goals.
                 </p>
             </div>
             
             <div class="bento-grid">
                 <!-- AI Recommendations -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.1s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="brain" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="brain" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">AI Fitness Advisor</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">AI Fitness Advisor</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Get personalized workout plans and nutrition advice powered by advanced AI that learns from your progress and preferences.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/Goals-portrait.png" alt="AI Recommendations" loading="lazy">
                         </div>
@@ -444,15 +554,15 @@
                 </div>
                 
                 <!-- Food Scanner -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.2s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="camera" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="camera" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Smart Food Scanner</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">Smart Food Scanner</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Simply take a photo of your meal and get instant nutritional information, calorie counts, and personalized recommendations.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/Imperial-portrait.png" alt="Food Scanner" loading="lazy">
                         </div>
@@ -460,15 +570,15 @@
                 </div>
                 
                 <!-- Workout Tracking -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.3s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="dumbbell" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="dumbbell" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Workout Tracker</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">Workout Tracker</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Track your exercises, sets, and reps with our comprehensive workout logging system designed for all fitness levels.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/Exercices-portrait.png" alt="Workout Tracking" loading="lazy">
                         </div>
@@ -476,15 +586,15 @@
                 </div>
                 
                 <!-- Step Counter -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.4s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="footprints" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="footprints" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Step Counter</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">Step Counter</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Monitor your daily activity with our accurate step counter that integrates with your device's sensors for real-time tracking.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/weekly&dailyStats-portrait.png" alt="Step Counter" loading="lazy">
                         </div>
@@ -492,15 +602,15 @@
                 </div>
                 
                 <!-- Progress Analytics -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.5s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="trending-up" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Progress Analytics</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">Progress Analytics</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Visualize your fitness journey with detailed charts, progress reports, and insights that help you stay motivated and on track.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/Profile-portrait.png" alt="Progress Analytics" loading="lazy">
                         </div>
@@ -508,15 +618,15 @@
                 </div>
                 
                 <!-- Personalized Settings -->
-                <div class="feature-card glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.6s;">
-                    <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-                        <i data-lucide="settings" class="w-6 h-6 text-primary-500"></i>
+                <div class="feature-card glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 animate-fade-in" style="animation-delay: 0.6s;">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                        <i data-lucide="settings" class="w-5 h-5 sm:w-6 sm:h-6 text-primary-500"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Personalized Settings</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                    <h3 class="text-xl sm:text-2xl font-bold">Personalized Settings</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Customize your experience with flexible units, notification preferences, and theme options that adapt to your lifestyle.
                     </p>
-                    <div class="phone-frame mt-6">
+                    <div class="phone-frame mt-4 sm:mt-6">
                         <div class="phone-screen">
                             <img src="Images/Settings-portrait.png" alt="Personalized Settings" loading="lazy">
                         </div>
@@ -527,18 +637,18 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-20 bg-light-surface dark:bg-dark-surface">
+    <section class="py-12 sm:py-16 lg:py-20 bg-light-surface dark:bg-dark-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-8 mb-16">
-                <h2 class="text-4xl md:text-6xl font-bold animate-slide-up">
+            <div class="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-slide-up">
                     What Our Users Say
                 </h2>
-                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
                     Join thousands of satisfied users who have transformed their fitness journey with FitLite
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <div class="glass rounded-2xl p-8 space-y-4 animate-fade-in" style="animation-delay: 0.1s;">
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 bg-primary-500/20 rounded-full flex items-center justify-center">
@@ -588,19 +698,19 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20">
+    <section id="pricing" class="py-12 sm:py-16 lg:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-8 mb-16">
-                <h2 class="text-4xl md:text-6xl font-bold animate-slide-up">
+            <div class="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-slide-up">
                     Simple, Transparent
                     <span class="gradient-text">Pricing</span>
                 </h2>
-                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
                     Choose the plan that fits your fitness journey
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Free Plan -->
                 <div class="glass rounded-2xl p-8 space-y-6 animate-fade-in" style="animation-delay: 0.1s;">
                     <div>
@@ -712,43 +822,43 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-20 bg-light-surface dark:bg-dark-surface">
+    <section class="py-12 sm:py-16 lg:py-20 bg-light-surface dark:bg-dark-surface">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-8 mb-16">
-                <h2 class="text-4xl md:text-6xl font-bold animate-slide-up">
+            <div class="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-slide-up">
                     Frequently Asked
                     <span class="gradient-text">Questions</span>
                 </h2>
-                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
                     Everything you need to know about FitLite
                 </p>
             </div>
             
-            <div class="space-y-6">
-                <div class="glass rounded-2xl p-8 animate-fade-in" style="animation-delay: 0.1s;">
-                    <h3 class="text-xl font-bold mb-4">How accurate is the AI fitness advisor?</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+            <div class="space-y-4 sm:space-y-6">
+                <div class="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 animate-fade-in" style="animation-delay: 0.1s;">
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">How accurate is the AI fitness advisor?</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Our AI uses advanced machine learning algorithms trained on millions of fitness data points. It provides personalized recommendations based on your goals, current fitness level, and progress, with accuracy rates above 95%.
                     </p>
                 </div>
                 
-                <div class="glass rounded-2xl p-8 animate-fade-in" style="animation-delay: 0.2s;">
-                    <h3 class="text-xl font-bold mb-4">Can I use FitLite without an internet connection?</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                <div class="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 animate-fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Can I use FitLite without an internet connection?</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Yes! FitLite works offline for basic features like step counting and workout logging. AI recommendations and food scanning require an internet connection for optimal performance.
                     </p>
                 </div>
                 
-                <div class="glass rounded-2xl p-8 animate-fade-in" style="animation-delay: 0.3s;">
-                    <h3 class="text-xl font-bold mb-4">What devices are supported?</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                <div class="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 animate-fade-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">What devices are supported?</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         FitLite is available on iOS and Android devices. We support all modern smartphones and tablets running iOS 12+ or Android 8+.
                     </p>
                 </div>
                 
-                <div class="glass rounded-2xl p-8 animate-fade-in" style="animation-delay: 0.4s;">
-                    <h3 class="text-xl font-bold mb-4">Is my data secure and private?</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+                <div class="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 animate-fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Is my data secure and private?</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Absolutely. We use industry-standard encryption and never share your personal data with third parties. Your fitness journey is private and secure.
                     </p>
                 </div>
@@ -757,14 +867,14 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20">
+    <section class="py-12 sm:py-16 lg:py-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="glass rounded-2xl p-12 space-y-8 animate-fade-in">
-                <h2 class="text-4xl md:text-6xl font-bold">
+            <div class="glass rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-12 space-y-6 sm:space-y-8 animate-fade-in">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
                     Ready to Transform Your
                     <span class="gradient-text">Fitness Journey?</span>
                 </h2>
-                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
                     Join thousands of users who have already achieved their fitness goals with FitLite. Download now and start your transformation today.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -779,13 +889,170 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-16 bg-light-surface dark:bg-dark-surface">
+    <!-- About Section -->
+    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-light-surface dark:bg-dark-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="space-y-4">
-                    <h3 class="text-2xl font-bold gradient-text">FitLite</h3>
-                    <p class="text-light-text-secondary dark:text-dark-text-secondary">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+                <div class="space-y-6 sm:space-y-8 animate-fade-in">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
+                        About
+                        <span class="gradient-text">FitLite</span>
+                    </h2>
+                    <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary">
+                        FitLite was born from a simple mission: make fitness accessible, personalized, and effective for everyone. We believe that with the right tools and guidance, anyone can achieve their fitness goals.
+                    </p>
+                    <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary">
+                        Our team of fitness experts, AI engineers, and health enthusiasts have created an app that combines cutting-edge technology with proven fitness principles. From beginners to athletes, FitLite adapts to your unique journey.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8">
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-500">10K+</div>
+                            <div class="text-xs sm:text-sm text-light-text-secondary dark:text-dark-text-secondary mt-1 sm:mt-2">Active Users</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-500">50+</div>
+                            <div class="text-xs sm:text-sm text-light-text-secondary dark:text-dark-text-secondary mt-1 sm:mt-2">Countries</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-500">4.9</div>
+                            <div class="text-xs sm:text-sm text-light-text-secondary dark:text-dark-text-secondary mt-1 sm:mt-2">App Rating</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative animate-scale-in">
+                    <div class="glass rounded-2xl p-8 space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="target" class="w-6 h-6 text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Our Mission</h3>
+                                <p class="text-light-text-secondary dark:text-dark-text-secondary">Empower everyone to live healthier</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="eye" class="w-6 h-6 text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Our Vision</h3>
+                                <p class="text-light-text-secondary dark:text-dark-text-secondary">AI-powered fitness for everyone</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="heart" class="w-6 h-6 text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Our Values</h3>
+                                <p class="text-light-text-secondary dark:text-dark-text-secondary">Innovation, health, and community</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 sm:py-16 lg:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-slide-up">
+                    Get in
+                    <span class="gradient-text">Touch</span>
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary animate-slide-up" style="animation-delay: 0.2s;">
+                    Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                </p>
+            </div>
+            
+            <div class="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 xl:p-12">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold mb-2">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="w-full px-4 py-3 rounded-lg bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border text-light-text dark:text-dark-text focus:outline-none focus:border-primary-500 transition-colors"
+                                placeholder="John Doe"
+                                required
+                            >
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="w-full px-4 py-3 rounded-lg bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border text-light-text dark:text-dark-text focus:outline-none focus:border-primary-500 transition-colors"
+                                placeholder="john@example.com"
+                                required
+                            >
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-semibold mb-2">Subject</label>
+                        <input 
+                            type="text" 
+                            id="subject" 
+                            name="subject" 
+                            class="w-full px-4 py-3 rounded-lg bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border text-light-text dark:text-dark-text focus:outline-none focus:border-primary-500 transition-colors"
+                            placeholder="How can we help?"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-semibold mb-2">Message</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="6"
+                            class="w-full px-4 py-3 rounded-lg bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border text-light-text dark:text-dark-text focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                            placeholder="Tell us more about your inquiry..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-all duration-300 hover:scale-105 shadow-lg"
+                    >
+                        Send Message
+                    </button>
+                </form>
+                
+                <div class="mt-12 pt-8 border-t border-light-border dark:border-dark-border">
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div class="space-y-2">
+                            <i data-lucide="mail" class="w-6 h-6 text-primary-500 mx-auto"></i>
+                            <h4 class="font-semibold">Email</h4>
+                            <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary">support@fitlite.app</p>
+                        </div>
+                        <div class="space-y-2">
+                            <i data-lucide="phone" class="w-6 h-6 text-primary-500 mx-auto"></i>
+                            <h4 class="font-semibold">Phone</h4>
+                            <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary">+1 (555) 123-4567</p>
+                        </div>
+                        <div class="space-y-2">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-primary-500 mx-auto"></i>
+                            <h4 class="font-semibold">Office</h4>
+                            <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary">San Francisco, CA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 sm:py-14 lg:py-16 bg-light-surface dark:bg-dark-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                <div class="col-span-2 md:col-span-1 space-y-3 sm:space-y-4">
+                    <h3 class="text-xl sm:text-2xl font-bold gradient-text">FitLite</h3>
+                    <p class="text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">
                         Transform your fitness journey with AI-powered recommendations and intelligent tracking.
                     </p>
                     <div class="flex space-x-4">
@@ -844,12 +1111,38 @@
         // Initialize Lucide icons
         lucide.createIcons();
         
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Close mobile menu when clicking a link
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
         
         // Function to update images based on theme with smooth transitions
-        function updateImages() {
+        function updateImages(animated = true) {
             const isDark = html.classList.contains('dark');
             const images = document.querySelectorAll('img[src*="-dark-"], img[src*="-portrait.png"]');
             
@@ -871,53 +1164,54 @@
                 
                 // Only update if the source actually needs to change
                 if (newSrc !== src) {
-                    // Add transitioning class to phone frame
-                    const phoneFrame = img.closest('.phone-frame');
-                    if (phoneFrame) {
-                        phoneFrame.classList.add('transitioning');
-                    }
-                    
-                    // Fade out
-                    img.classList.add('fade-out');
-                    
-                    // Wait for fade out, then change source and fade in
-                    setTimeout(() => {
-                        img.src = newSrc;
+                    if (animated) {
+                        // Add transitioning class to phone frame
+                        const phoneFrame = img.closest('.phone-frame');
+                        if (phoneFrame) {
+                            phoneFrame.classList.add('transitioning');
+                        }
                         
-                        // Fade in after a brief delay
+                        // Fade out
+                        img.classList.add('fade-out');
+                        
+                        // Wait for fade out, then change source and fade in
                         setTimeout(() => {
-                            img.classList.remove('fade-out');
-                            img.classList.add('fade-in');
+                            img.src = newSrc;
                             
-                            // Remove transitioning class from phone frame
-                            if (phoneFrame) {
-                                phoneFrame.classList.remove('transitioning');
-                            }
-                            
-                            // Remove fade-in class after animation completes
+                            // Fade in after a brief delay
                             setTimeout(() => {
-                                img.classList.remove('fade-in');
-                            }, 600);
-                        }, 50);
-                    }, 300);
+                                img.classList.remove('fade-out');
+                                img.classList.add('fade-in');
+                                
+                                // Remove transitioning class from phone frame
+                                if (phoneFrame) {
+                                    phoneFrame.classList.remove('transitioning');
+                                }
+                                
+                                // Remove fade-in class after animation completes
+                                setTimeout(() => {
+                                    img.classList.remove('fade-in');
+                                }, 600);
+                            }, 50);
+                        }, 300);
+                    } else {
+                        // Just change the source immediately without animation
+                        img.src = newSrc;
+                    }
                 }
             });
         }
         
-        // Check for saved theme preference or default to dark
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        html.classList.toggle('dark', savedTheme === 'dark');
-        
-        // Update images on initial load
-        updateImages();
+        // Set correct images on initial load (without animation)
+        updateImages(false);
         
         themeToggle.addEventListener('click', () => {
             html.classList.toggle('dark');
             const isDark = html.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
-            // Update images when theme changes
-            updateImages();
+            // Update images when theme changes (with animation)
+            updateImages(true);
         });
         
         // Smooth scrolling for navigation links
@@ -957,15 +1251,17 @@
             observer.observe(el);
         });
         
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.floating-phone');
-            if (parallax) {
-                const speed = scrolled * 0.5;
-                parallax.style.transform = `translateY(${speed}px)`;
-            }
-        });
+        // Parallax effect for hero section (disabled on mobile for performance)
+        if (window.innerWidth >= 768) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.floating-phone');
+                if (parallax) {
+                    const speed = scrolled * 0.5;
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+        }
         
         // Add loading animation to images
         document.querySelectorAll('img').forEach(img => {
