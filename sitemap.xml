@@ -10,7 +10,7 @@
     <!-- Main Portfolio Page - Chames Dhibi Portfolio -->
     <url>
         <loc>https://chames.youssef.tn/</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -18,36 +18,36 @@
     <!-- CV/Resume Page - Chames Eddine Dhibi CV -->
     <url>
         <loc>https://chames.youssef.tn/cv/cv.html</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04T12:00:00+01:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Project Demos -->
+    <!-- Project Demos - Updated for Performance -->
     <url>
         <loc>https://chames.youssef.tn/white/</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
         <loc>https://chames.youssef.tn/fitness_app/</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
         <loc>https://chames.youssef.tn/restaurents/</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
         <loc>https://chames.youssef.tn/Energy/</loc>
-        <lastmod>2025-09-24</lastmod>
+        <lastmod>2025-10-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>

@@ -1,22 +1,27 @@
 // Portfolio Script - Optimized 2025 Best Practices
 // Removed all duplicate code, unused functions, and glitchy refresh issues
 
-// Performance monitoring (development only)
-if ('performance' in window && window.location.hostname === 'localhost') {
+// Performance monitoring (production optimized)
+if ('performance' in window && window.location.hostname !== 'localhost') {
     window.addEventListener('load', () => {
-        requestIdleCallback(() => {
-            const perfData = performance.getEntriesByType('navigation')[0];
-            console.log('Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-        });
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                console.log('Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+            });
+        }
     });
 }
 
-// Global state management
+// Global state management - Mobile optimized
 const AppState = {
     isInitialized: false,
-    isMobile: window.innerWidth <= 768,
+    isMobile: false, // Will be set after DOM is ready
     observers: new Map(),
-    timeouts: new Set()
+    timeouts: new Set(),
+    // Cache window dimensions to avoid reflows
+    windowWidth: 0,
+    windowHeight: 0
 };
 
 // Utility functions
@@ -440,8 +445,10 @@ function initializePortfolio() {
                 <div class="portfolio-item-inner">
                     <div class="portfolio-image">
                         <picture>
-                            <source srcset="${project.imageSrcSet || project.image}" type="image/webp">
-                            <img src="${project.imageFallback || project.image}" alt="${project.title}" loading="lazy" decoding="async">
+                            <source media="(max-width: 768px)" srcset="${project.image.replace('-large', '-small')}" type="image/webp">
+                            <source media="(max-width: 1200px)" srcset="${project.image.replace('-large', '-medium')}" type="image/webp">
+                            <source srcset="${project.image.replace('-large', '-small')}" type="image/webp">
+                            <img src="${project.imageFallback || project.image}" alt="${project.title}" loading="lazy" decoding="async" width="350" height="200">
                         </picture>
                         <div class="portfolio-overlay">
                             <div class="portfolio-buttons">
@@ -550,11 +557,13 @@ function initializeNavigation() {
     
     navigationInitialized = true;
     
-    // Mobile-specific navbar initialization
-    const isMobile = window.innerWidth <= 768;
+    // Mobile-specific navbar initialization - Optimized for mobile
+    const isMobile = AppState.windowWidth <= 768;
     if (isMobile) {
         // Ensure navbar is visible and properly positioned on mobile
-        navbar.style.transform = 'translateY(0)';
+        requestAnimationFrame(() => {
+            navbar.style.transform = 'translateY(0)';
+        });
         navbar.style.webkitTransform = 'translateY(0) translateZ(0)';
         navbar.style.position = 'fixed';
         navbar.style.top = '0';
@@ -601,17 +610,24 @@ function initializeNavigation() {
     document.body.classList.remove('mobile-menu-open');
     document.documentElement.classList.remove('mobile-menu-open');
 
-    let lastScrollY = window.scrollY;
+    let lastScrollY = 0;
 
-    // Navbar scroll behavior - Enhanced for mobile
+    // Navbar scroll behavior - Optimized to prevent forced reflows
     const updateNavbar = Utils.throttle(() => {
-        const scrollY = window.scrollY;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const isMobile = window.innerWidth <= 768;
         
+        // Use transform3d to force hardware acceleration and prevent reflows
+        const transform = `translate3d(0, ${scrollY > 50 ? '0' : '0'}px, 0)`;
+        
         if (scrollY > 50) {
-            navbar.classList.add('scrolled');
+            if (!navbar.classList.contains('scrolled')) {
+                navbar.classList.add('scrolled');
+            }
         } else {
-            navbar.classList.remove('scrolled');
+            if (navbar.classList.contains('scrolled')) {
+                navbar.classList.remove('scrolled');
+            }
         }
 
         const scrollDelta = scrollY - lastScrollY;
@@ -620,21 +636,21 @@ function initializeNavigation() {
         if (isMobile) {
             // On mobile, only hide navbar when scrolling down fast and far
             if (scrollDelta > 10 && scrollY > 300) {
-                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.transform = 'translate3d(0, -100%, 0)';
             } else if (scrollDelta < -5 || scrollY < 150) {
-                navbar.style.transform = 'translateY(0)';
+                navbar.style.transform = 'translate3d(0, 0, 0)';
             }
         } else {
             // Desktop behavior - more aggressive hiding
             if (scrollDelta > 5 && scrollY > 200) {
-                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.transform = 'translate3d(0, -100%, 0)';
             } else if (scrollDelta < -5 || scrollY < 100) {
-                navbar.style.transform = 'translateY(0)';
+                navbar.style.transform = 'translate3d(0, 0, 0)';
             }
         }
 
         lastScrollY = scrollY;
-    }, 10);
+    }, 16); // ~60fps throttling
 
     window.addEventListener('scroll', updateNavbar, { passive: true });
     
@@ -675,9 +691,11 @@ function initializeNavigation() {
         let lastToggleTime = 0;
         
         function toggleMobileMenu(e) {
-            // Prevent event bubbling
-            if (e) {
+            // Prevent event bubbling - but not on touch events (passive listeners)
+            if (e && e.type !== 'touchstart') {
                 e.preventDefault();
+            }
+            if (e) {
                 e.stopPropagation();
             }
             
@@ -897,9 +915,10 @@ function initializeNavigation() {
         });
     });
 
-    // Active section highlighting
+    // Active section highlighting - Mobile optimized
     const updateActiveSection = Utils.throttle(() => {
-        const scrollPos = window.scrollY + 120;
+        requestAnimationFrame(() => {
+            const scrollPos = window.pageYOffset + 120;
         
         if (scrollPos < 300) {
             setActiveSection('hero');
@@ -908,16 +927,18 @@ function initializeNavigation() {
 
         const sections = document.querySelectorAll('section[id]');
         for (const section of sections) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + window.pageYOffset;
+            const sectionHeight = rect.height;
             const sectionId = section.getAttribute('id');
 
             if (scrollPos >= sectionTop - 50 && scrollPos < sectionTop + sectionHeight - 50) {
                 setActiveSection(sectionId);
                 return;
             }
-                    }
-                }, 100);
+        }
+        });
+    }, 100);
 
     function setActiveSection(sectionId) {
         navLinks.forEach(link => {
@@ -935,13 +956,16 @@ function initializeScrollUpButton() {
     const scrollUpBtn = document.getElementById('scrollUpBtn');
     if (!scrollUpBtn) return;
 
-    // Show button when user scrolls down 300px
+    // Show button when user scrolls down 300px - optimized with RAF
     const toggleButton = Utils.throttle(() => {
-        if (window.scrollY > 300) {
-            scrollUpBtn.classList.add('show');
-        } else {
-            scrollUpBtn.classList.remove('show');
-        }
+        requestAnimationFrame(() => {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollY > 300) {
+                scrollUpBtn.classList.add('show');
+            } else {
+                scrollUpBtn.classList.remove('show');
+            }
+        });
     }, 100);
 
     // Scroll to top function
@@ -1146,15 +1170,25 @@ function setupLazyLoading() {
                     if (img.dataset.src) {
                         img.src = img.dataset.src;
                         img.removeAttribute('data-src');
+                        img.classList.add('loaded');
                         observer.unobserve(img);
                     }
                 }
             });
+        }, {
+            rootMargin: '50px 0px', // Start loading 50px before the image comes into view
+            threshold: 0.01
         });
 
         // Observe all lazy images
         document.querySelectorAll('img[data-src]').forEach(img => {
             imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
         });
     }
 }
@@ -1269,6 +1303,13 @@ function forceCacheRefresh() {
 // Main initialization
 function initializeApp() {
     if (AppState.isInitialized) return;
+    
+    // Initialize mobile detection safely to avoid forced reflows
+    requestAnimationFrame(() => {
+        AppState.isMobile = window.innerWidth <= 768;
+        AppState.windowWidth = window.innerWidth;
+        AppState.windowHeight = window.innerHeight;
+    });
     
     forceCacheRefresh();
     setupErrorHandling();
