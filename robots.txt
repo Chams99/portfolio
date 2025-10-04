@@ -2,7 +2,8 @@
 # Full Stack Developer & Computer Science Student
 # https://chames.youssef.tn
 # Author: Chames Eddine Dhibi
-# Last updated: 2025-01-16
+# Last updated: 2025-10-04
+# Optimized for SEO and Performance
 
 User-agent: *
 
@@ -20,9 +21,9 @@ Disallow: /refs/
 Disallow: /info/
 Disallow: /scripts/
 Disallow: /IT-test/
-Disallow: /fa/
 Disallow: /css/
-Disallow: /sw.js
+# Allow Service Worker for PWA functionality
+Allow: /sw.js
 Disallow: /Plumb/
 Disallow: /product-listing/
 Disallow: /Sketches/
@@ -66,12 +67,14 @@ Allow: /wallpaper/
 # Allow CV page
 Allow: /cv/cv.html
 
-# Allow static assets
+# Allow static assets and optimized resources
 Allow: /Images/
 Allow: /images/
-Allow: /style.css
-Allow: /script.js
+Allow: /style.css?v=
+Allow: /script.js?v=
 Allow: /index.html
+Allow: /manifest.json
+Allow: /fa/favicon
 
 # Crawl delay for respectful crawling
 Crawl-delay: 1

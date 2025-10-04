@@ -1,13 +1,13 @@
-const CACHE_NAME = 'portfolio-v2.1.3';
-const STATIC_CACHE = 'static-v2.1.3';
-const DYNAMIC_CACHE = 'dynamic-v2.1.3';
+const CACHE_NAME = 'portfolio-v3.2.0';
+const STATIC_CACHE = 'static-v3.2.0';
+const DYNAMIC_CACHE = 'dynamic-v3.2.0';
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
     '/',
     '/index.html',
-    '/style.css',
-    '/script.js',
+    '/style.css?v=1.5.0',
+    '/script.js?v=1.5.0',
     '/Images/optimized/chams-small.webp',
     '/Images/optimized/chams-medium.webp',
     '/Images/optimized/chams-large.webp',
@@ -79,7 +79,6 @@ const STATIC_ASSETS = [
 
 // External resources to cache
 const EXTERNAL_RESOURCES = [
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
     'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js',

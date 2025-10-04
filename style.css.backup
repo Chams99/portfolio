@@ -1,3 +1,4 @@
+/* Variables and Reset */
 :root {
     --dark-gray: #161616;
     --green: #346751;
@@ -11,12 +12,14 @@
     --text-color: rgba(245, 240, 230, 0.98);
     --text-muted: rgba(245, 240, 230, 0.85);
     --border-color: rgba(52, 103, 81, 0.2);
+    /* Enhanced contrast colors for accessibility */
     --high-contrast-green: #1e3a2f;
     --high-contrast-beige: #ffffff;
     --tag-bg: rgba(52, 103, 81, 0.25);
     --tag-text: #2d5a47;
     --tag-hover-bg: #346751;
     --tag-hover-text: #f5f0e6;
+    /* Navigation specific variables */
     --nav-bg: rgba(22, 22, 22, 0.95);
     --nav-bg-scrolled: rgba(22, 22, 22, 0.98);
     --nav-border: rgba(255, 255, 255, 0.1);
@@ -1018,20 +1021,11 @@ textarea:focus-visible {
         transform: translateZ(0);
     }
     
+    /* Optimize expensive animations */
     .hero-blob {
         will-change: transform;
         transform: translateZ(0);
     }
-}
-
-/* Lazy loaded images styling */
-img[data-src] {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-img[data-src].loaded {
-    opacity: 1;
 }
 
 .hero-image img,
@@ -1205,10 +1199,10 @@ img[data-src].loaded {
 
 @keyframes textGlow {
     0%, 100% {
-        filter: drop-shadow(0 0 5px rgba(236, 219, 186, 0.3));
+        text-shadow: 0 0 5px rgba(236, 219, 186, 0.3);
     }
     50% {
-        filter: drop-shadow(0 0 20px rgba(236, 219, 186, 0.6));
+        text-shadow: 0 0 20px rgba(236, 219, 186, 0.6), 0 0 30px rgba(236, 219, 186, 0.4);
     }
 }
 
@@ -3062,23 +3056,10 @@ section:last-of-type {
 
 
 
-/* SVG Icon Styling */
+/* Laravel Icon Styling */
 .laravel-icon {
-    width: 32px;
-    height: 32px;
-    fill: #FF2D20;
-}
-
-/* General SVG icon styles */
-.nav-icon,
-.search-icon {
-    color: currentColor;
-    transition: color 0.3s ease;
-}
-
-.nav-icon:hover,
-.search-icon:hover {
-    color: var(--green);
+    font-size: 2.5rem;
+    color: #FF2D20;
 }
 
 /* Resume Download Section */
