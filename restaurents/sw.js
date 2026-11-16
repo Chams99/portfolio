@@ -1,50 +1,52 @@
 // Service Worker for La Cuisine Restaurant PWA
-const CACHE_NAME = 'la-cuisine-v1';
+const CACHE_NAME = 'la-cuisine-v2';
+const APP_CACHE_PREFIX = 'la-cuisine-';
+const APP_SCOPE = new URL(self.registration.scope);
+const APP_INDEX = new URL('', APP_SCOPE).href;
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/main.js',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
+  APP_INDEX,
+  new URL('index.html', APP_SCOPE).href,
+  new URL('css/styles.css', APP_SCOPE).href,
+  new URL('js/main.js', APP_SCOPE).href,
+  new URL('manifest.json', APP_SCOPE).href
 ];
 
-// Install event - cache resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-// Fetch event - serve from cache when offline
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  const requestUrl = new URL(request.url);
+
+  if (
+    request.method !== 'GET' ||
+    requestUrl.origin !== APP_SCOPE.origin ||
+    !requestUrl.pathname.startsWith(APP_SCOPE.pathname)
+  ) return;
+
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.open(CACHE_NAME).then((cache) => cache.match(APP_INDEX)))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      }
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.match(request).then((cachedResponse) => cachedResponse || fetch(request))
     )
   );
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then((cacheNames) => Promise.all(
+      cacheNames
+        .filter((cacheName) => cacheName.startsWith(APP_CACHE_PREFIX) && cacheName !== CACHE_NAME)
+        .map((cacheName) => caches.delete(cacheName))
+    ))
   );
 });

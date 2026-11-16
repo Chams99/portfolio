@@ -2,7 +2,7 @@
   "name": "La Cuisine - Fine Dining Restaurant",
   "short_name": "La Cuisine",
   "description": "Experience culinary excellence at La Cuisine. Fresh ingredients, exceptional service, and memorable moments.",
-  "start_url": "/",
+  "start_url": "/restaurents/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#d4af37",
@@ -24,6 +24,6 @@
   "categories": ["food", "restaurant", "dining"],
   "lang": "en",
   "dir": "ltr",
-  "scope": "/",
+  "scope": "/restaurents/",
   "prefer_related_applications": false
 }

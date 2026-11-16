@@ -701,6 +701,19 @@ p {
     margin: 0;
 }
 
+.form-disabled-fields {
+    border: 0;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+}
+
+.form-submit-status {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--spacing-md);
+}
+
 .reservation-form {
     background: var(--bg-secondary);
     padding: var(--spacing-xl);

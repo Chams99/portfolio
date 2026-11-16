@@ -169,34 +169,10 @@ const initFormHandling = () => {
 
 const handleReservationSubmit = (e) => {
     e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    
-    // Basic validation
-    if (!validateReservationData(data)) {
-        return;
-    }
-
-    // Simulate form submission
-    showNotification('Reservation submitted successfully! We will contact you soon.', 'success');
-    e.target.reset();
 };
 
 const handleContactSubmit = (e) => {
     e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    
-    // Basic validation
-    if (!validateContactData(data)) {
-        return;
-    }
-
-    // Simulate form submission
-    showNotification('Message sent successfully! We will get back to you soon.', 'success');
-    e.target.reset();
 };
 
 const validateReservationData = (data) => {
@@ -423,7 +399,7 @@ window.addEventListener('error', (e) => {
 // ===== SERVICE WORKER REGISTRATION (FOR PWA FEATURES) =====
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
             .then((registration) => {
                 // Service Worker registered successfully
             })
@@ -465,25 +441,14 @@ document.addEventListener('click', (e) => {
 // ===== LAZY LOADING FOR IMAGES =====
 const initLazyLoading = () => {
     const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src || img.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        images.forEach(img => imageObserver.observe(img));
-    }
+    images.forEach(img => {
+        const revealImage = () => img.classList.add('loaded');
+        img.addEventListener('load', revealImage, { once: true });
+        img.addEventListener('error', revealImage, { once: true });
+        if (img.complete) revealImage();
+    });
 };
 
-// Initialize lazy loading
-initLazyLoading();
 
 // ===== THEME TOGGLE FUNCTIONALITY =====
 const initThemeToggle = () => {
